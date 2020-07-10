@@ -6,7 +6,7 @@ import lombok.experimental.Accessors;
 import java.io.Serializable;
 
 /**
- * @program: springcloud-zjs-0708-project
+ * @program: qy-109-project
  * @description:
  * @author: 张竞赛   xfc
  * @create: 2020-07-08 15:24
