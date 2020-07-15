@@ -10,30 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>qy-109-project-provider-backup</artifactId>
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.aaa</groupId>
-            <artifactId>qy-109-project-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.aaa</groupId>
-            <artifactId>qy-109-project-service</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.aaa</groupId>
-            <artifactId>qy-109-project-model</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-    </dependencies>
+
 
 
 </project>
