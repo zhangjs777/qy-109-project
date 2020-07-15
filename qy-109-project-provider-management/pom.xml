@@ -17,8 +17,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.aaa.zjs</groupId>
-            <artifactId>zjs-0708-project-service</artifactId>
+            <groupId>com.aaa</groupId>
+            <artifactId>qy-109-project-service</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>

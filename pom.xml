@@ -15,6 +15,7 @@
         <module>qy-109-project-management</module>
         <module>qy-109-project-provider-management</module>
         <module>qy-109-project-zuul</module>
+
     </modules>
 
 
