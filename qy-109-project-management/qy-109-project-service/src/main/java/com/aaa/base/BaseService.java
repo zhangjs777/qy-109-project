@@ -184,7 +184,7 @@ public abstract class BaseService<T>  {
     * @Params: [pageNo, pageSize, where, orderByFiled, orderWord, fileds]
     * @Return java.util.List<T>
     */
-    private  List<T> selectByFileds(Integer pageNo,Integer pageSize,Sqls where,String orderByFiled,String orderWord,String... fileds){
+    public   List<T> selectByFileds(Integer pageNo,Integer pageSize,Sqls where,String orderByFiled,String orderWord,String... fileds){
         Example.Builder builder=null;
         if (null== fileds || fileds.length == 0){
             //查询所有

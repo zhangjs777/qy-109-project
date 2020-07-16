@@ -13,4 +13,13 @@ public class RedisProperties {
     public static final String PX = "px";
     public static final String NO = "NO";
     public static final String POINT = ".";
+    public static final String CODE = "code";
+    /**
+     * msg常量
+     */
+    public static final String MSG = "msg";
+    /**
+     * data常量
+     */
+    public static final String DATA = "data";
 }

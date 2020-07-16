@@ -1,13 +1,16 @@
 package com.aaa.service;
 
 import com.aaa.base.ResultData;
-import com.aaa.model.Dictionary;
 import com.aaa.model.LoginLog;
 import com.aaa.model.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Company
@@ -15,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @Date Create in 2020/7/15 9:30
  * @Description
  **/
-@FeignClient(value = "")
+@FeignClient(value = "sys-interface")
 public interface IProjectService {
 
     /**
@@ -41,45 +44,22 @@ public interface IProjectService {
     **/
     @PostMapping("/addLoginLog")
     Integer addLoginLog(@RequestBody LoginLog loginLog);
-
-
     /**
-     * @Author:xfc
-     * @Description:
-     *          查询数据字典数据
-     * @Date:2020/7/16
-     * @param pageNo:
-     * @param pageSize:
-     * @return: com.aaa.base.ResultData
-     *
-     **/
-    @PostMapping("/getAllDict")
-    ResultData getAllDict(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize);
+    * @Author: js.zhang
+    * @Description: 查询全部user
+    * @DateTime: 2020/7/16 15:14
+    * @Params: [hashMap]
+    * @Return com.aaa.base.ResultData
+    */
+    @RequestMapping("/selectAllUser")
+    ResultData selectAllUser(@RequestBody HashMap hashMap);
 
-    /**
-     * @Author:xfc
-     * @Description:
-     *          添加字典数据
-     * @Date:2020/7/16
-     * @param dictionary:
-     * @return: java.lang.Boolean
-     *
-     **/
-    @PostMapping("/addDict")
-    Boolean addDict(@RequestBody Dictionary dictionary);
+    @RequestMapping("/addUser")
+    ResultData addUser(@RequestBody Map map);
 
-    /**
-     * @Author:xfc
-     * @Description:
-     *          删除字典数据
-     * @Date:2020/7/16
-     * @param dictionary:
-     * @return: java.lang.Boolean
-     *
-     **/
-    @PostMapping("/delDict")
-    Boolean delDict(@RequestBody Dictionary dictionary);
-
-
+    @RequestMapping("/updateUser")
+    ResultData updateUser(@RequestBody Map map );
+    @RequestMapping("/updateUserStatus")
+    ResultData updateUserStatus(@RequestBody Map map,@RequestParam("ids[]") Integer [] ids);
 
 }
