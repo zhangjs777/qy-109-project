@@ -115,4 +115,42 @@ public class BaseController {
         return resultData;
     }
     //TODO 未完善
+
+    /**
+     * @Author:xfc
+     * @Description:
+     *          操作失败，使用系统消息，返回自定义返回值
+     * @Date: 2020/7/16 15:45
+     * @param data:
+     * @return: com.aaa.base.ResultData
+     *
+     **/
+    protected ResultData operationFailed(Object data) {
+        ResultData resultData = new ResultData();
+        resultData.setCode(FAILED.getCode());
+        resultData.setMsg(FAILED.getMsg());
+        resultData.setData(data);
+        return resultData;
+    }
+
+
+    /**
+     * @Author:xfc
+     * @Description:
+     *       操作失败，使用自定义消息，自定义返回值
+     * @Date: 2020/7/16 15:47
+     * @param msg:
+     * @param data:
+     * @return: com.aaa.base.ResultData
+     *
+     **/
+    protected ResultData operationFailed(String msg,Object data) {
+        ResultData resultData = new ResultData();
+        resultData.setCode(FAILED.getCode());
+        resultData.setMsg(msg);
+        resultData.setData(data);
+        return resultData;
+    }
+
+
 }
