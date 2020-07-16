@@ -6,7 +6,7 @@ import static com.aaa.status.OperationStatus.*;
 /**
  * @program: springcloud-zjs-0708-project
  * @description:
- * @author: 张竞赛
+ * @author: 张竞赛的爸爸张梦波
  * @create: 2020-07-08 16:04
  **/
 public class BaseController {
@@ -108,68 +108,49 @@ public class BaseController {
         return resultData;
     }
 
-
-    /**
-     * @Author: js.zhang
-     * @Description: 操作成功返回自定义消息
-     * @DateTime: 2020/7/16 12:00
-     * @Params: [msg]
-     * @Return com.aaa.zjs.base.ResultData
-     */
-    protected ResultData operationSuccess(String msg){
-        ResultData resultData = new ResultData();
-        resultData.setCode(SUCCESS.getCode());
-        resultData.setMsg(msg);
-        return resultData;
-    }
-    /**
-     * @Author: js.zhang
-     * @Description: 操作成功返回数据信息，系统消息
-     * @DateTime: 2020/7/16 12:02
-     * @Params: [data]
-     * @Return com.aaa.zjs.base.ResultData
-     */
-
-    protected ResultData operationSuccess(Object data){
-        ResultData resultData = new ResultData();
-        resultData.setCode(SUCCESS.getCode());
-        resultData.setMsg(SUCCESS.getCode());
-        resultData.setData(data);
-        return resultData;
-    }
-
-    /**
-     * @Author: js.zhang
-     * @Description: 操作成功返回数据信息 并返回自定义消息
-     * @DateTime: 2020/7/16 12:04
-     * @Params: [msg, data]
-     * @Return com.aaa.zjs.base.ResultData
-     */
-    protected ResultData operationSuccess(String msg,Object data){
-        ResultData resultData = new ResultData();
-        resultData.setCode(SUCCESS.getCode());
-        resultData.setMsg(msg);
-        resultData.setData(data);
-        return resultData;
-    }
-
     protected ResultData operationFailed(){
         ResultData resultData=new ResultData();
         resultData.setCode(FAILED.getCode());
         resultData.setMsg(FAILED.getMsg());
         return resultData;
     }
+    //TODO 未完善
+
     /**
-     * @Author: js.zhang
-     * @Description: 操作失败返回自定义消息
-     * @DateTime: 2020/7/16 12:05
-     * @Params: [msg]
-     * @Return com.aaa.zjs.base.ResultData
-     */
-    protected ResultData operationFailed(String msg){
-        ResultData resultData=new ResultData();
+     * @Author:xfc
+     * @Description:
+     *          操作失败，使用系统消息，返回自定义返回值  dfnglhndsjfk
+     * @Date: 2020/7/16 15:45
+     * @param data:
+     * @return: com.aaa.base.ResultData
+     *
+     **/
+    protected ResultData operationFailed(Object data) {
+        ResultData resultData = new ResultData();
         resultData.setCode(FAILED.getCode());
-        resultData.setMsg(msg);
+        resultData.setMsg(FAILED.getMsg());
+        resultData.setData(data);
         return resultData;
     }
+
+
+    /**
+     * @Author:xfc
+     * @Description:
+     *       操作失败，使用自定义消息，自定义返回值
+     * @Date: 2020/7/16 15:47
+     * @param msg:
+     * @param data:
+     * @return: com.aaa.base.ResultData
+     *
+     **/
+    protected ResultData operationFailed(String msg,Object data) {
+        ResultData resultData = new ResultData();
+        resultData.setCode(FAILED.getCode());
+        resultData.setMsg(msg);
+        resultData.setData(data);
+        return resultData;
+    }
+
+
 }
