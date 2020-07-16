@@ -7,6 +7,7 @@ import lombok.experimental.Accessors;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 /**
  * @Description:  角色菜单中间表-实体
@@ -20,7 +21,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Accessors(chain = true)
 @Data
-public class RoleMenu {
+public class RoleMenu implements Serializable {
     @Column(name = "ROLE_ID")
     private Long roleId;
 

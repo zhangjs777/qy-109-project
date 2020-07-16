@@ -8,6 +8,7 @@ import lombok.experimental.Accessors;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -22,7 +23,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Accessors(chain = true)
 @Data
-public class Dept {
+public class Dept  implements Serializable {
     /**
      * 部门ID
      */
