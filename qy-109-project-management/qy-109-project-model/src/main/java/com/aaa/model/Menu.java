@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Description:  菜单-实体
@@ -83,12 +84,16 @@ public class Menu implements Serializable {
      * 创建时间
      */
     @Column(name = "CREATE_TIME")
-    private Date createTime;
+    /*private Date createTime;*/
+    private String createTime;
 
     /**
      * 修改时间
      */
     @Column(name = "MODIFY_TIME")
-    private Date modifyTime;
+    /*private Date modifyTime;*/
+    private String modifyTime;
+
+    private List<Menu> subMenu;
 
 }
