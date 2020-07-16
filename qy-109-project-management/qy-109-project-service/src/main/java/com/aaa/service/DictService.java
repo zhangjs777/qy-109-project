@@ -109,7 +109,7 @@ public class DictService extends BaseService<Dictionary> {
     /**
     * @Author:xfc
     * @Description:
-     *      新增一条字典数据
+     *      * 新增一条字典数据
     * @Date:2020/7/16
     * @param dictionary:
      * @param redisService:
