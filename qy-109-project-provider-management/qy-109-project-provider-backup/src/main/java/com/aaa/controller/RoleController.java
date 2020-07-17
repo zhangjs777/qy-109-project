@@ -33,11 +33,12 @@ public class RoleController extends BaseController {
     public ResultData selectAllRole(){
         ResultData resultData = roleService.selectAllRole();
         if ("20010" == resultData.getCode()){
-            return super.operationSuccess();
+            return super.operationSuccess(resultData.getData());
         }else {
             return super.operationFailed();
         }
     }
+
 
     /**
     * @Description: 简单的分页查询
@@ -50,7 +51,7 @@ public class RoleController extends BaseController {
     public ResultData selectAllRoleByPage(@RequestBody RoleVo roleVo){
         ResultData resultData = roleService.selectAllRoleByPage(roleVo);
         if ("20010" == resultData.getCode()){
-            return super.operationSuccess();
+            return super.operationSuccess(resultData.getData());
         }else {
             return super.operationFailed();
         }

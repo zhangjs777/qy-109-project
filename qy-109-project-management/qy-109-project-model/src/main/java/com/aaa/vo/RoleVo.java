@@ -1,5 +1,6 @@
 package com.aaa.vo;
 
+import com.aaa.model.Dept;
 import com.aaa.model.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,6 +28,7 @@ public class RoleVo implements Serializable {
 
     private Role role;
 
+    private Dept dept;
 
     private Integer pageNo;
 
