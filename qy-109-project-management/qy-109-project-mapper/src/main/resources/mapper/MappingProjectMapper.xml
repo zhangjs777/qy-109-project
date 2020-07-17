@@ -49,4 +49,40 @@
     <result column="contract_time" property="contractTime" jdbcType="VARCHAR" />
     <result column="coordinate" property="coordinate" jdbcType="LONGVARCHAR" />
   </resultMap>
+
+  <select id="getMappingProjectByid" parameterType="java.lang.String" resultType="com.aaa.model.MappingProject">
+        select * from t_mapping_project WHERE id=#{id}
+  </select>
+
+  <select id="getMappingProjectByName" parameterType="java.lang.String" resultType="java.util.HashMap"><!--resultMap="BaseResultMap"-->
+    select * from t_mapping_project where 1=1
+    <if test="name!=null">
+      and project_name=#{name}
+    </if>
+  </select>
+
+
+  <select id="getMappingProjectUnauditedByName" parameterType="java.lang.String" resultType="com.aaa.model.MappingProject">
+        SELECT distinct A.*
+        FROM t_mapping_project A
+        JOIN t_audit B on A.id=B.ref_id
+        WHERE B.`name`="项目登记审核" AND ISNULL(B.STATUS)
+        and 1=1
+        <if test="name!=null">
+         and project_name=#{name}
+        </if>
+  </select>
+
+
+  <select id="getMappingProjectUnauditedByNameInfo" parameterType="java.lang.String" resultType="com.aaa.model.MappingProject">
+    SELECT distinct A.*
+    FROM t_mapping_project A
+    JOIN t_audit B     on   A.id=B.ref_id
+    WHERE B.`name`="项目成果汇交" AND ISNULL(B.STATUS)
+    and 1=1
+    <if test="name!=null">
+      and project_name=#{name}
+    </if>
+  </select>
+
 </mapper>

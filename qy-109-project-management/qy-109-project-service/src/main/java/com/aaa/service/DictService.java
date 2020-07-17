@@ -8,7 +8,6 @@ import com.aaa.utils.JSONUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,8 +28,7 @@ public class DictService extends BaseService<Dictionary> {
     @Autowired
     private DictionaryMapper dictionaryMapper;
 
-    @Value("${redis_dict_key}")
-    private String dictListKey;
+    private final static String DICT_KEY = "dictListKey";
 
 
     /**
@@ -53,11 +51,11 @@ public class DictService extends BaseService<Dictionary> {
         String dictList="";
         // 从redis中查询数据
         try {
-            dictList = redisService.getString(dictListKey);
+            dictList = redisService.getString(DICT_KEY);
         } catch (Exception e){
             System.out.println("redis获取key的过程中出现异常！");
             //异常处理,即redis获取key的过程中出现异常后，重查一遍
-            dictList = redisService.getString(dictListKey);
+            dictList = redisService.getString(DICT_KEY);
             //对数据进行判断
             if ("".equals(dictList) || null == dictList){
                 //值为空，redis异常导致查询失败
@@ -78,18 +76,18 @@ public class DictService extends BaseService<Dictionary> {
                 //对redis的set方法做异常处理
                 String setResult = "";
                 try {
-                    setResult = redisService.set(dictListKey, allDict, NX, EX, 1800);
+                    setResult = redisService.set(DICT_KEY, allDict, NX, EX, 1800);
                     System.out.println("setResult的结果值"+setResult);
                 } catch (Exception e2){
                     System.out.println("redis做set时出现异常");
                     //重新set一次
-                    redisService.set(dictListKey, allDict,NX, EX, 1800);
+                    redisService.set(DICT_KEY, allDict,NX, EX, 1800);
                 }
                 //判断最终redis是否set数据成功
                 if ("OK".equals(setResult.toUpperCase())){
                     //true 成功 返回数据的分页结果
                     //必须从redis中取数据，再返回，否则会报指针异常
-                    List<Dictionary> dicts = JSONUtils.toList(redisService.getString(dictListKey), Dictionary.class);
+                    List<Dictionary> dicts = JSONUtils.toList(redisService.getString(DICT_KEY), Dictionary.class);
                     return new PageInfo<Dictionary>(dicts);
                 } else {
                     //失败
@@ -109,7 +107,7 @@ public class DictService extends BaseService<Dictionary> {
     /**
     * @Author:xfc
     * @Description:
-     *      * 新增一条字典数据
+     *      新增一条字典数据
     * @Date:2020/7/16
     * @param dictionary:
      * @param redisService:
@@ -148,7 +146,7 @@ public class DictService extends BaseService<Dictionary> {
         //判断更新结果
         if (0<updateResult){
             //说明更新成功
-            redisService.delOne(dictListKey);
+            redisService.delOne(DICT_KEY);
             //返回true;
             return true;
         }else {
@@ -174,7 +172,7 @@ public class DictService extends BaseService<Dictionary> {
         //判断删除结果
         if (0<delResult){
 
-            redisService.delOne(dictListKey);
+            redisService.delOne(DICT_KEY);
             return true;
         }else{
             return false;
