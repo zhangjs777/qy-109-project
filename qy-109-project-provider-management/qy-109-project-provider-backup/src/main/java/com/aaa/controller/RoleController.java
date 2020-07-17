@@ -23,11 +23,11 @@ public class RoleController extends BaseController {
     private RoleService roleService;
 
     /**
-    * @Description: 查询所有的角色
-    * @Author: guohang
-    * @Date: 2020/6/3 19:01
+    * @Description:  查询所有的角色
     * @Param: []
-    * @return: com.aaa.qy108.base.ResultData
+    * @return: com.aaa.base.ResultData
+    * @Author: ZMB
+    * @Date: 2020/7/17
     */
     @GetMapping("/allRoles")
     public ResultData selectAllRole(){
@@ -39,13 +39,12 @@ public class RoleController extends BaseController {
         }
     }
 
-
     /**
-    * @Description: 简单的分页查询
-    * @Author: guohang
-    * @Date: 2020/6/3 19:01
+    * @Description:  简单的分页查询
     * @Param: [roleVo]
-    * @return: com.aaa.qy108.base.ResultData
+    * @return: com.aaa.base.ResultData
+    * @Author: ZMB
+    * @Date: 2020/7/17
     */
     @PostMapping("/pageRoles")
     public ResultData selectAllRoleByPage(@RequestBody RoleVo roleVo){
