@@ -14,29 +14,27 @@ import java.util.List;
  */
 public interface RoleMenuMapper extends Mapper<RoleMenu> {
     /**
-     * @Description: 在RoleMenu表中根据roleId删除
-     * @Author: guohang
-     * @Date: 2020/6/3 19:03
-     * @Param: [roleId]
-     * @return: int
-     */
+    * @Description:  在RoleMenu表中根据roleId删除
+    * @Param: [roleId]
+    * @return: int
+    * @Author: ZMB
+    * @Date: 2020/7/17
+    */
     int deleteRoleMenu(Long roleId);
-
     /**
-     * @Description: 批量新增
-     * @Author: guohang
-     * @Date: 2020/6/3 19:03
-     * @Param: [roleMenus]
-     * @return: int
-     */
+    * @Description:  批量新增
+    * @Param: [roleMenus]
+    * @return: int
+    * @Author: ZMB
+    * @Date: 2020/7/17
+    */
     int batchInsertRoleMenu(List<RoleMenu> roleMenus);
-
     /**
-     * @Description: 查询表里面有没有roleId
-     * @Author: guohang
-     * @Date: 2020/6/3 19:03
-     * @Param: [roleId]
-     * @return: java.util.List<com.aaa.qy108.model.RoleMenu>
-     */
+    * @Description:  查询表里面有没有roleId
+    * @Param: [roleId]
+    * @return: java.util.List<com.aaa.model.RoleMenu>
+    * @Author: ZMB
+    * @Date: 2020/7/17
+    */
     List<RoleMenu> selectByRoleId(Long roleId);
 }
