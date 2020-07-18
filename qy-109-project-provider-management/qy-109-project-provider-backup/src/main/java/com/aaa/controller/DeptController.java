@@ -27,7 +27,7 @@ public class DeptController extends BaseController {
     * @Author: ZMB
     * @Date: 2020/7/17
     */
-    @GetMapping("/allDepts")
+    @PostMapping("/allDepts")
     public ResultData selectAllRole(){
         ResultData resultData = deptService.selectAllDept();
         if ("20010" == resultData.getCode()){

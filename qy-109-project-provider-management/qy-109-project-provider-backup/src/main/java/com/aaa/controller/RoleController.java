@@ -29,7 +29,7 @@ public class RoleController extends BaseController {
     * @Author: ZMB
     * @Date: 2020/7/17
     */
-    @GetMapping("/allRoles")
+    @PostMapping("/allRoles")
     public ResultData selectAllRole(){
         ResultData resultData = roleService.selectAllRole();
         if ("20010" == resultData.getCode()){

@@ -31,7 +31,7 @@ public class MenuController extends BaseController {
     * @Author: ZMB
     * @Date: 2020/7/16
     */
-    @GetMapping("/getMenus")
+    @PostMapping("/getMenus")
     public List<Menu> selectAllMenus(){
         return menuService.selectAllMenus();
     }
