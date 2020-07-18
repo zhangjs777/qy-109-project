@@ -59,4 +59,31 @@
     <result column="unit_intro" property="unitIntro" jdbcType="LONGVARCHAR" />
     <result column="coordinate" property="coordinate" jdbcType="LONGVARCHAR" />
   </resultMap>
+
+
+
+
+  <select id="selectUnit" resultType="HashMap" parameterType="com.aaa.model.MappingUnit">
+    select id, unit_name from t_mapping_unit
+    <where>
+      1=1
+      <if test="ownedDistrict !=null">
+        and owned_district = #{ownedDistrict}
+      </if>
+      <if test="qualificationLevel !=null">
+        and qualification_level = #{qualificationLevel}
+      </if>
+      <if test="unitName">
+        and unit_name like '%${unitName}%'
+      </if>
+    </where>
+  </select>
+
+
+  <select id="selectUnitId"  resultType="HashMap" >
+    select id,unit_name from t_mapping_unit
+  </select>
+
+
+
 </mapper>

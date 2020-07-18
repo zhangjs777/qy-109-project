@@ -36,6 +36,10 @@ public class UserController {
     }
 
 
+    @RequestMapping("/selectUser")
+    ResultData selectUser(@RequestBody Map map ){
+        return iProjectService.selectUser(map);
+    }
     @RequestMapping("/addUser")
     ResultData addUser(@RequestBody Map map){
         return iProjectService.addUser(map);

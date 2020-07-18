@@ -27,7 +27,7 @@ public class DictController extends CommonController<Dictionary> {
     private DictService dictService;
 
     @Autowired
-    private RedisService redisService;
+    private RedisService<Dictionary> redisService;
 
 
     @Override

@@ -94,10 +94,11 @@ public abstract class CommonController<T> extends BaseController {
          * @Params: [map]
          * @Return com.aaa.base.ResultData
          */
-        public ResultData updateStatus(@RequestBody Map map,@RequestParam("ids[]") Integer [] ids){
-                T instance = getBaseService().newInstance(map);
+        public ResultData updateStatus(@RequestBody Map map){
+                List<Object> ids = (List<Object>) map.get("ids");
+                Object t = map.get("t");
                 try {
-                        Integer result = getBaseService().batchUpdate(instance,ids);
+                        Integer result = getBaseService().batchUpdate((T) t,ids);
                         if (result > 0){
                                 return super.operationSuccess();
                         }

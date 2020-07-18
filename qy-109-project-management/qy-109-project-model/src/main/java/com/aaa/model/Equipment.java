@@ -26,7 +26,6 @@ public class Equipment implements Serializable {
      * 编号
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     /**

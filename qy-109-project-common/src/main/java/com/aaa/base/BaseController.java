@@ -6,7 +6,7 @@ import static com.aaa.status.OperationStatus.*;
 /**
  * @program: springcloud-zjs-0708-project
  * @description:
- * @author: 张竞赛的爸爸张梦波
+ * @author: 
  * @create: 2020-07-08 16:04
  **/
 public class BaseController {
@@ -166,7 +166,20 @@ public class BaseController {
         resultData.setMsg(FAILED.getMsg());
         return resultData;
     }
-
+    /**
+    * @Author: js.zhang
+    * @Description: 操作失败返回自数据信息
+    * @DateTime: 2020/7/17 9:58
+    * @Params: [data]
+    * @Return com.aaa.base.ResultData
+    */
+    protected ResultData operationFailed(Object data){
+        ResultData resultData=new ResultData();
+        resultData.setCode(FAILED.getCode());
+        resultData.setMsg(FAILED.getMsg());
+        resultData.setData(data);
+        return resultData;
+    }
     /**
      * @Author: js.zhang
      * @Description: 操作失败返回自定义消息
@@ -178,6 +191,21 @@ public class BaseController {
         ResultData resultData=new ResultData();
         resultData.setCode(FAILED.getCode());
         resultData.setMsg(msg);
+        return resultData;
+    }
+
+    /**
+    * @Author: js.zhang
+    * @Description: 操作失败返回自定义信息 和数据信心
+    * @DateTime: 2020/7/17 10:03
+    * @Params: [msg, data]
+    * @Return com.aaa.base.ResultData
+    */
+    protected ResultData operationFailed(String msg,Object data){
+        ResultData resultData = new ResultData();
+        resultData.setCode(FAILED.getCode());
+        resultData.setMsg(msg);
+        resultData.setData(data);
         return resultData;
     }
 

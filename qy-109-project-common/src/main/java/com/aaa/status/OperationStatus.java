@@ -10,6 +10,7 @@ public enum OperationStatus {
 
     SUCCESS("1", "操作成功"),
     FAILED("2", "操作失败"),
+    SElECT_SUCCESS("12","查询成功"),
     DATA_NOT_EXIST("11","数据不存在！"),
     DELETE_OPERATION("3", "删除操作"),
     UPDATE_OPERATION("4", "修改操作"),

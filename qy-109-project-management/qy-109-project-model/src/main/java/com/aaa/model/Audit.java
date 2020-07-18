@@ -19,7 +19,6 @@ public class Audit implements Serializable {
      * 编号
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     /**

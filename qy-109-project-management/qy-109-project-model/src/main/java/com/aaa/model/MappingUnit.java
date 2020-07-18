@@ -23,7 +23,6 @@ import java.util.Date;
 @Data
 public class MappingUnit implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     /**

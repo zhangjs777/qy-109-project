@@ -2,9 +2,11 @@ package com.aaa.config;
 
 import com.aaa.properties.RedisCluterProperties;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import redis.clients.jedis.HostAndPort;
 import redis.clients.jedis.JedisCluster;
+
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,7 +21,7 @@ import java.util.Set;
 public class RedisClusterConfig {
         @Autowired
         private RedisCluterProperties redisCluterProperties;
-
+         @Bean
         public JedisCluster getJedisCluster(){
                 String nodes = redisCluterProperties.getNodes();
                 String[] split = nodes.split(",");

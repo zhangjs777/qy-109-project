@@ -96,8 +96,8 @@ public abstract class BaseService<T>  {
     * @Params: [t, ids]
     * @Return java.lang.Integer
     */
-    public Integer batchUpdate(T t,Integer [] ids){
-       Example example= Example.builder(getTypeArgument()).where(Sqls.custom().andIn("id", Arrays.asList(ids))).build();
+    public Integer batchUpdate(T t,List<Object> ids){
+       Example example= Example.builder(getTypeArgument()).where(Sqls.custom().andIn("id",ids)).build();
         return mapper.updateByExample(t,example);
     }
     

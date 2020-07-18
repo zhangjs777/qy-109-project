@@ -22,7 +22,6 @@ import java.io.Serializable;
 @Data
 public class MappingProject  implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     /**

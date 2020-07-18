@@ -18,10 +18,12 @@ import java.util.Map;
 import static com.aaa.staticproperties.RedisProperties.*;
 
 import static com.aaa.status.OperationStatus.*;
+import static com.aaa.status.SelectStatus.SELECT_DATA_FAILED;
+import static com.aaa.status.SelectStatus.SELECT_DATA_SUCCESS;
 
 /**
  * @program: springcloud-zjs-0708-project
- * @description:
+ * @description:用户管理
  * @author: 张竞赛
  * @create: 2020-07-16 11:33
  **/
@@ -73,42 +75,55 @@ public class UserController extends CommonController<User> {
     * @Return com.aaa.base.ResultData
     */
     @RequestMapping("/updateUserStatus")
-    ResultData updateUserStatus(@RequestBody Map map,@RequestParam("ids[]") Integer [] ids){
-        ResultData updateResult = super.updateStatus(map,ids);
+    ResultData updateUserStatus(@RequestBody Map map){
+        map.get("words");
+        ResultData updateResult = super.updateStatus(map);
         return updateResult;
     }
+
+
+    /**
+    * @Author: js.zhang
+    * @Description: 查询全部用户 测试用
+    * @DateTime: 2020/7/17 20:05
+    * @Params: []
+    * @Return com.aaa.base.ResultData
+    */
+    @RequestMapping("/selectUser")
+    public ResultData selectUser(){
+        Map<String, Object> stringObjectMap = userService.selectAll();
+        if (SELECT_DATA_SUCCESS.getCode().equals(stringObjectMap.get(CODE))){
+            return super.operationSuccess(stringObjectMap);
+        }else if (SELECT_DATA_FAILED.getCode().equals(stringObjectMap.get(CODE))){
+            return super.operationFailed();
+        }else{
+            return super.operationFailed(DATA_NOT_EXIST.getMsg());
+        }
+    }
+
+
 
 
 
     /**
     * @Author: js.zhang
-    * @Description: 分页 条件 查询   User
-    * @DateTime: 2020/7/16 14:56
-    * @Params: [hashMap]
-    * @Return com.aaa.zjs.base.ResultData
+    * @Description:分页 条件 查询
+    * @DateTime: 2020/7/16 21:45
+    * @Params: [map]
+    * @Return com.aaa.base.ResultData
     */
     @RequestMapping("/selectAllUser")
-    ResultData selectAllUser(@RequestBody HashMap hashMap){
+    public ResultData selectAllUser(@RequestBody HashMap hashMap ){
+        Map<String, Object> stringObjectMap = userService.selectAllUser(hashMap,redisService);
 
-        //转换数据
-        Integer pageNo = (Integer) hashMap.get("pageNo");
-        Integer pageSize = (Integer) hashMap.get("pageSize");
-        String orderByFiled = hashMap.get("orderByFiled").toString();
-        String orderWord = hashMap.get("orderWord").toString();
-        String username = hashMap.get("username").toString();
-        String deptid = hashMap.get("deptid").toString();
-
-
-        //调用查询方法
-        Map<String, Object> stringObjectMap = userService.selectAllUser(redisService, pageNo, pageSize, orderByFiled, orderWord, username, deptid);
-        //判断返回值
         if (SUCCESS.getCode().equals(stringObjectMap.get(CODE))){
-            return super.operationSuccess(stringObjectMap);
-        }else if (FAILED.getCode().equals(stringObjectMap.get(CODE))){
-            return super.operationFailed();
-        }else{
-            return super.operationFailed(DATA_NOT_EXIST.getMsg());
-        }
+          return super.operationSuccess(stringObjectMap);
+       }else if (FAILED.getCode().equals(stringObjectMap.get(CODE))){
+           return super.operationFailed();
+       }else{
+           return super.operationFailed(DATA_NOT_EXIST.getMsg());
+       }
 
     }
+
 }
