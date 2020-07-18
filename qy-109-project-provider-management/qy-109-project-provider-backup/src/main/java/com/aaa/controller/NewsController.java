@@ -3,6 +3,7 @@ package com.aaa.controller;
 import com.aaa.base.BaseController;
 import com.aaa.base.ResultData;
 import com.aaa.model.News;
+
 import com.aaa.service.NewsService;
 import com.aaa.vo.RoleVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,6 @@ public class NewsController extends BaseController {
 
     @Autowired
     private NewsService newsService;
-
     /**
     * @Description: 查询所有信息
     * @Param: []
