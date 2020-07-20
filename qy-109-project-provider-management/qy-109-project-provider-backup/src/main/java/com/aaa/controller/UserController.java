@@ -6,13 +6,14 @@ import com.aaa.base.ResultData;
 import com.aaa.model.User;
 import com.aaa.redis.RedisService;
 import com.aaa.service.UserService;
+import com.aaa.utils.BaseUtil;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.aaa.staticproperties.RedisProperties.*;
@@ -123,6 +124,42 @@ public class UserController extends CommonController<User> {
        }else{
            return super.operationFailed(DATA_NOT_EXIST.getMsg());
        }
+
+    }
+        /**
+        * @Author: js.zhang
+        * @Description: 模糊查询
+        * @DateTime: 2020/7/20 18:37
+        * @Params: [user]
+        * @Return com.aaa.base.ResultData
+        */
+    @PostMapping("/selectUserAll")
+    public ResultData selectUserAll(@RequestBody User user){
+        //获取pageNo和pageSize
+        Integer pageNo = user.getPageNo();
+        Integer pageSize = user.getPageSize();
+        //判断是否需要分页
+        if (pageNo!=null&&pageSize!=null){
+            PageHelper.startPage(pageNo,pageSize);
+            List<User> userList = userService.selectUserAll(user);
+            //查询出结果后分页
+            PageInfo<User> userPageInfo = new PageInfo<User>(userList);
+            if (userPageInfo!=null&&userPageInfo.getSize()>0){
+                return  super.operationSuccess(userPageInfo);
+            }else {
+                return  super.operationFailed();
+            }
+        }else {
+            //不分页
+            List<User> userList = userService.selectUserAll(user);
+            if (userList !=null&&userList.size()>0){
+                return  super.operationSuccess(userList);
+            }else {
+                return  super.operationFailed();
+            }
+
+        }
+
 
     }
 

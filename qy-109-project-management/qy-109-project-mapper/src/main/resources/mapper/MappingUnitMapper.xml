@@ -85,5 +85,10 @@
   </select>
 
 
+  <select id="selectScore" resultMap="BaseResultMap" parameterType="Long">
+    select score from mappingUnit where id=#{id}
+  </select>
+
+
 
 </mapper>

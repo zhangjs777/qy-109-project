@@ -106,6 +106,29 @@ public class MappingUnitController extends CommonController<MappingUnit> {
 
     /**
     * @Author: js.zhang
+    * @Description:  通过id查询单位具体信息
+    * @DateTime: 2020/7/20 8:37
+    * @Params: [mappingUnit]
+    * @Return com.aaa.base.ResultData
+    */
+    public ResultData selectUnitById(MappingUnit mappingUnit){
+        if (mappingUnit!=null){
+            MappingUnit mappingUnit1 = getBaseService().selectOne(mappingUnit);
+            if (mappingUnit!=null){
+                ResultData resultData = super.operationSuccess(mappingUnit);
+                return resultData;
+            }
+        }
+            ResultData resultData = super.operationFailed();
+            return resultData;
+
+    }
+
+
+
+
+    /**
+    * @Author: js.zhang
     * @Description: 待条件的 查询所有的 单位信息
     * @DateTime: 2020/7/17 9:20
     * @Params: [map]

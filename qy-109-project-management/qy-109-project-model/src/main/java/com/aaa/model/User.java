@@ -94,4 +94,9 @@ public class User implements Serializable {
      * 无状态token值
      */
     private String token;
+
+    @Transient
+    private Integer pageNo;
+    @Transient
+    private Integer pageSize;
 }

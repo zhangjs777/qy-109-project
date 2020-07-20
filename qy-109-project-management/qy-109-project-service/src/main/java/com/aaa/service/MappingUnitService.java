@@ -81,5 +81,15 @@ public class MappingUnitService extends BaseService<MappingUnit> {
 
 
 
+    public MappingUnit selectScore(Long id){
+        MappingUnit selectScore = mappingUnitMapper.selectScore(id);
+        if (selectScore!=null){
+            return selectScore;
+        }else {
+            return null;
+        }
+    }
+
+
 
 }

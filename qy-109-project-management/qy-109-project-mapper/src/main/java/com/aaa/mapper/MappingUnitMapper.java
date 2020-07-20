@@ -35,7 +35,7 @@ public interface MappingUnitMapper extends Mapper<MappingUnit> {
   */
   public List<HashMap> selectUnitId();
 
-
+  MappingUnit selectScore(Long id);
 
 
 }

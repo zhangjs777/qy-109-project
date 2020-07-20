@@ -11,6 +11,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.HashMap;
 import java.util.List;
@@ -198,5 +199,27 @@ public class UserService extends BaseService<User> {
         return resultMap;
 
     }
+
+
+    /**
+    * @Author: js.zhang
+    * @Description: 模糊查询username
+    * @DateTime: 2020/7/20 20:14
+    * @Params: [user]
+    * @Return java.util.List<com.aaa.model.User>
+    */
+    public List<User> selectUserAll(User user){
+        //获取user全部属性
+        Example example = new Example(User.class);
+        Example.Criteria criteria = example.createCriteria();
+        //拼接条件模糊查询username和精确查询deptid
+        criteria.andLike("username","%"+user.getUsername()+"%").andEqualTo("deptId",user.getDeptId());
+
+        List<User> userList = userMapper.selectByExample(example);
+
+        return userList;
+    }
+
+
 }
 

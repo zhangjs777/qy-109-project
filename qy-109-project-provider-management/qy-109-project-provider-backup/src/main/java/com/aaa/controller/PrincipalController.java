@@ -9,6 +9,7 @@ import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.Map;
 
 import static com.aaa.staticproperties.RedisProperties.CODE;
@@ -74,11 +75,21 @@ public class PrincipalController extends CommonController<Principal> {
                 }else{
                     return super.operationFailed(DATA_NOT_EXIST.getMsg());
                 }
-        
-        
-
 
     }
+    @PostMapping("/addPrincipal")
+    public ResultData addPrincipal(@RequestBody Principal principal){
+            principal.setCreateTime(new Date());
+        Integer integer = getBaseService().add(principal);
+        if (integer>0){
+            return super.operationSuccess();
+        }else {
+            return super.operationFailed();
+        }
+
+    }
+
+
 
 
 

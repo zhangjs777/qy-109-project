@@ -4,7 +4,9 @@ import cn.hutool.core.date.DateUtil;
 import com.aaa.base.BaseService;
 import com.aaa.base.CommonController;
 import com.aaa.base.ResultData;
+import com.aaa.model.MappingUnit;
 import com.aaa.model.Score;
+import com.aaa.service.MappingUnitService;
 import com.aaa.service.ScoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,6 +33,8 @@ import static com.aaa.status.SelectStatus.*;
 public class ScoreController extends CommonController<Score> {
     @Autowired
     private ScoreService scoreService;
+    @Autowired
+    private MappingUnitService mappingUnitService;
     @Override
     public BaseService getBaseService() {
         return scoreService;
@@ -68,12 +73,35 @@ public class ScoreController extends CommonController<Score> {
     * @Return com.aaa.base.ResultData
     */
     @PostMapping("/addScore")
-    public ResultData addScore(@RequestBody Map map){
-        //设置创建时间
-        map.put("createTime", DateUtil.now());
-        //执行新增
-        ResultData resultData = super.add(map);
-        return resultData;
+    public ResultData addScore(@RequestBody Score score,@RequestParam("id") Long id){
+        //添加创建时间
+        score.setCreateTime(new Date());
+
+        //查询单位分数
+        MappingUnit mappingUnit = mappingUnitService.selectScore(score.getUnitId());
+        //添加单位分数信息
+        score.setScore(mappingUnit.getScore());
+
+
+        Integer i=0;
+        MappingUnit mappingUnit1=new MappingUnit();
+        if (score.getScorePlus()!=null){
+           i= mappingUnit.getScore()+score.getScorePlus();
+            if (score.getScoreSubtract()!=null){
+                i=i+score.getScoreSubtract();
+            }
+            mappingUnit1.setScore(i);
+        }
+        mappingUnit1.setId(id);
+        Integer update = mappingUnitService.update(mappingUnit1);
+        if (update>0){
+            //执行记录分数
+            Integer j= getBaseService().add(score);
+
+            return j>0&&j!=null?super.operationSuccess():super.operationFailed();
+        }
+            return super.operationFailed();
+
 
     }
 
