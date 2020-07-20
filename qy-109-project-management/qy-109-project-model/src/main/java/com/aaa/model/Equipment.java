@@ -1,32 +1,25 @@
 package com.aaa.model;
 
+import com.aaa.base.BaseModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Table;
+import java.util.List;
 
 /**
- * @Description:  仪器设备信息-实体
- * @Param:
- * @return:
- * @Author: ZMB
- * @Date: 2020/7/16
+ * 仪器设备信息，关联单位基本信息表id
  */
+
 @Table(name = "t_equipment")
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-@Data
-public class Equipment implements Serializable {
-    /**
-     * 编号
-     */
-    @Id
-    private Long id;
+public class Equipment extends BaseModel {
 
     /**
      * 仪器设备名称
@@ -53,13 +46,13 @@ public class Equipment implements Serializable {
      * 检定日期
      */
     @Column(name = "check_date")
-    private Date checkDate;
+    private String checkDate;
 
     /**
      * 检定有效日期
      */
     @Column(name = "effective_date")
-    private Date effectiveDate;
+    private String effectiveDate;
 
     /**
      * 发票代码
@@ -90,17 +83,10 @@ public class Equipment implements Serializable {
     @Column(name = "user_id")
     private Long userId;
 
-    /**
-     * 创建时间
-
-     */
-    @Column(name = "create_time")
-    private Date createTime;
 
     /**
-     * 修改时间
+     * 一对多，对应多个资源
      */
-    @Column(name = "modify_time")
-    private Date modifyTime;
+    private List<MappingUnit> mappingUnitList;
 
 }

@@ -52,7 +52,7 @@ public class EquipmentController extends CommonController<Equipment> {
     *
     **/
     @PostMapping("/getEquipmentByUnitId")
-    public PageInfo<Equipment> getEquipmentByUnitId(Equipment equipment, Integer pageNo, Integer pageSize){
+    public PageInfo<Equipment> getEquipmentByUnitId(@RequestBody Equipment equipment, Integer pageNo, Integer pageSize){
 
         PageInfo<Equipment> PageInfo = getBaseService().selectListByPage(equipment, pageNo, pageSize);
         return (null !=equipment && PageInfo.getSize()>0) ? PageInfo : null;
