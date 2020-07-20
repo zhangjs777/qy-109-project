@@ -1,10 +1,7 @@
 package com.aaa.service;
 
 import com.aaa.base.ResultData;
-import com.aaa.model.LoginLog;
-import com.aaa.model.MappingUnit;
-import com.aaa.model.Principal;
-import com.aaa.model.User;
+import com.aaa.model.*;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -100,4 +97,219 @@ public interface IProjectService {
 
 
 
-}
+    /**
+     * @Author:xfc
+     * @Description:
+     *          查询数据字典数据
+     * @Date:2020/7/16
+     * @param pageNo:
+     * @param pageSize:
+     * @return: com.aaa.base.ResultData
+     *
+     **/
+    @PostMapping("/getAllDict")
+    ResultData getAllDict(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize);
+
+    /**
+     * @Author:xfc
+     * @Description:
+     *          添加字典数据
+     * @Date:2020/7/16
+     * @param dictionary:
+     * @return: java.lang.Boolean
+     *
+     **/
+    @PostMapping("/addDict")
+    Boolean addDict(@RequestBody Dictionary dictionary);
+
+    /**
+     * @Author:xfc
+     * @Description:
+     *          删除字典数据
+     * @Date:2020/7/16
+     * @param dictionary:
+     * @return: java.lang.Boolean
+     *
+     **/
+    @PostMapping("/delDict")
+    Boolean delDict(@RequestBody Dictionary dictionary);
+
+
+
+    /**
+     * @Author:xfc
+     * @Description:
+     *    查询所有测绘项目信息
+     * @Date: 2020/7/17 19:24
+     * @param mappingProject:
+     * @return: com.aaa.base.ResultData
+     *
+     **/
+    @PostMapping("/getAllMapProject")
+    ResultData getAllMappingProject(@RequestBody MappingProject mappingProject);
+
+    /**
+     * @Author:xfc
+     * @Description:
+     *      通过名字查询项目信息
+     * @Date: 2020/7/17 19:27
+     * @param name:
+     * @return: com.aaa.base.ResultData
+     *
+     **/
+    @PostMapping("/getMapProByName")
+    ResultData getMappingProjectByName(@RequestParam ("name") String name);
+
+
+    /**
+     * @Author:xfc
+     * @Description:
+     *          通过id 查询测绘信息
+     * @Date: 2020/7/17 19:29
+     * @param id:
+     * @return: com.aaa.base.ResultData
+     *
+     **/
+    @PostMapping("/getMapProById")
+    ResultData getMappingProjectById(@RequestParam("id") String id);
+
+
+    /**
+     * @Author:xfc
+     * @Description:
+     *        查询未审核的项目登记信息
+     * @Date: 2020/7/17 19:30
+     * @param pageNo:
+     * @param pageSize:
+     * @return: com.aaa.base.ResultData
+     *
+     **/
+    @PostMapping("/getMapProUnaudited")
+    ResultData getMappingProjectUnaudited(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize);
+
+
+
+    /**
+     * @Author:xfc
+     * @Description:
+     *        查询未审核的项目成功汇交信息
+     * @Date: 2020/7/17 19:32
+     * @param pageNo:
+     * @param pageSize:
+     * @return: com.aaa.base.ResultData
+     *
+     **/
+    @PostMapping("/getMapProUnauditedInfo")
+    ResultData getMappingProjectUnauditedInfo(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize);
+
+
+
+    /**
+     * @Author:xfc
+     * @Description:
+     *     根据 name 查询未审核的项目登记信息
+     * @Date: 2020/7/17 19:35
+     * @param pageNo:
+     * @param pageSize:
+     * @param name:
+     * @return: com.aaa.base.ResultData
+     *
+     **/
+    @PostMapping("/getMapProUnauditedByName")
+    ResultData getMappingProjectUnauditedByName(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize")Integer pageSize,String name);
+
+
+    /**
+     * @Author:xfc
+     * @Description:
+     *          根据 name 查询未审核的项目成果汇交信息
+     * @Date: 2020/7/17 19:38
+     * @param pageNo:
+     * @param pageSize:
+     * @param name:
+     * @return: com.aaa.base.ResultData
+     *
+     **/
+    @PostMapping("/getMapProUnaByNameInfo")
+    ResultData  getMappingProjectUnauditedByNameInfo(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize")Integer pageSize,String name);
+
+
+    /**
+    * @Author:xfc
+    * @Description:
+     *      根据单位id 查找设备信息
+    * @Date: 2020/7/20 8:52
+    * @param equipment:
+     * @param pageNo:
+     * @param pageSize:
+    * @return: com.aaa.base.ResultData
+    *
+    **/
+    @PostMapping("/getEquipmentByUnitId")
+    ResultData getEquipmentByUnitId(@RequestBody Equipment equipment, @RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize")Integer pageSize);
+
+
+    /**
+    * @Author:xfc
+    * @Description:
+     *         查询全部设备信息
+    * @Date: 2020/7/20 9:56
+    * @param map:
+    * @return: com.aaa.base.ResultData
+    *
+    **/
+    @PostMapping("/selectAllEquipment")
+    ResultData selectAllEquipment(@RequestBody HashMap map);
+
+
+    /**
+    * @Author:xfc
+    * @Description:
+     *       根据设备id 查找设备信息
+    * @Date: 2020/7/20 9:57
+    * @param map:
+    * @return: com.aaa.base.ResultData
+    *
+    **/
+    @PostMapping("/getEquipmentById")
+    ResultData getEquipmentById(@RequestBody HashMap map);
+
+
+    /**
+    * @Author:xfc
+    * @Description:
+     *          添加设备信息
+    * @Date: 2020/7/20 10:01
+    * @param equipment:
+    * @return: java.lang.Boolean
+    *
+    **/
+    @PostMapping("/addEquipment")
+    Boolean addEquipment(@RequestBody Equipment equipment);
+
+    /**
+    * @Author:xfc
+    * @Description:
+     *       更新设备信息
+    * @Date: 2020/7/20 10:01
+    * @param equipment:
+    * @return: java.lang.Boolean
+    *
+    **/
+    @PostMapping("/updateEquipment")
+    Boolean updateEquipment(@RequestBody Equipment equipment);
+
+
+
+    /**
+    * @Author:xfc
+    * @Description:
+     *      根据id 删除设备信息
+    * @Date: 2020/7/20 10:04
+    * @param id:
+    * @return: java.lang.Boolean
+    *
+    **/
+    @PostMapping("/deleteEquipment")
+    Boolean deleteEquipment(@RequestParam("id") Long id);
+    }

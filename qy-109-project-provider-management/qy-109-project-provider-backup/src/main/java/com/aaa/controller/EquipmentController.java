@@ -118,7 +118,7 @@ public class EquipmentController extends CommonController<Equipment> {
     *
     **/
     @PostMapping("/addEquipment")
-    public Boolean addEquipment(@RequestBody Equipment equipment, RedisService redisService)throws Exception{
+    public Boolean addEquipment(@RequestBody Equipment equipment)throws Exception{
         Boolean result=equipmentService.addEquipment(equipment,redisService);
         return result;
     }
