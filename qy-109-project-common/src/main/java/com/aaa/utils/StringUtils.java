@@ -48,6 +48,22 @@ public class StringUtils {
         return returnStr;
     }
 
+
+    /**
+     *    将对象转换成数字
+     */
+
+    public static Integer transToInt(Object obj){
+        if(obj!=null&&obj!=""){
+            return Integer.parseInt(obj.toString());
+        }
+        return null;
+    }
+
+
+
+
+
     /**
      * 判断字符串是否为空
      *
