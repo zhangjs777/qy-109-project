@@ -20,7 +20,7 @@ import static java.util.Map.*;
 
 /**
  * @program: qy-109-project
- * @description:
+ * @description:  单位表
  * @author: 张竞赛
  * @create: 2020-07-17 09:11
  **/

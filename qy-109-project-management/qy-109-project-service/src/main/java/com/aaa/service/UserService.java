@@ -171,13 +171,13 @@ public class UserService extends BaseService<User> {
 
         Map<String, Object> resultMap = new HashMap<String, Object>();
         //获取当前用户的token令牌
-        String tokenval = redisService.getOne("tokenId").toString();
-        //检测token
-        if (null == tokenval) {
-            resultMap.put(CODE, LOGIN_TIMEOUT_EXIT.getCode());
-            resultMap.put(MSG, LOGIN_TIMEOUT_EXIT.getMsg());
-            return resultMap;
-        }
+//        String tokenval = redisService.getOne("tokenId").toString();
+//        //检测token
+//        if (null == tokenval) {
+//            resultMap.put(CODE, LOGIN_TIMEOUT_EXIT.getCode());
+//            resultMap.put(MSG, LOGIN_TIMEOUT_EXIT.getMsg());
+//            return resultMap;
+//        }
 
         if (hashMap.size() > 0) {
             //使用pageHelper

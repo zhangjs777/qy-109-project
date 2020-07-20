@@ -8,6 +8,7 @@ import lombok.experimental.Accessors;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Description:  测绘单位负责人-实体
@@ -104,6 +105,14 @@ public class Principal implements Serializable {
      */
     @Column(name = "modify_time")
     private Date modifyTime;
+
+
+
+
+    /**
+     * 一对多，对应多个资源
+     */
+    private List<Resource> resources;
 
 
 }

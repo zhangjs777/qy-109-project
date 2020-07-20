@@ -2,6 +2,7 @@ package com.aaa.utils;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -27,6 +28,13 @@ public class BaseUtil {
             return obj.toString();
         }
         return "";
+    }
+    //将对象转换成数字
+    public static Long transToLong(Object obj){
+        if(obj!=null&&obj!=""){
+            return Long.valueOf(obj.toString());
+        }
+        return null;
     }
 
     //将对象转换成数字

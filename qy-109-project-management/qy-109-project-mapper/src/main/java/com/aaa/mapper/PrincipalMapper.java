@@ -11,4 +11,7 @@ import tk.mybatis.mapper.common.Mapper;
  * @Date: 2020/7/16
  */
 public interface PrincipalMapper extends Mapper<Principal> {
+
+       public Principal  selectPrincipalById(Long id);
+
 }

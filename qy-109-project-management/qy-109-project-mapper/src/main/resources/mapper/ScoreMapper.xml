@@ -16,5 +16,14 @@
   </resultMap>
 
 
+  <select id="selectByUnitId" resultType="HashMap" parameterType="HashMap">
+    SELECT ts.*,tr.name,tr.path
+    from t_score ts
+    LEFT JOIN t_resource tr on  tr.ref_biz_id=ts.unit_id
+    WHERE ts.unit_id=#{unitId} and tr.ref_biz_type='评分文件'
+
+  </select>
+
+
 
 </mapper>

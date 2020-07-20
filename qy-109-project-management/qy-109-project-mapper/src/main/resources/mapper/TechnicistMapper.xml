@@ -33,4 +33,10 @@
     <result column="create_time" property="createTime" jdbcType="DATE" />
     <result column="modify_time" property="modifyTime" jdbcType="DATE" />
   </resultMap>
+
+<select id="selectTechnicistById" resultMap="BaseResultMap">
+        SELECT *FROM t_technicist id=#{id}
+</select>
+
+
 </mapper>

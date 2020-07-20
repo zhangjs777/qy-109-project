@@ -158,6 +158,14 @@ public abstract class BaseService<T>  {
   public List<T> selectList(T t){
       return mapper.select(t);
   }
+
+  /**
+  * @Author: js.zhang
+  * @Description: 条件分页查询
+  * @DateTime: 2020/7/18 17:03
+  * @Params: [t, pageNo, pageSize]
+  * @Return com.github.pagehelper.PageInfo<T>
+  */
     public PageInfo<T> selectListByPage(T t,Integer pageNo,Integer pageSize){
       PageHelper.startPage(pageNo,pageSize);
       List<T> select=mapper.select(t);

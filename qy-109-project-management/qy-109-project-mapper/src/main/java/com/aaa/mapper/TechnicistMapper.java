@@ -1,5 +1,6 @@
 package com.aaa.mapper;
 
+
 import com.aaa.model.Technicist;
 import tk.mybatis.mapper.common.Mapper;
 
@@ -11,4 +12,6 @@ import tk.mybatis.mapper.common.Mapper;
  * @Date: 2020/7/16
  */
 public interface TechnicistMapper extends Mapper<Technicist> {
+
+    Technicist selectTechnicistById(Long id);
 }

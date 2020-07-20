@@ -18,7 +18,7 @@ import static com.aaa.status.OperationStatus.*;
 
 /**
  * @program: qy-109-project
- * @description:
+ * @description: 审核表
  * @author: 张竞赛
  * @create: 2020-07-17 10:24
  **/
