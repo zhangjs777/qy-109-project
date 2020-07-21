@@ -4,13 +4,16 @@ import cn.hutool.core.date.DateUtil;
 import com.aaa.base.BaseService;
 import com.aaa.base.ResultData;
 import com.aaa.mapper.NewsMapper;
+import com.aaa.model.Menu;
 import com.aaa.model.News;
 import com.aaa.vo.RoleVo;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,6 +26,23 @@ public class NewsService extends BaseService<News> {
 
     @Autowired
     NewsMapper newsMapper;
+
+    /**
+    * @Description: 信息公开的模糊查询
+    * @Param: [news]
+    * @return: java.util.List<com.aaa.model.News>
+    * @Author: ZMB
+    * @Date: 2020/7/20
+    */
+    public List<News> selectNews(News news){
+        //获取News全部属性
+        Example example = new Example(News.class);
+        Example.Criteria criteria = example.createCriteria();
+        //模糊查询
+        criteria.andLike("title","%"+news.getTitle()+"%");
+        List<News> newsList = newsMapper.selectByExample(example);
+        return newsList;
+    }
 
     /**
     * @Description: 查询所有信息
@@ -81,8 +101,9 @@ public class NewsService extends BaseService<News> {
     * @Date: 2020/7/18
     */
     public Boolean addNews(News news){
-        String createTime= DateUtil.now();
-        news.setGmtCreate(createTime);
+        /*String createTime= DateUtil.now();*/
+        //设置新增时间
+        news.setGmtCreate(new Date());
         try {
             Integer add=super.add(news);
             if (add>0){
@@ -104,8 +125,9 @@ public class NewsService extends BaseService<News> {
     * @Date: 2020/7/18
     */
     public Boolean updateNews(News news){
-        String createTime= DateUtil.now();
-        news.setGmtModified(createTime);
+        /*String createTime= DateUtil.now();*/
+        //设置修改时间
+        news.setGmtModified(new Date());
         try {
             Integer update=super.update(news);
             if (update>0){

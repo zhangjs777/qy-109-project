@@ -3,10 +3,15 @@ package com.aaa.controller;
 import com.aaa.base.BaseController;
 import com.aaa.base.ResultData;
 import com.aaa.model.Dept;
+import com.aaa.model.User;
 import com.aaa.service.DeptService;
 import com.aaa.vo.RoleVo;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @program: qy-109-project
@@ -19,6 +24,23 @@ public class DeptController extends BaseController {
 
     @Autowired
     private DeptService deptService;
+
+    /**
+    * @Description:  部门模糊管理
+    * @Param: [dept]
+    * @return: com.aaa.base.ResultData
+    * @Author: ZMB
+    * @Date: 2020/7/20
+    */
+    @PostMapping("/selectDept")
+    public ResultData selectDeptAll(@RequestBody Dept dept){
+        List<Dept> deptList = deptService.selectDept(dept);
+        if (deptList !=null&&deptList.size()>0){
+            return  super.operationSuccess(deptList);
+        }else {
+            return  super.operationFailed();
+        }
+    }
 
     /**
     * @Description: 查询所有部门

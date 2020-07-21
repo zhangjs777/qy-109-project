@@ -1,5 +1,6 @@
 package com.aaa.vo;
 
+import com.aaa.model.CheckPerson;
 import com.aaa.model.Dept;
 import com.aaa.model.News;
 import com.aaa.model.Role;
@@ -32,6 +33,8 @@ public class RoleVo implements Serializable {
     private Dept dept;
 
     private News news;
+
+    private CheckPerson checkPerson;
 
     private Integer pageNo;
 

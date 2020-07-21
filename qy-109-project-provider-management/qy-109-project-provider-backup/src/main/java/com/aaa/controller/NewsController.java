@@ -2,12 +2,15 @@ package com.aaa.controller;
 
 import com.aaa.base.BaseController;
 import com.aaa.base.ResultData;
+import com.aaa.model.Menu;
 import com.aaa.model.News;
 
 import com.aaa.service.NewsService;
 import com.aaa.vo.RoleVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @program: qy-109-project
@@ -20,6 +23,24 @@ public class NewsController extends BaseController {
 
     @Autowired
     private NewsService newsService;
+
+    /** 
+    * @Description: 信息公开的模糊查询 
+    * @Param: [news] 
+    * @return: com.aaa.base.ResultData 
+    * @Author: ZMB 
+    * @Date: 2020/7/20 
+    */
+    @PostMapping("/selectNews")
+    public ResultData selectNewsAll(@RequestBody News news){
+        List<News> newsList = newsService.selectNews(news);
+        if (newsList !=null&&newsList.size()>0){
+            return  super.operationSuccess(newsList);
+        }else {
+            return  super.operationFailed();
+        }
+    }
+    
     /**
     * @Description: 查询所有信息
     * @Param: []

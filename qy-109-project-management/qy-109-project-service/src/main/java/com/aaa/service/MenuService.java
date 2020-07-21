@@ -3,11 +3,14 @@ package com.aaa.service;
 import cn.hutool.core.date.DateUtil;
 import com.aaa.base.BaseService;
 import com.aaa.mapper.MenuMapper;
+import com.aaa.model.Dept;
 import com.aaa.model.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -81,6 +84,25 @@ public class MenuService extends BaseService<Menu> {
     }
 
     /**
+     * @Description: 模糊查询-菜单
+     * @Param: [menu]
+     * @return: java.util.List<com.aaa.model.Menu>
+     * @Author: ZMB
+     * @Date: 2020/7/20
+     */
+    public List<Menu> selectMenu(Menu menu){
+        //获取Menu全部属性
+        Example example = new Example(Menu.class);
+        Example.Criteria criteria = example.createCriteria();
+        //模糊查询
+        criteria.andLike("menuName","%"+menu.getMenuName()+"%");
+
+        List<Menu> menuList = menuMapper.selectByExample(example);
+
+        return menuList;
+    }
+
+    /**
     * @Description:  新增菜单或者按钮
     * @Param: [menu]
     * @return: java.lang.Boolean
@@ -88,8 +110,9 @@ public class MenuService extends BaseService<Menu> {
     * @Date: 2020/7/16
     */
     public Boolean insertMenuOrButton(Menu menu){
-        String createTime = DateUtil.now();
-        menu.setCreateTime(createTime);
+        //设置新增时间
+        /*String createTime = DateUtil.now();*/
+        menu.setCreateTime(new Date());
         try{
             Integer add = super.add(menu);
             if (add > 0){
@@ -111,8 +134,9 @@ public class MenuService extends BaseService<Menu> {
     * @Date: 2020/7/16
     */
     public Boolean updateMenuOrButton(Menu menu){
-        String time = DateUtil.now();
-        menu.setModifyTime(time);
+        //设置修改时间
+        /*String time = DateUtil.now();*/
+        menu.setModifyTime(new Date());
         try {
             Integer update = super.update(menu);
             if (update>0){

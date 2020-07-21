@@ -2,6 +2,7 @@ package com.aaa.controller;
 
 import com.aaa.base.BaseController;
 import com.aaa.base.ResultData;
+import com.aaa.model.Dept;
 import com.aaa.model.Menu;
 import com.aaa.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,23 @@ public class MenuController extends BaseController {
     private MenuService menuService;
 
     /**
+    * @Description: 菜单的模糊查询
+    * @Param: [dept]
+    * @return: com.aaa.base.ResultData
+    * @Author: ZMB
+    * @Date: 2020/7/20
+    */
+    @PostMapping("/selectMenu")
+    public ResultData selectMenuAll(@RequestBody Menu menu){
+        List<Menu> menuList = menuService.selectMenu(menu);
+        if (menuList !=null&&menuList.size()>0){
+            return  super.operationSuccess(menuList);
+        }else {
+            return  super.operationFailed();
+        }
+    }
+
+    /**
     * @Description:  查询所有菜单
     * @Param: []
     * @return: java.util.List<com.aaa.model.Menu>
@@ -35,7 +53,6 @@ public class MenuController extends BaseController {
     public List<Menu> selectAllMenus(){
         return menuService.selectAllMenus();
     }
-
 
     /** 
     * @Description: 在菜单管理中新增菜单或者是按钮 

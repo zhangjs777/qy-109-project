@@ -12,57 +12,56 @@ import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
-* @Description:  部门-实体
-* @Param:
-* @return:
-* @Author: ZMB
-* @Date: 2020/7/16
-*/
-@Table(name = "t_dept")
+@Table(name = "t_check_person")
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
 @Data
-public class Dept  implements Serializable {
+public class CheckPerson implements Serializable {
     /**
-     * 部门ID
+     * id
      */
     @Id
-    @Column(name = "DEPT_ID")
-    private Long deptId;
+    private Long id;
 
     /**
-     * 上级部门ID
+     * 姓名
      */
-    @Column(name = "PARENT_ID")
-    private Long parentId;
+    private String name;
 
     /**
-     * 部门名称
+     * 单位名称
      */
-    @Column(name = "DEPT_NAME")
-    private String deptName;
+    @Column(name = "unit_name")
+    private String unitName;
 
     /**
-     * 排序
+     * 职务
      */
-    @Column(name = "ORDER_NUM")
-    private Double orderNum;
+    private String duty;
+
+    /**
+     * 联系方式
+     */
+    private String phone;
 
     /**
      * 创建时间
      */
-    @Column(name = "CREATE_TIME")
-    /* private Date createTime;*/
+    @Column(name = "create_time")
+    /*private Date createTime;*/
     private Date createTime;
 
     /**
      * 修改时间
      */
-    @Column(name = "MODIFY_TIME")
+    @Column(name = "modify_time")
     /*private Date modifyTime;*/
     private Date modifyTime;
 
+    /**
+     * 备注
+     */
+    private String memo;
 
 }

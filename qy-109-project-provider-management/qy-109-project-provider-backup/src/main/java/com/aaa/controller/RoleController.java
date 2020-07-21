@@ -3,10 +3,14 @@ package com.aaa.controller;
 
 import com.aaa.base.BaseController;
 import com.aaa.base.ResultData;
+import com.aaa.model.News;
+import com.aaa.model.Role;
 import com.aaa.service.RoleService;
 import com.aaa.vo.RoleVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
 * @Description:
@@ -22,6 +26,23 @@ public class RoleController extends BaseController {
     @Autowired
     private RoleService roleService;
 
+    /** 
+    * @Description: 模糊查询角色 
+    * @Param: [role] 
+    * @return: com.aaa.base.ResultData 
+    * @Author: ZMB 
+    * @Date: 2020/7/20 
+    */
+    @PostMapping("/selectRole")
+    public ResultData selectRoleAll(@RequestBody Role role){
+        List<Role> roleList = roleService.selectRole(role);
+        if (roleList !=null&&roleList.size()>0){
+            return  super.operationSuccess(roleList);
+        }else {
+            return  super.operationFailed();
+        }
+    }
+    
     /**
     * @Description:  查询所有的角色
     * @Param: []

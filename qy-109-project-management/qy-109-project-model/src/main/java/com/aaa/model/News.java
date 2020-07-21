@@ -43,15 +43,15 @@ public class News implements Serializable {
      * 创建时间
      */
     @Column(name = "gmt_create")
-    /*private Date gmtCreate;*/
-    private String gmtCreate;
+    private Date gmtCreate;
+    /*private String gmtCreate;*/
 
     /**
      * 记录最近一次修改时间
      */
     @Column(name = "gmt_modified")
-    /*private Date gmtModified;*/
-    private String gmtModified;
+    private Date gmtModified;
+    /*private String gmtModified;*/
 
     /**
      * 正文

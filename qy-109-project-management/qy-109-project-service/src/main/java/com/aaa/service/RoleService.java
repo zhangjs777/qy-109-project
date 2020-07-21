@@ -5,14 +5,17 @@ import com.aaa.base.BaseService;
 import com.aaa.base.ResultData;
 import com.aaa.mapper.RoleMapper;
 import com.aaa.mapper.RoleMenuMapper;
+import com.aaa.model.News;
 import com.aaa.model.Role;
 import com.aaa.model.RoleMenu;
 import com.aaa.vo.RoleVo;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /** 
@@ -80,6 +83,23 @@ public class RoleService extends BaseService<Role> {
     }
 
     /**
+    * @Description:  模糊查询角色信息
+    * @Param: [news]
+    * @return: java.util.List<com.aaa.model.News>
+    * @Author: ZMB
+    * @Date: 2020/7/20
+    */
+    public List<Role> selectRole(Role role){
+        //获取Role全部属性
+        Example example = new Example(Role.class);
+        Example.Criteria criteria = example.createCriteria();
+        //模糊查询
+        criteria.andLike("roleName","%"+role.getRoleName()+"%");
+        List<Role> roleList = roleMapper.selectByExample(example);
+        return roleList;
+    }
+
+    /**
     * @Description:  删除角色
     * @Param: [roleId]
     * @return: java.lang.Boolean
@@ -122,8 +142,8 @@ public class RoleService extends BaseService<Role> {
     * @Date: 2020/7/16
     */
     public Boolean insertRole(RoleVo roleVo){
-        String s = DateUtil.now();
-        roleVo.getRole().setCreateTime(s);
+        /*String s = DateUtil.now();*/
+        roleVo.getRole().setCreateTime(new Date());
 
         int insert = roleMapper.insert(roleVo.getRole());
         if (insert>0) {
@@ -164,8 +184,8 @@ public class RoleService extends BaseService<Role> {
     * @Date: 2020/7/16
     */
     public Boolean updateRole(RoleVo roleVo) {
-        String s = DateUtil.now();
-        roleVo.getRole().setModifyTime(s);
+        /*String s = DateUtil.now();*/
+        roleVo.getRole().setModifyTime(new Date());
         //1、去修改role表
         int i = roleMapper.updateByPrimaryKeySelective(roleVo.getRole());
         if (i > 0) {
