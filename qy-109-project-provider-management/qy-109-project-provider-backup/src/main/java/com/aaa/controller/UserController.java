@@ -70,17 +70,19 @@ public class UserController extends CommonController<User> {
 
     /**
     * @Author: js.zhang
-    * @Description: 批量逻辑删除 status
+    * @Description: 批量删除
     * @DateTime: 2020/7/16 19:35
     * @Params: [map, ids]
     * @Return com.aaa.base.ResultData
     */
-    @RequestMapping("/updateUserStatus")
-    ResultData updateUserStatus(@RequestBody Map map){
-        map.get("words");
-        ResultData updateResult = super.updateStatus(map);
-        return updateResult;
+    @RequestMapping("/deleteUserById")
+    ResultData updateUserStatus(@RequestParam("ids[]") Integer [] ids){
+        ResultData resultData = super.batchDelete(ids);
+        return resultData;
     }
+
+
+
 
 
     /**

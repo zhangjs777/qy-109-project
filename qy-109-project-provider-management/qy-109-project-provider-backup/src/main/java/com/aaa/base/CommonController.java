@@ -87,26 +87,7 @@ public abstract class CommonController<T> extends BaseController {
                 return super.operationFailed();
         }
 
-        /**
-         * @Author: js.zhang
-         * @Description: 批量修改status
-         * @DateTime: 2020/7/16 19:30
-         * @Params: [map]
-         * @Return com.aaa.base.ResultData
-         */
-        public ResultData updateStatus(@RequestBody Map map){
-                List<Object> ids = (List<Object>) map.get("ids");
-                Object t = map.get("t");
-                try {
-                        Integer result = getBaseService().batchUpdate((T) t,ids);
-                        if (result > 0){
-                                return super.operationSuccess();
-                        }
-                } catch (Exception e) {
-                        e.printStackTrace();
-                }
-                return super.operationFailed();
-        }
+
 
 
 

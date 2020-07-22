@@ -77,6 +77,13 @@ public class PrincipalController extends CommonController<Principal> {
                 }
 
     }
+    /**
+    * @Author: js.zhang
+    * @Description: 新增法人信息
+    * @DateTime: 2020/7/21 8:38
+    * @Params: [principal]
+    * @Return com.aaa.base.ResultData
+    */
     @PostMapping("/addPrincipal")
     public ResultData addPrincipal(@RequestBody Principal principal){
             principal.setCreateTime(new Date());
@@ -87,6 +94,41 @@ public class PrincipalController extends CommonController<Principal> {
             return super.operationFailed();
         }
 
+    }
+    /**
+    * @Author: js.zhang
+    * @Description: 修改法人
+    * @DateTime: 2020/7/22 9:10
+    * @Params: [principal]
+    * @Return com.aaa.base.ResultData
+    */
+    @PostMapping("/updatePrincipal")
+    public ResultData updatePrincipal(@RequestBody Principal principal){
+        principal.setModifyTime(new Date());
+
+        Integer update = getBaseService().update(principal);
+        if (update>0){
+            return super.operationSuccess();
+        }else {
+            return super.operationFailed();
+        }
+
+    }
+    /**
+    * @Author: js.zhang
+    * @Description: 删除法人
+    * @DateTime: 2020/7/22 9:13
+    * @Params: [principal]
+    * @Return com.aaa.base.ResultData
+    */
+    @PostMapping("/deletePrincipal")
+    public ResultData   updatePrinicepal(@RequestBody Principal principal){
+        Integer delete = getBaseService().delete(principal);
+        if (delete>0){
+            return super.operationSuccess();
+        }else {
+            return super.operationFailed();
+        }
     }
 
 

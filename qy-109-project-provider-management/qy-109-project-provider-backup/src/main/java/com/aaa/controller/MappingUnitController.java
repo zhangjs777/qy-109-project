@@ -111,6 +111,7 @@ public class MappingUnitController extends CommonController<MappingUnit> {
     * @Params: [mappingUnit]
     * @Return com.aaa.base.ResultData
     */
+    @PostMapping("/selectUnitById")
     public ResultData selectUnitById(MappingUnit mappingUnit){
         if (mappingUnit!=null){
             MappingUnit mappingUnit1 = getBaseService().selectOne(mappingUnit);
@@ -154,6 +155,8 @@ public class MappingUnitController extends CommonController<MappingUnit> {
         }
 
     }
+
+
 
 
 }
