@@ -24,7 +24,7 @@ public interface MappingUnitMapper extends Mapper<MappingUnit> {
   * @Params: [mappingUnit]
   * @Return java.util.List<java.util.HashMap>
   */
-  public List<HashMap> selectUnit(MappingUnit mappingUnit);
+  public List<MappingUnit> selectUnit(MappingUnit mappingUnit);
 
   /**
   * @Author: js.zhang

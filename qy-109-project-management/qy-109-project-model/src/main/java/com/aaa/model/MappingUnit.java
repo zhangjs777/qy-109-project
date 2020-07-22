@@ -332,4 +332,8 @@ public class MappingUnit implements Serializable {
      */
     private String coordinate;
 
+    @Transient
+    private Integer pageNo;
+    @Transient
+    private Integer pageSize;
 }
