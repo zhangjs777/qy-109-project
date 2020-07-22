@@ -6,6 +6,7 @@ import com.aaa.mapper.MappingUnitMapper;
 import com.aaa.model.MappingUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,6 +26,31 @@ import static com.aaa.status.SelectStatus.*;
 public class MappingUnitService extends BaseService<MappingUnit> {
     @Autowired
     private MappingUnitMapper mappingUnitMapper;
+
+
+        /**
+        * @Author: js.zhang
+        * @Description: 查询黑白名单  黑0 白1l
+        * @DateTime: 2020/7/22 11:46
+        * @Params: [blankAndWirte]
+        * @Return java.util.List<com.aaa.model.MappingUnit>
+        */
+    public List<MappingUnit> bwUnit(String blankAndWirte){
+        Example example = new Example(MappingUnit.class);
+        Example.Criteria criteria = example.createCriteria();
+        List<MappingUnit> mappingUnitList=null;
+        if (blankAndWirte=="0"){
+            criteria.orLessThan("score",60);
+          mappingUnitList= mappingUnitMapper.selectByExample(example);
+        }else {
+            criteria.orGreaterThan("score",100);
+          mappingUnitList = mappingUnitMapper.selectByExample(example);
+        }
+        return mappingUnitList;
+
+
+    }
+
 
 
     /**

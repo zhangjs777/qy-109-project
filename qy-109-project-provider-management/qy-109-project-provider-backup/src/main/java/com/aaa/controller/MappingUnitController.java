@@ -5,6 +5,8 @@ import com.aaa.base.CommonController;
 import com.aaa.base.ResultData;
 import com.aaa.model.MappingUnit;
 import com.aaa.service.MappingUnitService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,6 +38,45 @@ public class MappingUnitController extends CommonController<MappingUnit> {
     public BaseService<MappingUnit> getBaseService() {
         return mappingUnitService;
     }
+
+
+    /**
+    * @Author: js.zhang
+    * @Description: 查询黑白名单 0 黑 1白
+    * @DateTime: 2020/7/22 11:39
+    * @Params: [blankAndWirte]
+    * @Return com.aaa.base.ResultData
+    */
+    @PostMapping("/bwUnit")
+    public ResultData bwUnit(String blankAndWirte,Integer pageNo,Integer pageSize){
+
+        if (pageNo!=null&&pageSize!=null){
+            PageHelper.startPage(pageNo,pageSize);
+            List<MappingUnit> mappingUnitList = mappingUnitService.bwUnit(blankAndWirte);
+            PageInfo<MappingUnit> mappingUnitPageInfo = new PageInfo<MappingUnit>(mappingUnitList);
+            if (mappingUnitPageInfo!=null&&mappingUnitPageInfo.getSize()>0){
+                return  super.operationSuccess(mappingUnitPageInfo);
+            }else {
+                return  super.operationFailed();
+            }
+
+
+        }else {
+            List<MappingUnit> mappingUnitList = mappingUnitService.bwUnit(blankAndWirte);
+            if (mappingUnitList!=null&&mappingUnitList.size()>0){
+                return  super.operationSuccess(mappingUnitList);
+            }else {
+                return  super.operationFailed();
+            }
+
+
+        }
+
+
+
+
+    }
+
 
 
 

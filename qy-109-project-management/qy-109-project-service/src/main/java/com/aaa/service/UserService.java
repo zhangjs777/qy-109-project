@@ -212,12 +212,19 @@ public class UserService extends BaseService<User> {
         //获取user全部属性
         Example example = new Example(User.class);
         Example.Criteria criteria = example.createCriteria();
-        //拼接条件模糊查询username和精确查询deptid
-        criteria.andLike("username","%"+user.getUsername()+"%").andEqualTo("deptId",user.getDeptId());
+        if (user.getDeptId()!=null||user.getUsername()!=null){
+            //拼接条件模糊查询username和精确查询deptid
+            criteria.andLike("username","%"+user.getUsername()+"%").andEqualTo("deptId",user.getDeptId());
 
-        List<User> userList = userMapper.selectByExample(example);
+            List<User> userList = userMapper.selectByExample(example);
+            return userList;
+        }else {
+            List<User> userList = userMapper.selectAll();
+            return  userList;
+        }
 
-        return userList;
+
+
     }
 
 
