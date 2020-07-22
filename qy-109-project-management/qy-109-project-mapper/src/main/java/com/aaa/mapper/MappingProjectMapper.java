@@ -91,4 +91,6 @@ public interface MappingProjectMapper extends Mapper<MappingProject> {
     List<MappingProject> getMappingProjectUnauditedByNameInfo(String name);
 
 
+
+//    List<HashMap> selectAllMappingProject(HashMap map);
 }

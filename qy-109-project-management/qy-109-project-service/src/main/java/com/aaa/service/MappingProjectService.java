@@ -9,6 +9,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.HashMap;
 import java.util.List;
@@ -43,10 +44,8 @@ public class MappingProjectService extends BaseService<MappingProject> {
     *
     **/
     public PageInfo<MappingProject> getAllMappingProject(Integer pageNo, Integer pageSize, RedisService redisService){
-
         //1.根据前台传来的pageNo，pageSize 进行分页
         PageHelper.startPage(pageNo, pageSize);
-
         try {
             //从redis中获取mappingproject的key值
             //String mappingprojectkey = null;
@@ -366,6 +365,31 @@ public class MappingProjectService extends BaseService<MappingProject> {
                 return new PageInfo<MappingProject>(mappingProjects);
             }
         }
+
     }
+
+
+    /**
+    * @Author:xfc
+    * @Description:
+     *      根据 名称模糊查询 +条件 查询
+    * @Date: 2020/7/22 9:51
+    * @param mappingProject:
+    * @return: java.util.List<com.aaa.model.MappingProject>
+    *
+    **/
+
+    public List<MappingProject> selectAllMappingProject(MappingProject mappingProject){
+        //获取mappingProject全部属性
+        Example example = new Example(MappingProject.class);
+        Example.Criteria criteria = example.createCriteria();
+        //拼接条件模糊查询projectName和精确查询项目类型+创建时间
+        criteria.andLike("projectName","%"+mappingProject.getProjectName()+"%").andEqualTo("projectType",mappingProject.getProjectType()).andEqualTo("startDate");
+
+        List<MappingProject> mappingProjectList = mappingProjectMapper.selectByExample(example);
+        return mappingProjectList;
+    }
+
+
 
 }

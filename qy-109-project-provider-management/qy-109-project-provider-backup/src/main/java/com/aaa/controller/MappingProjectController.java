@@ -4,16 +4,22 @@ import com.aaa.base.BaseService;
 import com.aaa.base.CommonController;
 import com.aaa.base.ResultData;
 import com.aaa.model.MappingProject;
+import com.aaa.model.User;
 import com.aaa.redis.RedisService;
 import com.aaa.service.MappingProjectService;
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static com.aaa.staticproperties.RedisProperties.CODE;
+import static com.aaa.status.OperationStatus.DATA_NOT_EXIST;
+import static com.aaa.status.SelectStatus.SELECT_DATA_FAILED;
+import static com.aaa.status.SelectStatus.SELECT_DATA_SUCCESS;
 
 /**
  * @program: qy-109-project
@@ -188,6 +194,33 @@ public class MappingProjectController extends CommonController<MappingProject> {
     @PostMapping("/getMappingProjectUnauditedByNameInfo")
     public ResultData getMappingProjectUnauditedByNameInfo(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize")Integer pageSize, String name){
         PageInfo<MappingProject> mappingProjectList= mappingProjectService.getMappingProjectUnauditedByNameInfo(pageNo,pageSize,name);
+        if (!"".equals(mappingProjectList) && null !=mappingProjectList){
+            //（true）有值，返回成功结果
+            return operationSuccess(mappingProjectList);
+        }else {
+            //(false)无值，返回失败结果
+            return operationFailed();
+        }
+    }
+
+
+
+
+    /**
+    * @Author:xfc
+    * @Description:
+     *      条件 查询
+    * @Date: 2020/7/22 11:38
+    * @param mappingProject:
+    * @return: com.aaa.base.ResultData
+    *
+    **/
+    @RequestMapping("/selectAllMappingProject")
+
+    public  ResultData selectAllMappingProject(@RequestBody MappingProject mappingProject) {
+
+         List<MappingProject> mappingProjectList= mappingProjectService.selectAllMappingProject(mappingProject);
+
         if (!"".equals(mappingProjectList) && null !=mappingProjectList){
             //（true）有值，返回成功结果
             return operationSuccess(mappingProjectList);
