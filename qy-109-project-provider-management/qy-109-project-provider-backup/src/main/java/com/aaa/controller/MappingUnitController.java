@@ -49,7 +49,7 @@ public class MappingUnitController extends CommonController<MappingUnit> {
     * @Return com.aaa.base.ResultData
     */
     @GetMapping("/bwUnit")
-    public ResultData bwUnit(String blankAndWirte,Integer pageNo,Integer pageSize){
+    public ResultData bwUnit(@RequestParam("blankAndWirte") String blankAndWirte,@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize){
 
         if (pageNo!=null&&pageSize!=null){
             PageHelper.startPage(pageNo,pageSize);
@@ -152,7 +152,7 @@ public class MappingUnitController extends CommonController<MappingUnit> {
     * @Return com.aaa.base.ResultData
     */
     @PostMapping("/selectUnitById")
-    public ResultData selectUnitById(MappingUnit mappingUnit){
+    public ResultData selectUnitById(@RequestBody MappingUnit mappingUnit){
         if (mappingUnit!=null){
             MappingUnit mappingUnit1 = getBaseService().selectOne(mappingUnit);
             if (mappingUnit!=null){

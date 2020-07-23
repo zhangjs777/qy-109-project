@@ -28,7 +28,7 @@ public interface IProjectService {
      * @throws
     **/
     @PostMapping("/doLogin")
-    public  ResultData doLogin(@RequestBody User user);
+    ResultData doLogin(@RequestBody User user);
 
     /**
      * @author
@@ -40,7 +40,7 @@ public interface IProjectService {
      * @throws
     **/
             @PostMapping("/addLoginLog")
-    public Integer addLoginLog(@RequestBody LoginLog loginLog);
+   Integer addLoginLog(@RequestBody LoginLog loginLog);
     /**
      * @Author: js.zhang
      * @Description: 查询全部用户 测试用
@@ -49,7 +49,7 @@ public interface IProjectService {
      * @Return com.aaa.base.ResultData
      */
     @RequestMapping("/selectUser")
-    public ResultData selectUser();
+    ResultData selectUser();
     /**
      * @Author: js.zhang
      * @Description:分页 条件 查询
@@ -58,7 +58,18 @@ public interface IProjectService {
      * @Return com.aaa.base.ResultData
      */
     @RequestMapping("/selectAllUser")
-    public ResultData selectAllUser(@RequestBody HashMap hashMap );
+    ResultData selectAllUser(@RequestBody User user );
+
+
+    /**
+     * @Author: js.zhang
+     * @Description: 通过id查询user具体信息 部门 管理员
+     * @DateTime: 2020/7/22 21:35
+     * @Params: [id]
+     * @Return com.aaa.base.ResultData
+     */
+    @GetMapping("/selectUserById")
+    ResultData selectUserById(@RequestParam ("id") Long id);
 
     /**
      * @Author: js.zhang
@@ -68,7 +79,7 @@ public interface IProjectService {
      * @Return com.aaa.base.ResultData
      */
     @PostMapping("/selectUserAll")
-    public ResultData selectUserAll(@RequestBody User user);
+   ResultData selectUserAll(@RequestBody User user);
 
     /**
      * @Author: js.zhang
@@ -100,6 +111,17 @@ public interface IProjectService {
     @RequestMapping("/deleteUserById")
     ResultData updateUserStatus(@RequestParam("ids[]") Integer [] ids);
 
+
+    /**
+     * @Author: js.zhang
+     * @Description: 查询黑白名单 0 黑 1白
+     * @DateTime: 2020/7/22 11:39
+     * @Params: [blankAndWirte]
+     * @Return com.aaa.base.ResultData
+     */
+    @GetMapping("/bwUnit")
+    public ResultData bwUnit(@RequestParam("blankAndWirte") String blankAndWirte,@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize);
+
     /**
     * @Author: js.zhang
     * @Description: 分页查询所有的mappingUnit 1.带条件  2不带条件
@@ -120,7 +142,7 @@ public interface IProjectService {
      * @Return com.aaa.base.ResultData
      */
     @PostMapping("updateUnit")
-    public ResultData updateUnit(@RequestBody Map map);
+    ResultData updateUnit(@RequestBody Map map);
 
     /**
      * @Author: js.zhang
@@ -130,8 +152,18 @@ public interface IProjectService {
      * @Return com.aaa.base.ResultData
      */
     @RequestMapping("selectAllMappingUnit")
-    public  ResultData selectAllMappingUnit(@RequestBody Map map);
+     ResultData selectAllMappingUnit(@RequestBody Map map);
 
+
+    /**
+     * @Author: js.zhang
+     * @Description: 修改单位信息
+     * @DateTime: 2020/7/17 11:45
+     * @Params: [map]
+     * @Return com.aaa.base.ResultData
+     */
+    @RequestMapping("updateAllMappingUnit")
+    public ResultData updateMappingUnit(@RequestBody Map map);
 
     /**
      * @Author: js.zhang
@@ -141,7 +173,18 @@ public interface IProjectService {
      * @Return com.aaa.base.ResultData
      */
     @PostMapping("/selectUnitById")
-    public ResultData selectUnitById(MappingUnit mappingUnit);
+    ResultData selectUnitById( @RequestBody MappingUnit mappingUnit);
+
+    /**
+     * @Author: js.zhang
+     * @Description: 通过unitName 查询所有的 单位信息
+     * @DateTime: 2020/7/17 9:20
+     * @Params: [map]
+     * @Return com.aaa.base.ResultData
+     */
+    @RequestMapping("/selctMappingUnit")
+    public  ResultData selectMappingUnit(@RequestBody MappingUnit mappingUnit);
+
     /**
      * @Author: js.zhang
      * @Description: 通过refId查询对应审核信息  审核表
@@ -150,7 +193,7 @@ public interface IProjectService {
      * @Return com.aaa.base.ResultData
      */
     @PostMapping("/selectByRefId")
-    public ResultData selectByRefId(@RequestBody HashMap map);
+   ResultData selectByRefId(@RequestBody Audit audit);
 
 
     /**
@@ -161,7 +204,7 @@ public interface IProjectService {
      * @Return com.aaa.base.ResultData
      */
     @PostMapping("/unitSelect")
-    public ResultData unitSelect(@RequestBody MappingUnit mappingUnit);
+     ResultData unitSelect(@RequestBody MappingUnit mappingUnit);
 
 
     /**
@@ -172,7 +215,7 @@ public interface IProjectService {
      * @Return com.aaa.base.ResultData
      */
     @GetMapping("/selectPrincipalById")
-    public ResultData selectPrincipalByUserId(String id);
+    ResultData selectPrincipalByUserId(String id);
 
     /**
      * @Author: js.zhang
@@ -182,7 +225,7 @@ public interface IProjectService {
      * @Return com.aaa.base.ResultData
      */
     @PostMapping("/selectPrincipalByUserId")
-    public ResultData selectPrincipalByUserId(@RequestBody Map map);
+   ResultData selectPrincipalByUserId(@RequestBody Map map);
 
     /**
      * @Author: js.zhang
@@ -192,7 +235,7 @@ public interface IProjectService {
      * @Return com.aaa.base.ResultData
      */
     @PostMapping("/addPrincipal")
-    public ResultData addPrincipal(@RequestBody Principal principal);
+    ResultData addPrincipal(@RequestBody Principal principal);
 
 
     /**
@@ -203,7 +246,7 @@ public interface IProjectService {
      * @Return com.aaa.base.ResultData
      */
     @PostMapping("/updatePrincipal")
-    public ResultData updatePrincipal(@RequestBody Principal principal);
+    ResultData updatePrincipal(@RequestBody Principal principal);
 
 
     /**
@@ -214,7 +257,7 @@ public interface IProjectService {
      * @Return com.aaa.base.ResultData
      */
     @PostMapping("/deletePrincipal")
-    public ResultData   updatePrinicepal(@RequestBody Principal principal);
+     ResultData   updatePrinicepal(@RequestBody Principal principal);
 
 
     /**
@@ -225,7 +268,7 @@ public interface IProjectService {
      * @Return com.aaa.base.ResultData
      */
     @GetMapping("/selectTechById")
-    public ResultData selectTechByUserId( Long id);
+     ResultData selectTechByUserId( Long id);
 
     /**
      * @Author: js.zhang
@@ -235,7 +278,7 @@ public interface IProjectService {
      * @Return com.aaa.base.ResultData
      */
     @PostMapping("/selectTechByUid")
-    public ResultData selectTechByUid( Technicist technicist,Integer pageNo,Integer pageSize);
+    ResultData selectTechByUid( Technicist technicist,Integer pageNo,Integer pageSize);
 
 
     /**
@@ -246,7 +289,7 @@ public interface IProjectService {
      * @Return com.aaa.base.ResultData
      */
     @PostMapping("/updateTechnicist")
-    public ResultData updateTechnicist(@RequestBody Technicist technicist);
+    ResultData updateTechnicist(@RequestBody Technicist technicist);
 
     /**
      * @Author: js.zhang
@@ -256,7 +299,7 @@ public interface IProjectService {
      * @Return com.aaa.base.ResultData
      */
     @PostMapping("addTechnicist")
-    public ResultData addTechnicist(@RequestBody Technicist technicist);
+    ResultData addTechnicist(@RequestBody Technicist technicist);
 
 
     /**
@@ -266,7 +309,7 @@ public interface IProjectService {
      * @Params: [technicist]
      * @Return com.aaa.base.ResultData
      */
-    public ResultData deleteTechnicist(@RequestBody Technicist technicist);
+    ResultData deleteTechnicist(@RequestBody Technicist technicist);
 
 
     /**
@@ -277,7 +320,7 @@ public interface IProjectService {
      * @Return com.aaa.base.ResultData
      */
     @PostMapping("/selectByRefBizId")
-    public ResultData selectByRefBizId(Resource resource);
+    ResultData selectByRefBizId(Resource resource);
 
 
     /**
@@ -288,7 +331,7 @@ public interface IProjectService {
      * @Return com.aaa.base.ResultData
      */
     @RequestMapping("/addResouce")
-    public ResultData addResource(MultipartFile multipartFile, Resource resource);
+    ResultData addResource(MultipartFile multipartFile, Resource resource);
 
     /**
      * @Author: js.zhang
@@ -299,7 +342,7 @@ public interface IProjectService {
      */
 
     @PostMapping("/selectByUnitId")
-    public ResultData selectByUnitId(@RequestBody HashMap hashMap);
+    ResultData selectByUnitId(@RequestBody HashMap hashMap);
 
 
 
@@ -311,7 +354,7 @@ public interface IProjectService {
      * @Return com.aaa.base.ResultData
      */
     @PostMapping("/addScore")
-    public ResultData addScore(@RequestBody Score score,@RequestParam("id") Long id);
+     ResultData addScore(@RequestBody Score score,@RequestParam("id") Long id);
 
 
 

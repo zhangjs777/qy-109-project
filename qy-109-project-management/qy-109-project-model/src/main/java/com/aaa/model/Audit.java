@@ -68,5 +68,9 @@ public class Audit implements Serializable {
     @Column(name = "create_time")
     private Date createTime;
 
+    @Transient
+    private Integer pageNo;
+    @Transient
+    private Integer pageSize;
 
 }
