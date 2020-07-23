@@ -4,7 +4,7 @@ import com.aaa.base.BaseService;
 import com.aaa.mapper.EquipmentMapper;
 import com.aaa.model.Equipment;
 import com.aaa.redis.RedisService;
-import com.aaa.utils.DateUtils;
+import com.aaa.utils.DataUtils;
 import com.aaa.utils.IdUtils;
 import com.aaa.utils.StringUtils;
 import com.github.pagehelper.PageHelper;
@@ -64,7 +64,8 @@ public class EquipmentService extends BaseService<Equipment> {
     /**
     * @Author:xfc
     * @Description:
-     *          根据id查询仪器设备信息
+     *          根据id
+     *          查询仪器设备信息
     * @Date: 2020/7/18 8:49
     * @param map:
      * @param :
@@ -134,7 +135,7 @@ public class EquipmentService extends BaseService<Equipment> {
             //为新增数据添加id
             equipment.setId(IdUtils.getLongID());
             //为新增数据添加当前创建时间
-            equipment.setCreateTime(DateUtils.getNewDate());
+            equipment.setCreateTime(DataUtils.getNewDate());
             //进行新增操作，从父类通用service中获取新增方法
             Integer addResult=super.add(equipment);
             //对新增结果进行判断
@@ -165,7 +166,7 @@ public class EquipmentService extends BaseService<Equipment> {
         //判断前台传来的数据是否为空
         if (null != equipment && !"".equals(equipment)){
             //不为空，为其添加修改时间
-            equipment.setModifyTime(DateUtils.getNewDate());
+            equipment.setModifyTime(DataUtils.getNewDate());
             //进行更新，从父类获取更新方法
             Integer updateResult =super.update(equipment);
             if (0<updateResult){

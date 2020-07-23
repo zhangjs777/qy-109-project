@@ -1,5 +1,6 @@
 package com.aaa.utils;
 
+import javax.xml.crypto.Data;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -10,9 +11,9 @@ import java.util.Date;
  * @create: 2020/7/10 17:09
  **/
 
-public class DateUtils {
+public class DataUtils {
 
-    private DateUtils() {
+    private DataUtils() {
     }
 
     /**
@@ -29,6 +30,5 @@ public class DateUtils {
         String time=sim.format(dd);
         return time;
     }
-
 
 }

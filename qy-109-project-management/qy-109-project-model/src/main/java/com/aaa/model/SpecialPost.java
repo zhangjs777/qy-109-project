@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import javax.persistence.Column;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -19,6 +20,13 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Accessors(chain = true)
 public class SpecialPost extends BaseModel {
+
+    /**
+     * 编号
+     */
+    @Id
+    private Long id;
+
 
     /**
      * 姓名

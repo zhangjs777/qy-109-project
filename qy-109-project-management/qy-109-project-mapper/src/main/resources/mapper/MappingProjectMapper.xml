@@ -85,4 +85,20 @@
     </if>
   </select>
 
+
+  <select id="selectAllMappingProject" resultType="HashMap" parameterType="HashMap">
+    select A.project_name, A.project_type, A.start_date from t_mapping_project A
+    <where>
+      1 = 1
+      <if test="projectName != null">
+        and A.project_name like '%${projectName}%'
+      </if>
+      <if test="projectType != null">
+        and A.project_type like '%${projectType}%'
+      </if>
+      <if test="startDate != null">
+        and A.start_date like '%${startDate}%'
+      </if>
+    </where>
+  </select>
 </mapper>
