@@ -37,7 +37,7 @@ public class EquipmentController extends BaseController {
     *
     **/
     @PostMapping("/getEquipmentByUnitId")
-    public ResultData getEquipmentByUnitId(@RequestBody Equipment equipment, @RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize){
+    public ResultData getEquipmentByUnitId( Equipment equipment, Integer pageNo, Integer pageSize){
         return iProjectService.getEquipmentByUnitId(equipment,pageNo,pageSize);
     }
 
@@ -52,7 +52,7 @@ public class EquipmentController extends BaseController {
     *
     **/
     @PostMapping("/selectAllEquipment")
-    public ResultData selectAllEquipment(@RequestBody HashMap map) {
+    public ResultData selectAllEquipment( HashMap map) {
        return iProjectService.selectAllEquipment(map);
     }
 
@@ -66,7 +66,7 @@ public class EquipmentController extends BaseController {
    *
    **/
     @PostMapping("/getEquipmentById")
-    public ResultData getEquipmentById(@RequestBody HashMap map)  {
+    public ResultData getEquipmentById( HashMap map)  {
       return iProjectService.getEquipmentById(map);
     }
 
@@ -81,19 +81,19 @@ public class EquipmentController extends BaseController {
     *
     **/
     @PostMapping("/addEquipment")
-    public Boolean addEquipment(@RequestBody Equipment equipment){
+    public Boolean addEquipment( Equipment equipment){
       return iProjectService.addEquipment(equipment);
     }
 
     @PostMapping("/updateEquipment")
-    public Boolean updateEquipment(@RequestBody Equipment equipment) {
+    public Boolean updateEquipment(Equipment equipment) {
         return iProjectService.updateEquipment(equipment);
 
     }
 
 
     @PostMapping("/deleteEquipment")
-    public Boolean deleteEquipment(@RequestParam("id") Long id){
+    public Boolean deleteEquipment( Long id){
         return  iProjectService.deleteEquipment(id);
     }
 

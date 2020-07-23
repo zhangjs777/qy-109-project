@@ -28,7 +28,7 @@ public class AuditController {
      * @Return com.aaa.base.ResultData
      */
     @PostMapping("/selectByRefId")
-    public ResultData selectByRefId(@RequestBody Audit audit){
+    public ResultData selectByRefId( Audit audit){
       return   iProjectService.selectByRefId(audit);
     }
 

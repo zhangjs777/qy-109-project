@@ -278,7 +278,7 @@ public interface IProjectService {
      * @Return com.aaa.base.ResultData
      */
     @PostMapping("/selectTechByUid")
-    ResultData selectTechByUid( Technicist technicist,Integer pageNo,Integer pageSize);
+    ResultData selectTechByUid( @RequestBody Technicist technicist,@RequestParam("pageNo") Integer pageNo,@RequestParam("pageSize")Integer pageSize);
 
 
     /**
@@ -309,6 +309,7 @@ public interface IProjectService {
      * @Params: [technicist]
      * @Return com.aaa.base.ResultData
      */
+    @PostMapping("/deleteTechnicist")
     ResultData deleteTechnicist(@RequestBody Technicist technicist);
 
 
@@ -323,15 +324,6 @@ public interface IProjectService {
     ResultData selectByRefBizId(Resource resource);
 
 
-    /**
-     * @Author: js.zhang
-     * @Description: 文件上传
-     * @DateTime: 2020/7/21 16:37
-     * @Params: [multipartFile, resource]
-     * @Return com.aaa.base.ResultData
-     */
-    @RequestMapping("/addResouce")
-    ResultData addResource(MultipartFile multipartFile, Resource resource);
 
     /**
      * @Author: js.zhang

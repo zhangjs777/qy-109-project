@@ -36,7 +36,7 @@ public class SpecialPostController extends BaseController {
     *
     **/
     @PostMapping("/getAllSpecialPost")
-    public ResultData getAllSpecialPost(@RequestBody SpecialPost specialPost, @RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize")Integer pageSize) {
+    public ResultData getAllSpecialPost(    SpecialPost specialPost,  Integer pageNo, Integer pageSize) {
        return iProjectService.getAllSpecialPost(specialPost,pageNo,pageSize);
     }
 
@@ -50,7 +50,7 @@ public class SpecialPostController extends BaseController {
    **/
 
     @PostMapping("/addSpecialPost")
-    public Boolean addSpecialPost(@RequestBody SpecialPost specialPost){
+    public Boolean addSpecialPost(    SpecialPost specialPost){
       return iProjectService.addSpecialPost(specialPost);
     }
 
@@ -65,7 +65,7 @@ public class SpecialPostController extends BaseController {
     **/
 
     @PostMapping("/updateSpecialPost")
-    public Boolean updateSpecialPost(@RequestBody SpecialPost specialPost){
+    public Boolean updateSpecialPost(    SpecialPost specialPost){
        return iProjectService.updateSpecialPost(specialPost);
     }
 
@@ -80,7 +80,7 @@ public class SpecialPostController extends BaseController {
     **/
 
     @PostMapping("/deleteSpecialPost")
-    public Boolean deleteSpecialPost(@RequestParam("id") Long id)throws Exception{
+    public Boolean deleteSpecialPost( Long id)throws Exception{
         return iProjectService.deleteSpecialPost(id);
     }
 

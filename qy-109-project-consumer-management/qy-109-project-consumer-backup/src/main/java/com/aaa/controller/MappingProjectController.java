@@ -33,7 +33,7 @@ public class MappingProjectController extends BaseController {
     *
     **/
     @PostMapping("/getAllMappingProject")
-    public ResultData getAllMappingProject(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize){
+    public ResultData getAllMappingProject( Integer pageNo, Integer pageSize){
        return iProjectService.getAllMappingProject(pageNo,pageSize);
     }
 
@@ -47,7 +47,7 @@ public class MappingProjectController extends BaseController {
     *
     **/
    @PostMapping("/getMappingProjectByName")
-   public ResultData getMappingProjectByName(@RequestParam("name") String name){
+   public ResultData getMappingProjectByName(String name){
        return iProjectService.getMappingProjectByName(name);
    }
 
@@ -61,7 +61,7 @@ public class MappingProjectController extends BaseController {
    *
    **/
    @PostMapping("/getMappingProjectById")
-    public ResultData getMappingProjectById(@RequestParam("id") String id){
+    public ResultData getMappingProjectById( String id){
       return iProjectService.getMappingProjectById(id);
     }
 
@@ -78,7 +78,7 @@ public class MappingProjectController extends BaseController {
     *
     **/
     @PostMapping("/getMappingProjectUnaudited")
-    public ResultData getMappingProjectUnaudited(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize) {
+    public ResultData getMappingProjectUnaudited( Integer pageNo, Integer pageSize) {
        return iProjectService.getMappingProjectUnaudited(pageNo,pageSize);
     }
 
@@ -93,7 +93,7 @@ public class MappingProjectController extends BaseController {
     *
     **/
     @PostMapping("/getMappingProjectUnauditedInfo")
-    public ResultData getMappingProjectUnauditedInfo(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize){
+    public ResultData getMappingProjectUnauditedInfo( Integer pageNo,  Integer pageSize){
       return iProjectService.getMappingProjectUnauditedInfo(pageNo,pageSize);
     }
 
@@ -110,7 +110,7 @@ public class MappingProjectController extends BaseController {
     *
     **/
     @PostMapping("/getMappingProjectUnauditedByName")
-    public ResultData getMappingProjectUnauditedByName(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize")Integer pageSize,@RequestParam("name") String name){
+    public ResultData getMappingProjectUnauditedByName( Integer pageNo, Integer pageSize, String name){
       return getMappingProjectUnauditedByName(pageNo,pageSize,name);
     }
 
@@ -127,7 +127,7 @@ public class MappingProjectController extends BaseController {
     **/
 
     @PostMapping("/getMappingProjectUnauditedByNameInfo")
-    public ResultData getMappingProjectUnauditedByNameInfo(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize")Integer pageSize,@RequestParam("name") String name){
+    public ResultData getMappingProjectUnauditedByNameInfo( Integer pageNo, Integer pageSize, String name){
      return iProjectService.getMappingProjectUnauditedInfo(pageNo,pageSize);
     }
 
@@ -145,7 +145,7 @@ public class MappingProjectController extends BaseController {
     **/
     @RequestMapping("/selectAllMappingProject")
 
-    public  ResultData selectAllMappingProject(@RequestBody MappingProject mappingProject) {
+    public  ResultData selectAllMappingProject( MappingProject mappingProject) {
         return iProjectService.selectAllMappingProject(mappingProject);
     }
 
