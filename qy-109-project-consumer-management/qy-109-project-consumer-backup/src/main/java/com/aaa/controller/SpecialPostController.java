@@ -1,8 +1,11 @@
 package com.aaa.controller;
 
+import com.aaa.base.BaseController;
 import com.aaa.base.BaseService;
 import com.aaa.base.CommonController;
+import com.aaa.base.ResultData;
 import com.aaa.model.SpecialPost;
+import com.aaa.service.IProjectService;
 import com.aaa.service.SpecialPostServcie;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,16 +23,10 @@ import org.springframework.web.bind.annotation.RestController;
  **/
 
 @RestController
-public class SpecialPostController extends CommonController<SpecialPost> {
+public class SpecialPostController extends BaseController {
 
     @Autowired
-    private SpecialPostServcie specialPostServcie;
-
-    @Override
-    public BaseService<SpecialPost> getBaseService() {
-
-        return specialPostServcie;
-    }
+    private IProjectService iProjectService;
 
     /**
     * @Author:xfc
@@ -43,9 +40,8 @@ public class SpecialPostController extends CommonController<SpecialPost> {
     *
     **/
     @PostMapping("/getAllSpecialPost")
-    public PageInfo<SpecialPost> getAllSpecialPost(@RequestBody SpecialPost specialPost,@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize")Integer pageSize) {
-        PageInfo<SpecialPost> sPageInfo = getBaseService().selectListByPage(specialPost, pageNo, pageSize);
-        return (null != sPageInfo && sPageInfo.getSize() > 0) ? sPageInfo : null;
+    public ResultData getAllSpecialPost(@RequestBody SpecialPost specialPost, @RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize")Integer pageSize) {
+       return iProjectService.getAllSpecialPost(specialPost,pageNo,pageSize);
     }
 
    /**
@@ -55,12 +51,11 @@ public class SpecialPostController extends CommonController<SpecialPost> {
    * @Date: 2020/7/20 20:45
    * @param specialPost:
    * @return: java.lang.Boolean
-   *
    **/
+
     @PostMapping("/addSpecialPost")
-    public Boolean addSpecialPost(@RequestBody SpecialPost specialPost)throws Exception{
-        Boolean result=specialPostServcie.addSpecialPost(specialPost);
-        return result;
+    public Boolean addSpecialPost(@RequestBody SpecialPost specialPost){
+      return iProjectService.addSpecialPost(specialPost);
     }
 
 
@@ -71,12 +66,11 @@ public class SpecialPostController extends CommonController<SpecialPost> {
     * @Date: 2020/7/20 20:45
     * @param specialPost:
     * @return: java.lang.Boolean
-    *
     **/
+
     @PostMapping("/updateSpecialPost")
-    public Boolean updateSpecialPost(@RequestBody SpecialPost specialPost)throws Exception{
-        Boolean result=specialPostServcie.updateSpecialPost(specialPost);
-        return result;
+    public Boolean updateSpecialPost(@RequestBody SpecialPost specialPost){
+       return iProjectService.updateSpecialPost(specialPost);
     }
 
 
@@ -87,12 +81,11 @@ public class SpecialPostController extends CommonController<SpecialPost> {
     * @Date: 2020/7/20 20:46
     * @param id:
     * @return: java.lang.Boolean
-    *
     **/
+
     @PostMapping("/deleteSpecialPost")
     public Boolean deleteSpecialPost(@RequestParam("id") Long id)throws Exception{
-        Boolean result=specialPostServcie.deleteSpecialPost(id);
-        return result;
+        return iProjectService.deleteSpecialPost(id);
     }
 
 

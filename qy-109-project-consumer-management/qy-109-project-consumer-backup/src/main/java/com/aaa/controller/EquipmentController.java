@@ -1,11 +1,13 @@
 package com.aaa.controller;
 
+import com.aaa.base.BaseController;
 import com.aaa.base.BaseService;
 import com.aaa.base.CommonController;
 import com.aaa.base.ResultData;
 import com.aaa.model.Equipment;
 import com.aaa.redis.RedisService;
 import com.aaa.service.EquipmentService;
+import com.aaa.service.IProjectService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,19 +29,10 @@ import static com.aaa.status.OperationStatus.SUCCESS;
  **/
 
 @RestController
-public class EquipmentController extends CommonController<Equipment> {
+public class EquipmentController extends BaseController {
 
     @Autowired
-    private EquipmentService equipmentService;
-
-    @Autowired
-    private RedisService redisService;
-
-
-    @Override
-    public BaseService<Equipment> getBaseService() {
-        return equipmentService;
-    }
+    private IProjectService iProjectService;
 
     /**
     * @Author:xfc
@@ -52,9 +45,8 @@ public class EquipmentController extends CommonController<Equipment> {
     *
     **/
     @PostMapping("/getEquipmentByUnitId")
-    public PageInfo<Equipment> getEquipmentByUnitId(@RequestBody Equipment equipment, @RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize){
-        PageInfo<Equipment> PageInfo = getBaseService().selectListByPage(equipment, pageNo, pageSize);
-        return (null !=equipment && PageInfo.getSize()>0) ? PageInfo : null;
+    public ResultData getEquipmentByUnitId(@RequestBody Equipment equipment, @RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize){
+        return iProjectService.getEquipmentByUnitId(equipment,pageNo,pageSize);
     }
 
 
@@ -68,13 +60,8 @@ public class EquipmentController extends CommonController<Equipment> {
     *
     **/
     @PostMapping("/selectAllEquipment")
-    public ResultData selectAllEquipment(@RequestBody HashMap map) throws Exception {
-        Map<String, Object> resultMap = equipmentService.selectAllEquipment(map);
-        if(SUCCESS.getCode().equals(resultMap.get(CODE))){
-            return super.operationSuccess(resultMap.get("data"));
-        }else{
-            return super.operationFailed();
-        }
+    public ResultData selectAllEquipment(@RequestBody HashMap map) {
+       return iProjectService.selectAllEquipment(map);
     }
 
    /**
@@ -87,13 +74,8 @@ public class EquipmentController extends CommonController<Equipment> {
    *
    **/
     @PostMapping("/getEquipmentById")
-    public ResultData getEquipmentById(@RequestBody HashMap map) throws Exception {
-        Map<String, Object> resultMap = equipmentService.getEquipmentById(map);
-        if(SUCCESS.getCode().equals(resultMap.get(CODE))){
-            return super.operationSuccess(resultMap);
-        }else{
-            return super.operationFailed();
-        }
+    public ResultData getEquipmentById(@RequestBody HashMap map)  {
+      return iProjectService.getEquipmentById(map);
     }
 
     /**
@@ -102,28 +84,25 @@ public class EquipmentController extends CommonController<Equipment> {
      *          添加 设备信息
     * @Date: 2020/7/18 14:39
     * @param equipment:
-     * @param redisService:
+     * @param :
     * @return: java.lang.Boolean
     *
     **/
     @PostMapping("/addEquipment")
-    public Boolean addEquipment(@RequestBody Equipment equipment)throws Exception{
-        Boolean result=equipmentService.addEquipment(equipment,redisService);
-        return result;
+    public Boolean addEquipment(@RequestBody Equipment equipment){
+      return iProjectService.addEquipment(equipment);
     }
 
     @PostMapping("/updateEquipment")
-    public Boolean updateEquipment(@RequestBody Equipment equipment) throws Exception{
-        Boolean result=equipmentService.updateEquipment(equipment);
-        return result;
+    public Boolean updateEquipment(@RequestBody Equipment equipment) {
+        return iProjectService.updateEquipment(equipment);
 
     }
 
 
     @PostMapping("/deleteEquipment")
     public Boolean deleteEquipment(@RequestParam("id") Long id){
-        Boolean result=equipmentService.deleteEquipment(id);
-        return result;
+        return  iProjectService.deleteEquipment(id);
     }
 
 
