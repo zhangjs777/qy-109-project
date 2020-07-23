@@ -77,7 +77,7 @@ public class MappingProjectController extends BaseController {
     /**
     * @Author:xfc
     * @Description:
-     *           查询 未审核的项目登记信息
+     *           查询未审核的项目登记信息
     * @Date: 2020/7/17 14:37
     * @param pageNo:
      * @param pageSize:

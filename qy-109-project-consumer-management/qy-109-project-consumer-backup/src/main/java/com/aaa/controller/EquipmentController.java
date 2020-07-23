@@ -81,7 +81,7 @@ public class EquipmentController extends BaseController {
     /**
     * @Author:xfc
     * @Description:
-     *          添加 设备信息
+     *          添加设备信息
     * @Date: 2020/7/18 14:39
     * @param equipment:
      * @param :

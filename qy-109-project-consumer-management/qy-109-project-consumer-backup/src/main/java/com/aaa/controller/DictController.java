@@ -63,7 +63,7 @@ public class DictController extends BaseController {
     /**
     * @Author:xfc
     * @Description:
-     *          删除字典信息
+     *          删除 字典信息
     * @Date:2020/7/16
     * @param dictionary:
     * @return: java.lang.Boolean

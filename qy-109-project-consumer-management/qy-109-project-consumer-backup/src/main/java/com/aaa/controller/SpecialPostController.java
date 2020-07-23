@@ -77,7 +77,7 @@ public class SpecialPostController extends BaseController {
     /**
     * @Author:xfc
     * @Description:
-     *     根据id 删除特殊人才信息
+     *     根据id删除特殊人才信息
     * @Date: 2020/7/20 20:46
     * @param id:
     * @return: java.lang.Boolean
