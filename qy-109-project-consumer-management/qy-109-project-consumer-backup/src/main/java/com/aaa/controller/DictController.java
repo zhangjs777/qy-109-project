@@ -1,14 +1,9 @@
 package com.aaa.controller;
 
 import com.aaa.base.BaseController;
-import com.aaa.base.BaseService;
-import com.aaa.base.CommonController;
 import com.aaa.base.ResultData;
 import com.aaa.model.Dictionary;
-import com.aaa.redis.RedisService;
-import com.aaa.service.DictService;
 import com.aaa.service.IProjectService;
-import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
