@@ -3,6 +3,7 @@ package com.aaa.model;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+
 import javax.persistence.Column;
 import javax.persistence.Table;
 import java.io.Serializable;

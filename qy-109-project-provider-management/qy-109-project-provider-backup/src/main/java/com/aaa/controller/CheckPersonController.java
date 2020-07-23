@@ -97,9 +97,8 @@ public class CheckPersonController extends BaseController {
      * @Date: 2020/7/18
      */
     @PostMapping("/deleteCheckPerson")
-    public ResultData deleteCheckPerson(@RequestParam("id") String id){
-        Long aLong = Long.valueOf(id);
-        Boolean aBoolean=checkPersonService.deleteCheckPerson(aLong);
+    public ResultData deleteCheckPerson(@RequestParam("id") Long id){
+        Boolean aBoolean=checkPersonService.deleteCheckPerson(id);
         if (true == aBoolean){
             return super.operationSuccess();
         }else{
