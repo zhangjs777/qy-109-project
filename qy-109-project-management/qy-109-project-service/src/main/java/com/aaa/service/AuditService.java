@@ -3,18 +3,18 @@ package com.aaa.service;
 import com.aaa.base.BaseService;
 import com.aaa.mapper.AuditMapper;
 import com.aaa.model.Audit;
-import com.aaa.utils.BaseUtil;
+
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
 
-import static com.aaa.staticproperties.RedisProperties.*;
-import static com.aaa.status.OperationStatus.*;
+
+
 
 
 /**
@@ -37,25 +37,21 @@ public class AuditService extends BaseService<Audit> {
     * @Params: [refId]
     * @Return com.aaa.model.Audit
     */
-    public Map<String,Object> selectByRefId(HashMap hashMap){
-        Map<String, Object> resultMap = new HashMap<String, Object>();
-        //使用pageHelper
-        PageHelper.startPage(BaseUtil.transToInt(hashMap.get("pageNo")), BaseUtil.transToInt(hashMap.get("pageSize")));
-        //获取refId
-        Long refId = (Long) hashMap.get("refId");
-        //执行方法
-        List<HashMap> hashMaps = auditMapper.selectByRefId(refId);
-        PageInfo<HashMap> pageInfo = new PageInfo<HashMap>(hashMaps);
-
-        if (null != pageInfo && pageInfo.getSize() > 0) {
-            resultMap.put(CODE, SUCCESS.getCode());
-            resultMap.put(MSG, SUCCESS.getMsg());
-            resultMap.put(DATA, pageInfo);
-        } else {
-            resultMap.put(CODE, FAILED.getCode());
-            resultMap.put(MSG, FAILED.getMsg());
+    public PageInfo<Audit> selectByRefId(Audit audit){
+        PageHelper.startPage(audit.getPageNo(),audit.getPageSize());
+        //获取audit全部属性
+        Example example = new Example(Audit.class);
+        Example.Criteria criteria = example.createCriteria();
+        List<Audit> auditList=null;
+        if (audit.getRefId()!=null||audit.getName()!=null){
+            //拼接条件模糊查询auditname和精确查询deptid
+            criteria.andEqualTo("refId",audit.getRefId()).andEqualTo("name",audit.getName());
+            auditList = auditMapper.selectByExample(example);
+        }else {
+            auditList = auditMapper.selectAll();
         }
-        return resultMap;
+        PageInfo<Audit> auditPageInfo = new PageInfo<Audit>(auditList);
+        return  auditPageInfo;
 
     }
 
