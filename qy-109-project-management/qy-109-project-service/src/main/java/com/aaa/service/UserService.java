@@ -158,6 +158,17 @@ public class UserService extends BaseService<User> {
 
 
 
+    /**
+    * @Author: js.zhang
+    * @Description: 通过id查询user具体信息
+    * @DateTime: 2020/7/22 21:15
+    * @Params: [id]
+    * @Return java.util.Map
+    */
+    public Map selectUserById(Long id){
+        Map map = userMapper.selectUserById(id);
+        return map;
+    }
 
 
     /**
@@ -168,35 +179,17 @@ public class UserService extends BaseService<User> {
      * @Return java.util.Map<java.lang.String, java.lang.Object>
      */
 
-    public Map<String, Object> selectAllUser(HashMap hashMap, RedisService redisService) {
+    public PageInfo<HashMap> selectAllUser(User user) {
 
-        Map<String, Object> resultMap = new HashMap<String, Object>();
-        //获取当前用户的token令牌
-//        String tokenval = redisService.getOne("tokenId").toString();
-//        //检测token
-//        if (null == tokenval) {
-//            resultMap.put(CODE, LOGIN_TIMEOUT_EXIT.getCode());
-//            resultMap.put(MSG, LOGIN_TIMEOUT_EXIT.getMsg());
-//            return resultMap;
-//        }
 
-        if (hashMap.size() > 0) {
-            //使用pageHelper
-            PageHelper.startPage(BaseUtil.transToInt(hashMap.get("pageNo")), BaseUtil.transToInt(hashMap.get("pageSize")));
-            //首先体哦见查询
-            List<HashMap> list = userMapper.selectUserAll(hashMap);
-            PageInfo<HashMap> pageInfo = new PageInfo<HashMap>(list);
-            if (null != pageInfo && pageInfo.getSize() > 0) {
-                resultMap.put(CODE, SUCCESS.getCode());
-                resultMap.put(MSG, SUCCESS.getMsg());
-                resultMap.put(DATA, pageInfo);
-            } else {
-                resultMap.put(CODE, FAILED.getCode());
-                resultMap.put(MSG, FAILED.getMsg());
-            }
 
-        }
-        return resultMap;
+        PageHelper.startPage(user.getPageNo(),user.getPageSize());
+
+        List<HashMap> hashMaps = userMapper.selectUserAll(user);
+
+
+        PageInfo<HashMap> hashMapPageInfo = new PageInfo<>(hashMaps);
+        return hashMapPageInfo;
 
     }
 
@@ -208,23 +201,22 @@ public class UserService extends BaseService<User> {
     * @Params: [user]
     * @Return java.util.List<com.aaa.model.User>
     */
-    public List<User> selectUserAll(User user){
+    public PageInfo<User> selectUserAll(User user){
+
+        PageHelper.startPage(user.getPageNo(),user.getPageSize());
         //获取user全部属性
         Example example = new Example(User.class);
         Example.Criteria criteria = example.createCriteria();
+        List<User> userList=null;
         if (user.getDeptId()!=null||user.getUsername()!=null){
             //拼接条件模糊查询username和精确查询deptid
             criteria.andLike("username","%"+user.getUsername()+"%").andEqualTo("deptId",user.getDeptId());
-
-            List<User> userList = userMapper.selectByExample(example);
-            return userList;
+           userList = userMapper.selectByExample(example);
         }else {
-            List<User> userList = userMapper.selectAll();
-            return  userList;
+           userList = userMapper.selectAll();
         }
-
-
-
+        PageInfo<User> userPageInfo = new PageInfo<>(userList);
+        return  userPageInfo;
     }
 
 

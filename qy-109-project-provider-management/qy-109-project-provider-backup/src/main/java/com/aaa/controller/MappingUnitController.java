@@ -18,6 +18,7 @@ import java.util.Map;
 import static com.aaa.staticproperties.RedisProperties.CODE;
 import static com.aaa.staticproperties.RedisProperties.DATA;
 import static com.aaa.status.OperationStatus.*;
+import static com.aaa.status.SelectStatus.SELECT_DATA_SUCCESS;
 import static java.util.Map.*;
 
 /**
@@ -47,7 +48,7 @@ public class MappingUnitController extends CommonController<MappingUnit> {
     * @Params: [blankAndWirte]
     * @Return com.aaa.base.ResultData
     */
-    @PostMapping("/bwUnit")
+    @GetMapping("/bwUnit")
     public ResultData bwUnit(String blankAndWirte,Integer pageNo,Integer pageSize){
 
         if (pageNo!=null&&pageSize!=null){
@@ -59,8 +60,6 @@ public class MappingUnitController extends CommonController<MappingUnit> {
             }else {
                 return  super.operationFailed();
             }
-
-
         }else {
             List<MappingUnit> mappingUnitList = mappingUnitService.bwUnit(blankAndWirte);
             if (mappingUnitList!=null&&mappingUnitList.size()>0){
@@ -100,11 +99,11 @@ public class MappingUnitController extends CommonController<MappingUnit> {
     * @Params: [mappingUnit]
     * @Return com.aaa.base.ResultData
     */
-    @PostMapping("/unitSelect")
+    @RequestMapping("/unitSelect")
     public ResultData unitSelect(@RequestBody MappingUnit mappingUnit){
 
         Map<String, Object> stringObjectMap = mappingUnitService.selectUnit(mappingUnit);
-            if (SElECT_SUCCESS.getCode().equals(stringObjectMap.get(CODE))){
+            if (SELECT_DATA_SUCCESS.getCode().equals(stringObjectMap.get(CODE))){
                 return super.operationSuccess(stringObjectMap.get(DATA));
             }else {
                     return super.operationFailed();
@@ -171,26 +170,20 @@ public class MappingUnitController extends CommonController<MappingUnit> {
 
     /**
     * @Author: js.zhang
-    * @Description: 待条件的 查询所有的 单位信息
+    * @Description: 通过unitName 查询所有的 单位信息
     * @DateTime: 2020/7/17 9:20
     * @Params: [map]
     * @Return com.aaa.base.ResultData
     */
     @RequestMapping("/selctMappingUnit")
-    public  ResultData selectMappingUnit(@RequestBody HashMap hashMap){
-        //转换数据
-        Integer pageNo = (Integer) hashMap.get("pageNo");
-        Integer pageSize = (Integer) hashMap.get("pageSize");
-        String orderByFiled = hashMap.get("orderByFiled").toString();
-        String orderWord = hashMap.get("orderWord").toString();
-        String unitName = hashMap.get("unitName").toString();
+    public  ResultData selectMappingUnit(@RequestBody MappingUnit mappingUnit){
 
 
         //调用查询方法
-        List<MappingUnit> mappingUnits = mappingUnitService.selectMappingUnit(pageNo, pageSize, orderByFiled, orderWord, unitName);
+        PageInfo<MappingUnit> mappingUnitPageInfo = mappingUnitService.selectMappingUnit(mappingUnit);
         //判断返回值
-        if (mappingUnits!=null&&mappingUnits.size()>0){
-            return super.operationSuccess(mappingUnits);
+        if (mappingUnitPageInfo!=null&&mappingUnitPageInfo.getSize()>0){
+            return super.operationSuccess(mappingUnitPageInfo);
         } else{
             return super.operationFailed(DATA_NOT_EXIST.getMsg());
         }

@@ -75,14 +75,6 @@ public class TechnicistController extends CommonController<Technicist> {
             return super.operationFailed();
         }
 
-
-//        if (SELECT_DATA_SUCCESS.getCode().equals(stringObjectMap.get(CODE))){
-//            return super.operationSuccess(stringObjectMap);
-//        }else if (SELECT_DATA_FAILED.getCode().equals(stringObjectMap.get(CODE))){
-//            return super.operationFailed();
-//        }else{
-//            return super.operationFailed(DATA_NOT_EXIST.getMsg());
-//        }
     }
 
     /**

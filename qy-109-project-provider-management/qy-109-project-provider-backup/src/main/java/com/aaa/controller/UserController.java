@@ -116,51 +116,54 @@ public class UserController extends CommonController<User> {
     * @Return com.aaa.base.ResultData
     */
     @RequestMapping("/selectAllUser")
-    public ResultData selectAllUser(@RequestBody HashMap hashMap ){
-        Map<String, Object> stringObjectMap = userService.selectAllUser(hashMap,redisService);
+    public ResultData selectAllUser(@RequestBody User user ){
+        PageInfo<HashMap> hashMapPageInfo = userService.selectAllUser(user);
 
-        if (SUCCESS.getCode().equals(stringObjectMap.get(CODE))){
-          return super.operationSuccess(stringObjectMap);
-       }else if (FAILED.getCode().equals(stringObjectMap.get(CODE))){
-           return super.operationFailed();
-       }else{
-           return super.operationFailed(DATA_NOT_EXIST.getMsg());
-       }
+        if (hashMapPageInfo!=null&&hashMapPageInfo.getSize()>0){
+            return  super.operationSuccess(hashMapPageInfo);
+        }else {
+            return  super.operationFailed();
+        }
 
     }
+
+    /**
+    * @Author: js.zhang
+    * @Description: 通过id查询user具体信息 部门 管理员
+    * @DateTime: 2020/7/22 21:35
+    * @Params: [id]
+    * @Return com.aaa.base.ResultData
+    */
+    @GetMapping("/selectUserById")
+    public ResultData selectUserById(@RequestParam ("id") Long id){
+        Map map = userService.selectUserById(id);
+        if (map.isEmpty()){
+          return   super.operationFailed();
+        }else {
+            return super.operationSuccess(map);
+        }
+    }
+
+
+
         /**
         * @Author: js.zhang
-        * @Description: 模糊查询
+        * @Description: 通过username模糊查询和deptid查询
         * @DateTime: 2020/7/20 18:37
         * @Params: [user]
         * @Return com.aaa.base.ResultData
         */
     @PostMapping("/selectUserAll")
     public ResultData selectUserAll(@RequestBody User user){
-        //获取pageNo和pageSize
-        Integer pageNo = user.getPageNo();
-        Integer pageSize = user.getPageSize();
-        //判断是否需要分页
-        if (pageNo!=null&&pageSize!=null){
-            PageHelper.startPage(pageNo,pageSize);
-            List<User> userList = userService.selectUserAll(user);
-            //查询出结果后分页
-            PageInfo<User> userPageInfo = new PageInfo<User>(userList);
+
+        PageInfo<User> userPageInfo = userService.selectUserAll(user);
+
             if (userPageInfo!=null&&userPageInfo.getSize()>0){
                 return  super.operationSuccess(userPageInfo);
             }else {
                 return  super.operationFailed();
             }
-        }else {
-            //不分页
-            List<User> userList = userService.selectUserAll(user);
-            if (userList !=null&&userList.size()>0){
-                return  super.operationSuccess(userList);
-            }else {
-                return  super.operationFailed();
-            }
 
-        }
 
 
     }
