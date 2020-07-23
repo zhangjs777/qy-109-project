@@ -58,7 +58,7 @@ public class SpecialPostServcie extends BaseService<SpecialPost> {
     /**
     * @Author:xfc
     * @Description:
-     *    特殊岗位人员信息的更新操作
+     *    特殊岗位 人员信息的更新操作
     * @Date: 2020/7/20 20:39
     * @param model:
     * @return: java.lang.Boolean

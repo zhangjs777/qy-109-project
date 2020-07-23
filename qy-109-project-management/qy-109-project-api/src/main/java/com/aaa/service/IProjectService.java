@@ -438,7 +438,9 @@ public interface IProjectService {
      *
      **/
     @PostMapping("/getMapProUnauditedByName")
-    ResultData getMappingProjectUnauditedByName(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize")Integer pageSize,String name);
+    ResultData getMappingProjectUnauditedByName(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize")Integer pageSize,@RequestParam("name")String name);
+
+
 
 
     /**
@@ -453,7 +455,21 @@ public interface IProjectService {
      *
      **/
     @PostMapping("/getMapProUnaByNameInfo")
-    ResultData  getMappingProjectUnauditedByNameInfo(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize")Integer pageSize,String name);
+    ResultData  getMappingProjectUnauditedByNameInfo(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize")Integer pageSize, @RequestParam("name")String name);
+
+
+    /**
+     * @Author:xfc
+     * @Description:
+     *      首页条件 查询MappingProject信息
+     * @Date: 2020/7/22 11:38
+     * @param mappingProject:
+     * @return: com.aaa.base.ResultData
+     **/
+    @RequestMapping("/selectAllMappingProject")
+     ResultData selectAllMappingProject(@RequestBody MappingProject mappingProject);
+
+
 
 
     /**
@@ -528,10 +544,46 @@ public interface IProjectService {
     * @Description:
      *      根据id 删除设备信息
     * @Date: 2020/7/20 10:04
-    * @param id:
-    * @return: java.lang.Boolean
-    *
     **/
     @PostMapping("/deleteEquipment")
     Boolean deleteEquipment(@RequestParam("id") Long id);
+
+
+    /**
+    * @Author:xfc
+    * @Description:
+     *       查询 全部特殊人才信息
+    * @Date: 2020/7/23 18:52
+    **/
+    @PostMapping("/getAllSpecialPost")
+   ResultData getAllSpecialPost(@RequestBody SpecialPost specialPost,@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize")Integer pageSize);
+
+   /**
+    * 添加特殊人才信息
+    **/
+
+    @PostMapping("/addSpecialPost")
+   Boolean addSpecialPost(@RequestBody SpecialPost specialPost)throws Exception;
+
+
+    /**
+     * 更新特殊人才信息
+     **/
+    @PostMapping("/updateSpecialPost")
+     Boolean updateSpecialPost(@RequestBody SpecialPost specialPost)throws Exception;
+
+
+    /**
+     * 根据id 删除特殊人才信息
+     **/
+    @PostMapping("/deleteSpecialPost")
+    Boolean deleteSpecialPost(@RequestParam("id") Long id)throws Exception;
+
     }
+
+
+
+
+
+
+

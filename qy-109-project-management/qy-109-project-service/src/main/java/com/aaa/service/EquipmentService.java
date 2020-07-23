@@ -64,7 +64,8 @@ public class EquipmentService extends BaseService<Equipment> {
     /**
     * @Author:xfc
     * @Description:
-     *          根据id查询仪器设备信息
+     *          根据id
+     *          查询仪器设备信息
     * @Date: 2020/7/18 8:49
     * @param map:
      * @param :

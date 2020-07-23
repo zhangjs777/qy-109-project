@@ -334,7 +334,7 @@ public class MappingProjectService extends BaseService<MappingProject> {
     /**
     * @Author:xfc
     * @Description:
-     *            条件分页查询 根据project_name查询未审核的项目成果汇交信息
+     *            条件分页查询  根据project_name查询未审核的项目成果汇交信息
     * @Date: 2020/7/17 11:40
     * @param pageNo:
      * @param pageSize:
