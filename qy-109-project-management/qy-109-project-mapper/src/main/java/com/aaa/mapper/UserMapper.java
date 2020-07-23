@@ -5,6 +5,7 @@ import tk.mybatis.mapper.common.Mapper;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public interface UserMapper extends Mapper<User> {
 
@@ -15,6 +16,8 @@ public interface UserMapper extends Mapper<User> {
     * @Params: [map]
     * @Return java.util.List<java.util.HashMap>
     */
-    List<HashMap> selectUserAll(HashMap map);
+    List<HashMap> selectUserAll(User user);
+
+    Map selectUserById(Long id);
 
 }

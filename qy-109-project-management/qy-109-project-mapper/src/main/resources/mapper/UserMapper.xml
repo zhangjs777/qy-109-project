@@ -22,8 +22,9 @@
     <result column="token" property="token" jdbcType="VARCHAR" />
   </resultMap>
 
-  <select id="selectUserAll" resultType="HashMap" parameterType="HashMap">
-    select u.username,u.ssex,u.email,d.DEPT_NAME,u.mobile,u.`status`,u.create_time from t_user u LEFT JOIN t_dept d on u.dept_id = d.DEPT_ID
+
+  <select id="selectUserAll" resultType="HashMap" parameterType="com.aaa.model.User">
+    select u.*,d.DEPT_NAME from t_user u LEFT JOIN t_dept d on u.dept_id = d.DEPT_ID
     <where>
       1 = 1
       <if test="username != null">
@@ -31,6 +32,19 @@
       </if>
       <if test="deptId != null">
         and d.dept_id like '%${deptId}%'
+      </if>
+    </where>
+  </select>
+
+
+  <select id="selectUserById" resultType="HashMap" parameterType="Long">
+    SELECT tu.*,td.DEPT_NAME,tr.ROLE_NAME FROM  t_user tu
+    LEFT JOIN  t_dept td on td.DEPT_ID = tu.DEPT_ID
+    LEFT JOIN t_role tr ON tr.ROLE_ID=tu.type
+    <where>
+      1 = 1
+      <if test="id != null">
+        and tu.id=#{id}
       </if>
     </where>
   </select>

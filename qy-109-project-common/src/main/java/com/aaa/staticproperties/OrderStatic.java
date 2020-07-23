@@ -9,4 +9,6 @@ package com.aaa.staticproperties;
 public class OrderStatic {
     public static final String ASC="ASC";
     public static  final String DESC="DESC";
+    public static final String BLACK="black";
+    public static final String WHITE="white";
 }

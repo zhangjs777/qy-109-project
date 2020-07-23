@@ -36,23 +36,6 @@ public class UserController {
     }
 
 
-    @RequestMapping("/selectUser")
-    ResultData selectUser(@RequestBody Map map ){
-        return iProjectService.selectUser(map);
-    }
-    @RequestMapping("/addUser")
-    ResultData addUser(@RequestBody Map map){
-        return iProjectService.addUser(map);
-    }
-
-    @RequestMapping("/updateUser")
-    ResultData updateUser(@RequestBody Map map ){
-        return iProjectService.updateUser(map);
-    }
-    @RequestMapping("/updateUserStatus")
-    ResultData updateUserStatus(@RequestBody Map map,@RequestParam("ids[]") Integer [] ids){
-        return iProjectService.updateUserStatus(map,ids);
-    }
 
 
 
