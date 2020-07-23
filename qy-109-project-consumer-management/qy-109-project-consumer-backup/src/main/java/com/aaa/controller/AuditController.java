@@ -1,8 +1,11 @@
 package com.aaa.controller;
 
 import com.aaa.base.ResultData;
+import com.aaa.model.Audit;
 import com.aaa.service.IProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,10 +22,14 @@ public class AuditController {
     private IProjectService iProjectService;
     /**
      * @Author: js.zhang
-     * @Description: 项目通过id对应审核表refId查询审核记录
-     * @DateTime: 2020/7/17 11:04
-     * @Params: [refId, pageNo, pageSize]
+     * @Description: 通过refId查询对应审核信息
+     * @DateTime: 2020/7/17 10:47
+     * @Params: [refId]
      * @Return com.aaa.base.ResultData
      */
+    @PostMapping("/selectByRefId")
+    public ResultData selectByRefId(@RequestBody Audit audit){
+      return   iProjectService.selectByRefId(audit);
+    }
 
 }

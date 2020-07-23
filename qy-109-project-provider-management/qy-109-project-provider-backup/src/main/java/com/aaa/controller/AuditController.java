@@ -5,6 +5,7 @@ import com.aaa.base.CommonController;
 import com.aaa.base.ResultData;
 import com.aaa.model.Audit;
 import com.aaa.service.AuditService;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -44,19 +45,16 @@ public class AuditController extends CommonController<Audit> {
     * @Return com.aaa.base.ResultData
     */
     @PostMapping("/selectByRefId")
-    public ResultData selectByRefId(@RequestBody HashMap map){
+    public ResultData selectByRefId(@RequestBody Audit audit){
 
 
-        Map<String, Object> stringObjectMap = auditService.selectByRefId(map);
+        PageInfo<Audit> auditPageInfo = auditService.selectByRefId(audit);
 
-
-        if (SUCCESS.getCode().equals(stringObjectMap.get(CODE))){
-            return super.operationSuccess(stringObjectMap);
-        }else if (FAILED.getCode().equals(stringObjectMap.get(CODE))){
-            return super.operationFailed();
-        }else{
-            return super.operationFailed(DATA_NOT_EXIST.getMsg());
-        }
+         if (auditPageInfo!=null&&auditPageInfo.getSize()>0){
+                   return super.operationSuccess(auditPageInfo);
+                }else {
+             return super.operationSuccess(auditPageInfo);
+         }
 
     }
 

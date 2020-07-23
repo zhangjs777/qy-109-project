@@ -1,40 +1,89 @@
 package com.aaa.controller;
 
+import com.aaa.base.BaseController;
 import com.aaa.base.ResultData;
+import com.aaa.model.User;
 import com.aaa.service.IProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @program: springcloud-zjs-0708-project
+ * @program: qy-109-project
  * @description:
  * @author: 张竞赛
  * @create: 2020-07-16 09:34
  **/
 @RestController
-public class UserController {
+public class UserController extends BaseController {
     @Autowired
     private IProjectService iProjectService;
+
+    /**
+    * @Author: js.zhang
+    * @Description: 新增用户
+    * @DateTime: 2020/7/23 17:29
+    * @Params: [map]
+    * @Return com.aaa.base.ResultData
+    */
+    @RequestMapping("/addUser")
+    ResultData addUser(@RequestBody Map map){
+       return iProjectService.addUser(map);
+    }
+
+    /**
+    * @Author: js.zhang
+    * @Description: 修改用户
+    * @DateTime: 2020/7/23 17:30
+    * @Params: [map]
+    * @Return com.aaa.base.ResultData
+    */
+    @RequestMapping("/updateUser")
+    ResultData updateUser(@RequestBody Map map ){
+       return iProjectService.updateUser(map);
+    }
 
 
     /**
     * @Author: js.zhang
-    * @Description: 用户表增删改查
-    * @DateTime: 2020/7/16 19:42
-    * @Params: [hashMap]
+    * @Description: 批量删除
+    * @DateTime: 2020/7/23 17:31
+    * @Params: [ids]
+    * @Return com.aaa.base.ResultData
+    */
+    @RequestMapping("/deleteUserById")
+    ResultData updateUserStatus(@RequestParam("ids[]") Integer [] ids){
+       return iProjectService.updateUserStatus(ids);
+    }
+
+
+
+    /**
+    * @Author: js.zhang
+    * @Description: 分页 条件 查询
+    * @DateTime: 2020/7/23 17:35
+    * @Params: [user]
     * @Return com.aaa.base.ResultData
     */
     @RequestMapping("/selectAllUser")
-    ResultData selectAllUser(@RequestBody HashMap hashMap){
-      return   iProjectService.selectAllUser(hashMap);
+    public ResultData selectAllUser(@RequestBody User user ){
+      return   iProjectService.selectAllUser(user);
     }
 
+
+    /**
+     * @Author: js.zhang
+     * @Description: 通过id查询user具体信息 部门 管理员
+     * @DateTime: 2020/7/22 21:35
+     * @Params: [id]
+     * @Return com.aaa.base.ResultData
+     */
+    @GetMapping("/selectUserById")
+    public ResultData selectUserById(@RequestParam ("id") Long id){
+     return    iProjectService.selectUserById(id);
+    }
 
 
 
