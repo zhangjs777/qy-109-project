@@ -3,12 +3,15 @@ package com.aaa.controller;
 
 import com.aaa.base.BaseController;
 import com.aaa.base.ResultData;
-import com.aaa.model.News;
 import com.aaa.model.Role;
+import com.aaa.service.IProjectService;
 import com.aaa.service.RoleService;
 import com.aaa.vo.RoleVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -24,7 +27,7 @@ import java.util.List;
 public class RoleController extends BaseController {
 
     @Autowired
-    private RoleService roleService;
+    private IProjectService iProjectService;
 
     /** 
     * @Description: 模糊查询角色 
@@ -35,12 +38,7 @@ public class RoleController extends BaseController {
     */
     @PostMapping("/selectRole")
     public ResultData selectRoleAll(@RequestBody Role role){
-        List<Role> roleList = roleService.selectRole(role);
-        if (roleList !=null&&roleList.size()>0){
-            return  super.operationSuccess(roleList);
-        }else {
-            return  super.operationFailed();
-        }
+        return iProjectService.selectRoleAll(role);
     }
     
     /**
@@ -52,12 +50,7 @@ public class RoleController extends BaseController {
     */
     @PostMapping("/allRoles")
     public ResultData selectallrole(){
-        ResultData resultData = roleService.selectAllRole();
-        if ("20010" == resultData.getCode()){
-            return super.operationSuccess(resultData.getData());
-        }else {
-            return super.operationFailed();
-        }
+        return iProjectService.selectallrole();
     }
 
     /**
@@ -68,13 +61,8 @@ public class RoleController extends BaseController {
     * @Date: 2020/7/17
     */
     @PostMapping("/pageRoles")
-    public ResultData selectAllRoleByPage(@RequestBody RoleVo roleVo){
-        ResultData resultData = roleService.selectAllRoleByPage(roleVo);
-        if ("20010" == resultData.getCode()){
-            return super.operationSuccess(resultData.getData());
-        }else {
-            return super.operationFailed();
-        }
+    public ResultData selectAllRoleByPage(RoleVo roleVo){
+        return iProjectService.selectAllRoleByPage(roleVo);
     }
 
     /**
@@ -85,13 +73,8 @@ public class RoleController extends BaseController {
     * @Date: 2020/7/16
     */
     @PostMapping("/deleteRole")
-    public ResultData deleteRole(@RequestParam("roleId") Long roleId){
-        Boolean aBoolean = roleService.deleteRole(roleId);
-        if (aBoolean == true){
-            return super.operationSuccess();
-        }else {
-            return super.operationFailed();
-        }
+    public ResultData deleteRole(Long roleId){
+        return iProjectService.deleteRole(roleId);
     }
 
     /**
@@ -102,13 +85,8 @@ public class RoleController extends BaseController {
     * @Date: 2020/7/16
     */
     @PostMapping("/insertRole")
-    public ResultData insertRole(@RequestBody RoleVo roleVo){
-        Boolean aBoolean = roleService.insertRole(roleVo);
-        if (true == aBoolean){
-            return super.operationSuccess();
-        }else {
-            return super.operationFailed();
-        }
+    public ResultData insertRole(RoleVo roleVo){
+        return iProjectService.insertRole(roleVo);
     }
 
     /**
@@ -119,13 +97,8 @@ public class RoleController extends BaseController {
     * @Date: 2020/7/16
     */
     @PostMapping("/updateRole")
-    public ResultData updateRole(@RequestBody RoleVo roleVo){
-        Boolean aBoolean = roleService.updateRole(roleVo);
-        if (aBoolean==true){
-            return super.operationSuccess();
-        }else {
-            return super.operationFailed();
-        }
+    public ResultData updateRole(RoleVo roleVo){
+        return iProjectService.updateRole(roleVo);
     }
 
 }

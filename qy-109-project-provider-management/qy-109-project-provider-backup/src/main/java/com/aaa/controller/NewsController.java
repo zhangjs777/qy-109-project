@@ -18,7 +18,7 @@ import java.util.List;
  * @create: 2020-07-18 11:01
  **/
 @RestController
-@RequestMapping("/news")
+/*@RequestMapping("/news")*/
 public class NewsController extends BaseController {
 
     @Autowired
@@ -49,7 +49,7 @@ public class NewsController extends BaseController {
     * @Date: 2020/7/18
     */
     @PostMapping("/allNews")
-    public ResultData selectALLNews(){
+    public ResultData selectallnews(){
         ResultData resultData=newsService.selectALLNews();
         if ("20010" == resultData.getCode()){
             return super.operationSuccess(resultData.getData());

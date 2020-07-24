@@ -4,9 +4,13 @@ import com.aaa.base.BaseController;
 import com.aaa.base.ResultData;
 import com.aaa.model.Dept;
 import com.aaa.service.DeptService;
+import com.aaa.service.IProjectService;
 import com.aaa.vo.RoleVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -20,7 +24,7 @@ import java.util.List;
 public class DeptController extends BaseController {
 
     @Autowired
-    private DeptService deptService;
+    private IProjectService iProjectService;
 
     /**
     * @Description:  部门模糊管理
@@ -30,13 +34,8 @@ public class DeptController extends BaseController {
     * @Date: 2020/7/20
     */
     @PostMapping("/selectDept")
-    public ResultData selectDeptAll(@RequestBody Dept dept){
-        List<Dept> deptList = deptService.selectDept(dept);
-        if (deptList !=null&&deptList.size()>0){
-            return  super.operationSuccess(deptList);
-        }else {
-            return  super.operationFailed();
-        }
+    public ResultData selectDeptAll(Dept dept){
+        return iProjectService.selectDeptAll(dept);
     }
 
     /**
@@ -48,12 +47,7 @@ public class DeptController extends BaseController {
     */
     @PostMapping("/allDepts")
     public ResultData selectAllDept(){
-        ResultData resultData = deptService.selectAllDept();
-        if ("20010" == resultData.getCode()){
-            return super.operationSuccess(resultData.getData());
-        }else {
-            return super.operationFailed();
-        }
+        return iProjectService.selectAllDept();
     }
 
     /**
@@ -64,13 +58,8 @@ public class DeptController extends BaseController {
     * @Date: 2020/7/17
     */
     @PostMapping("/pageDepts")
-    public ResultData selectAllDeptByPage(@RequestBody RoleVo roleVo){
-        ResultData resultData = deptService.selectAllDeptByge(roleVo);
-        if ("20010" == resultData.getCode()){
-            return super.operationSuccess(resultData.getData());
-        }else {
-            return super.operationFailed();
-        }
+    public ResultData selectAllDeptByPage(RoleVo roleVo){
+        return iProjectService.selectAllDeptByPage(roleVo);
     }
 
     /**
@@ -81,13 +70,8 @@ public class DeptController extends BaseController {
     * @Date: 2020/7/17
     */
     @PostMapping("/insertDept")
-    public ResultData<Dept> insertDept(@RequestBody Dept dept){
-        Boolean aBoolean = deptService.addDept(dept);
-        if (true == aBoolean){
-            return super.operationSuccess();
-        }else {
-            return super.operationFailed();
-        }
+    public ResultData<Dept> insertDept(Dept dept){
+       return iProjectService.insertDept(dept);
     }
 
     /**
@@ -98,13 +82,8 @@ public class DeptController extends BaseController {
      * @Date: 2020/7/17
      */
     @PostMapping("/updateDept")
-    public ResultData<Dept> updateDept(@RequestBody Dept dept){
-        Boolean aBoolean = deptService.updateDept(dept);
-        if (true == aBoolean){
-            return super.operationSuccess();
-        }else {
-            return super.operationFailed();
-        }
+    public ResultData<Dept> updateDept(Dept dept){
+        return iProjectService.updateDept(dept);
     }
 
     /**
@@ -115,13 +94,8 @@ public class DeptController extends BaseController {
      * @Date: 2020/7/17
      */
     @PostMapping("/deleteDept")
-    public ResultData<Dept> deleteDept(@RequestParam("deptId") Long deptId){
-        Boolean aBoolean = deptService.deleteDept(deptId);
-        if (true == aBoolean){
-            return super.operationSuccess();
-        }else {
-            return super.operationFailed();
-        }
+    public ResultData<Dept> deleteDept(Long deptId){
+        return iProjectService.deleteDept(deptId);
     }
 
 

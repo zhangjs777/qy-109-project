@@ -2,11 +2,13 @@ package com.aaa.service;
 
 import com.aaa.base.ResultData;
 import com.aaa.model.*;
+import com.aaa.vo.RoleVo;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -58,7 +60,7 @@ public interface IProjectService {
      * @Return com.aaa.base.ResultData
      */
     @RequestMapping("/selectAllUser")
-    ResultData selectAllUser(@RequestBody User user );
+    ResultData selectAllUser(@RequestBody User user);
 
 
     /**
@@ -69,7 +71,7 @@ public interface IProjectService {
      * @Return com.aaa.base.ResultData
      */
     @GetMapping("/selectUserById")
-    ResultData selectUserById(@RequestParam ("id") Long id);
+    ResultData selectUserById(@RequestParam("id") Long id);
 
     /**
      * @Author: js.zhang
@@ -99,7 +101,7 @@ public interface IProjectService {
      * @Return com.aaa.base.ResultData
      */
     @RequestMapping("/updateUser")
-    ResultData updateUser(@RequestBody Map map );
+    ResultData updateUser(@RequestBody Map map);
 
     /**
      * @Author: js.zhang
@@ -109,7 +111,7 @@ public interface IProjectService {
      * @Return com.aaa.base.ResultData
      */
     @RequestMapping("/deleteUserById")
-    ResultData updateUserStatus(@RequestParam("ids[]") Integer [] ids);
+    ResultData updateUserStatus(@RequestParam("ids[]") Integer[] ids);
 
 
     /**
@@ -120,7 +122,7 @@ public interface IProjectService {
      * @Return com.aaa.base.ResultData
      */
     @GetMapping("/bwUnit")
-    public ResultData bwUnit(@RequestParam("blankAndWirte") String blankAndWirte,@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize);
+    public ResultData bwUnit(@RequestParam("blankAndWirte") String blankAndWirte, @RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize);
 
     /**
     * @Author: js.zhang
@@ -173,7 +175,7 @@ public interface IProjectService {
      * @Return com.aaa.base.ResultData
      */
     @PostMapping("/selectUnitById")
-    ResultData selectUnitById( @RequestBody MappingUnit mappingUnit);
+    ResultData selectUnitById(@RequestBody MappingUnit mappingUnit);
 
     /**
      * @Author: js.zhang
@@ -193,7 +195,7 @@ public interface IProjectService {
      * @Return com.aaa.base.ResultData
      */
     @PostMapping("/selectByRefId")
-   ResultData selectByRefId(@RequestBody Audit audit);
+   ResultData selectByRefId(@RequestBody HashMap map);
 
 
     /**
@@ -268,7 +270,7 @@ public interface IProjectService {
      * @Return com.aaa.base.ResultData
      */
     @GetMapping("/selectTechById")
-     ResultData selectTechByUserId( Long id);
+     ResultData selectTechByUserId(Long id);
 
     /**
      * @Author: js.zhang
@@ -278,7 +280,7 @@ public interface IProjectService {
      * @Return com.aaa.base.ResultData
      */
     @PostMapping("/selectTechByUid")
-    ResultData selectTechByUid( @RequestBody Technicist technicist,@RequestParam("pageNo") Integer pageNo,@RequestParam("pageSize")Integer pageSize);
+    ResultData selectTechByUid(Technicist technicist, Integer pageNo, Integer pageSize);
 
 
     /**
@@ -309,7 +311,6 @@ public interface IProjectService {
      * @Params: [technicist]
      * @Return com.aaa.base.ResultData
      */
-    @PostMapping("/deleteTechnicist")
     ResultData deleteTechnicist(@RequestBody Technicist technicist);
 
 
@@ -324,6 +325,15 @@ public interface IProjectService {
     ResultData selectByRefBizId(Resource resource);
 
 
+    /**
+     * @Author: js.zhang
+     * @Description: 文件上传
+     * @DateTime: 2020/7/21 16:37
+     * @Params: [multipartFile, resource]
+     * @Return com.aaa.base.ResultData
+     */
+    @RequestMapping("/addResouce")
+    ResultData addResource(MultipartFile multipartFile, Resource resource);
 
     /**
      * @Author: js.zhang
@@ -346,7 +356,7 @@ public interface IProjectService {
      * @Return com.aaa.base.ResultData
      */
     @PostMapping("/addScore")
-     ResultData addScore(@RequestBody Score score,@RequestParam("id") Long id);
+     ResultData addScore(@RequestBody Score score, @RequestParam("id") Long id);
 
 
 
@@ -392,17 +402,6 @@ public interface IProjectService {
     Boolean delDict(@RequestBody Dictionary dictionary);
 
 
-    /**
-    * @Author:xfc
-    * @Description:
-     *     更新字典数据
-    * @Date: 2020/7/23 21:05
-    * @param dictionary:
-    * @return: java.lang.Boolean
-    *
-    **/
-    @PostMapping("/updateDict")
-    Boolean updateDict(@RequestBody Dictionary dictionary);
 
     /**
      * @Author:xfc
@@ -414,7 +413,7 @@ public interface IProjectService {
      *
      **/
     @PostMapping("/getAllMapProject")
-    ResultData getAllMappingProject(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize);
+    ResultData getAllMappingProject(@RequestBody MappingProject mappingProject);
 
     /**
      * @Author:xfc
@@ -426,7 +425,7 @@ public interface IProjectService {
      *
      **/
     @PostMapping("/getMapProByName")
-    ResultData getMappingProjectByName(@RequestParam ("name") String name);
+    ResultData getMappingProjectByName(@RequestParam("name") String name);
 
 
     /**
@@ -484,7 +483,7 @@ public interface IProjectService {
      *
      **/
     @PostMapping("/getMapProUnauditedByName")
-    ResultData getMappingProjectUnauditedByName(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize")Integer pageSize,@RequestParam("name")String name);
+    ResultData getMappingProjectUnauditedByName(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize, @RequestParam("name") String name);
 
 
 
@@ -501,7 +500,7 @@ public interface IProjectService {
      *
      **/
     @PostMapping("/getMapProUnaByNameInfo")
-    ResultData  getMappingProjectUnauditedByNameInfo(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize")Integer pageSize, @RequestParam("name")String name);
+    ResultData  getMappingProjectUnauditedByNameInfo(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize, @RequestParam("name") String name);
 
 
     /**
@@ -530,7 +529,7 @@ public interface IProjectService {
     *
     **/
     @PostMapping("/getEquipmentByUnitId")
-    ResultData getEquipmentByUnitId(@RequestBody Equipment equipment, @RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize")Integer pageSize);
+    ResultData getEquipmentByUnitId(@RequestBody Equipment equipment, @RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize);
 
 
     /**
@@ -602,28 +601,316 @@ public interface IProjectService {
     * @Date: 2020/7/23 18:52
     **/
     @PostMapping("/getAllSpecialPost")
-   ResultData getAllSpecialPost(@RequestBody SpecialPost specialPost,@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize")Integer pageSize);
+   ResultData getAllSpecialPost(@RequestBody SpecialPost specialPost, @RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize);
 
    /**
     * 添加特殊人才信息
     **/
 
     @PostMapping("/addSpecialPost")
-   Boolean addSpecialPost(@RequestBody SpecialPost specialPost);
+   Boolean addSpecialPost(@RequestBody SpecialPost specialPost)throws Exception;
 
 
     /**
      * 更新特殊人才信息
      **/
     @PostMapping("/updateSpecialPost")
-     Boolean updateSpecialPost(@RequestBody SpecialPost specialPost);
+     Boolean updateSpecialPost(@RequestBody SpecialPost specialPost)throws Exception;
 
 
     /**
      * 根据id 删除特殊人才信息
      **/
     @PostMapping("/deleteSpecialPost")
-    Boolean deleteSpecialPost(@RequestParam("id") Long id);
+    Boolean deleteSpecialPost(@RequestParam("id") Long id)throws Exception;
+
+
+
+    //------------抽查人员信息表
+    /**
+     * @Description: 查询所有信息
+     * @Param: []
+     * @return: com.aaa.base.ResultData
+     * @Author: ZMB
+     * @Date: 2020/7/18
+     */
+    @PostMapping("/allCheckPaerson")
+    ResultData selectALLCheckPaerson();
+
+    /**
+     * @Description: 分页查询信息
+     * @Param: [roleVo]
+     * @return: com.aaa.base.ResultData
+     * @Author: ZMB
+     * @Date: 2020/7/18
+     */
+    @PostMapping("/pageCheckPerson")
+    ResultData selectAllCheckPersonByPage(@RequestBody RoleVo roleVo);
+
+    /**
+     * @Description: 新增信息
+     * @Param: [news]
+     * @return: com.aaa.base.ResultData<com.aaa.model.News>
+     * @Author: ZMB
+     * @Date: 2020/7/18
+     */
+    @PostMapping("/insertCheckPerson")
+    ResultData<News> insertCheckPerson(@RequestBody CheckPerson checkPerson);
+
+    /**
+     * @Description: 修改信息
+     * @Param: [news]
+     * @return: com.aaa.base.ResultData<com.aaa.model.News>
+     * @Author: ZMB
+     * @Date: 2020/7/18
+     */
+    @PostMapping("/updateCheckPerson")
+    ResultData<News> updatetCheckPerson(@RequestBody CheckPerson checkPerson);
+
+    /**
+     * @Description:  根据主键删除信息
+     * @Param: [id]
+     * @return: com.aaa.base.ResultData
+     * @Author: ZMB
+     * @Date: 2020/7/18
+     */
+    @PostMapping("/deleteCheckPerson")
+    ResultData deleteCheckPerson(@RequestParam("id") Long id);
+
+    //------------部门表
+    /**
+     * @Description:  部门模糊管理
+     * @Param: [dept]
+     * @return: com.aaa.base.ResultData
+     * @Author: ZMB
+     * @Date: 2020/7/20
+     */
+    @PostMapping("/selectDept")
+    ResultData selectDeptAll(@RequestBody Dept dept);
+
+    /**
+     * @Description: 查询所有部门
+     * @Param: []
+     * @return: com.aaa.base.ResultData
+     * @Author: ZMB
+     * @Date: 2020/7/17
+     */
+    @PostMapping("/allDepts")
+    ResultData selectAllDept();
+
+    /**
+     * @Description:  简单的分页查询
+     * @Param: [roleVo]
+     * @return: com.aaa.base.ResultData
+     * @Author: ZMB
+     * @Date: 2020/7/17
+     */
+    @PostMapping("/pageDepts")
+    ResultData selectAllDeptByPage(@RequestBody RoleVo roleVo);
+
+    /**
+     * @Description:  新增部门信息
+     * @Param: [dept]
+     * @return: com.aaa.base.ResultData<com.aaa.model.Dept>
+     * @Author: ZMB
+     * @Date: 2020/7/17
+     */
+    @PostMapping("/insertDept")
+    ResultData<Dept> insertDept(@RequestBody Dept dept);
+
+    /**
+     * @Description:  修改部门信息
+     * @Param: [dept]
+     * @return: com.aaa.base.ResultData<com.aaa.model.Dept>
+     * @Author: ZMB
+     * @Date: 2020/7/17
+     */
+    @PostMapping("/updateDept")
+    ResultData<Dept> updateDept(@RequestBody Dept dept);
+
+    /**
+     * @Description:  删除部门信息
+     * @Param: [dept]
+     * @return: com.aaa.base.ResultData<com.aaa.model.Dept>
+     * @Author: ZMB
+     * @Date: 2020/7/17
+     */
+    @PostMapping("/deleteDept")
+    ResultData<Dept> deleteDept(@RequestParam("deptId") Long deptId);
+
+    //----------菜单表
+    /**
+     * @Description: 菜单的模糊查询
+     * @Param: [dept]
+     * @return: com.aaa.base.ResultData
+     * @Author: ZMB
+     * @Date: 2020/7/20
+     */
+    @PostMapping("/selectMenu")
+    ResultData selectMenu(@RequestBody Menu menu);
+
+    /**
+     * @Description:  查询所有菜单
+     * @Param: []
+     * @return: java.util.List<com.aaa.model.Menu>
+     * @Author: ZMB
+     * @Date: 2020/7/16
+     */
+    @PostMapping("/getMenus")
+    List<Menu> selectAllMenus();
+
+    /**
+     * @Description: 在菜单管理中新增菜单或者是按钮
+     * @Author: guohang
+     * @Date: 2020/6/3 19:02
+     * @Param: [menu]
+     * @return: com.aaa.qy108.base.ResultData<com.aaa.qy108.model.Menu>
+     */
+    @PostMapping("/insertMenuOrButton")
+    ResultData<Menu> insertMenuOrButton(@RequestBody Menu menu);
+
+    /**
+     * @Description: 在菜单管理中修改菜单或者按钮
+     * @Author: guohang
+     * @Date: 2020/6/3 18:45
+     * @Param: [menu]
+     * @return: com.aaa.qy108.base.ResultData<com.aaa.qy108.model.Menu>
+     */
+    @PostMapping("/updateMenuOrButton")
+    ResultData<Menu> updateMenuOrButton(@RequestBody Menu menu);
+
+    /**
+     * @Description: 删除按钮或者菜单
+     * @Author: guohang
+     * @Date: 2020/6/3 18:45
+     * @Param: [menuId]
+     * @return: com.aaa.qy108.base.ResultData<com.aaa.qy108.model.Menu>
+     */
+    @PostMapping("/deleteMenuOrButton")
+    ResultData<Menu> deleteMenuOrButton(@RequestParam("menuId") Long menuId);
+
+    //------信息公开表（新闻）
+    /**
+     * @Description: 信息公开的模糊查询
+     * @Param: [news]
+     * @return: com.aaa.base.ResultData
+     * @Author: ZMB
+     * @Date: 2020/7/20
+     */
+    @PostMapping("/selectNews")
+    ResultData selectNewsAll(@RequestBody News news);
+
+    /**
+     * @Description: 查询所有信息
+     * @Param: []
+     * @return: com.aaa.base.ResultData
+     * @Author: ZMB
+     * @Date: 2020/7/18
+     */
+    @PostMapping("/allNews")
+    ResultData selectallnews();
+
+    /**
+     * @Description: 分页查询信息
+     * @Param: [roleVo]
+     * @return: com.aaa.base.ResultData
+     * @Author: ZMB
+     * @Date: 2020/7/18
+     */
+    @PostMapping("/pageNews")
+    ResultData selectAllNewsByPage(@RequestBody RoleVo roleVo);
+
+    /**
+     * @Description: 新增信息
+     * @Param: [news]
+     * @return: com.aaa.base.ResultData<com.aaa.model.News>
+     * @Author: ZMB
+     * @Date: 2020/7/18
+     */
+    @PostMapping("/insertNews")
+    ResultData<News> insertNews(@RequestBody News news);
+
+    /**
+     * @Description: 修改信息
+     * @Param: [news]
+     * @return: com.aaa.base.ResultData<com.aaa.model.News>
+     * @Author: ZMB
+     * @Date: 2020/7/18
+     */
+    @PostMapping("/updateNews")
+    ResultData<News> updatetNews(@RequestBody News news);
+
+    /**
+     * @Description:  根据主键删除信息
+     * @Param: [id]
+     * @return: com.aaa.base.ResultData
+     * @Author: ZMB
+     * @Date: 2020/7/18
+     */
+    @PostMapping("/deleteNews")
+    ResultData deleteNews(@RequestParam("id") long id);
+
+    //------角色表
+    /**
+     * @Description: 模糊查询角色
+     * @Param: [role]
+     * @return: com.aaa.base.ResultData
+     * @Author: ZMB
+     * @Date: 2020/7/20
+     */
+    @PostMapping("/selectRole")
+    ResultData selectRoleAll(@RequestBody Role role);
+
+    /**
+     * @Description:  查询所有的角色
+     * @Param: []
+     * @return: com.aaa.base.ResultData
+     * @Author: ZMB
+     * @Date: 2020/7/17
+     */
+    @PostMapping("/allRoles")
+    ResultData selectallrole();
+
+    /**
+     * @Description:  简单的分页查询
+     * @Param: [roleVo]
+     * @return: com.aaa.base.ResultData
+     * @Author: ZMB
+     * @Date: 2020/7/17
+     */
+    @PostMapping("/pageRoles")
+    ResultData selectAllRoleByPage(@RequestBody RoleVo roleVo);
+
+    /**
+     * @Description:  删除角色
+     * @Param: [roleId]
+     * @return: com.aaa.base.ResultData
+     * @Author: ZMB
+     * @Date: 2020/7/16
+     */
+    @PostMapping("/deleteRole")
+    ResultData deleteRole(@RequestParam("roleId") Long roleId);
+
+    /**
+     * @Description:  新增角色以及批量新增权限
+     * @Param: [roleVo]
+     * @return: com.aaa.base.ResultData
+     * @Author: ZMB
+     * @Date: 2020/7/16
+     */
+    @PostMapping("/insertRole")
+    ResultData insertRole(@RequestBody RoleVo roleVo);
+
+    /**
+     * @Description:  修改角色及其权限
+     * @Param: [roleVo]
+     * @return: com.aaa.base.ResultData
+     * @Author: ZMB
+     * @Date: 2020/7/16
+     */
+    @PostMapping("/updateRole")
+    ResultData updateRole(@RequestBody RoleVo roleVo);
+
 
     }
 

@@ -2,11 +2,14 @@ package com.aaa.controller;
 
 import com.aaa.base.BaseController;
 import com.aaa.base.ResultData;
-import com.aaa.model.Dept;
 import com.aaa.model.Menu;
+import com.aaa.service.IProjectService;
 import com.aaa.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -23,7 +26,7 @@ public class MenuController extends BaseController {
 
 
     @Autowired
-    private MenuService menuService;
+    private IProjectService iProjectService;
 
     /**
     * @Description: 菜单的模糊查询
@@ -33,13 +36,8 @@ public class MenuController extends BaseController {
     * @Date: 2020/7/20
     */
     @PostMapping("/selectMenu")
-    public ResultData selectMenu(@RequestBody Menu menu){
-        List<Menu> menuList = menuService.selectMenu(menu);
-        if (menuList !=null&&menuList.size()>0){
-            return  super.operationSuccess(menuList);
-        }else {
-            return  super.operationFailed();
-        }
+    public ResultData selectMenu(Menu menu){
+        return iProjectService.selectMenu(menu);
     }
 
     /**
@@ -51,7 +49,7 @@ public class MenuController extends BaseController {
     */
     @PostMapping("/getMenus")
     public List<Menu> selectAllMenus(){
-        return menuService.selectAllMenus();
+        return iProjectService.selectAllMenus();
     }
 
     /** 
@@ -62,13 +60,8 @@ public class MenuController extends BaseController {
     * @return: com.aaa.qy108.base.ResultData<com.aaa.qy108.model.Menu> 
     */ 
     @PostMapping("/insertMenuOrButton")
-    public ResultData<Menu> insertMenuOrButton(@RequestBody Menu menu){
-        Boolean aBoolean = menuService.insertMenuOrButton(menu);
-        if (true == aBoolean){
-            return super.operationSuccess();
-        }else {
-            return super.operationFailed();
-        }
+    public ResultData<Menu> insertMenuOrButton(Menu menu){
+        return iProjectService.insertMenuOrButton(menu);
     }
 
     /** 
@@ -79,13 +72,8 @@ public class MenuController extends BaseController {
     * @return: com.aaa.qy108.base.ResultData<com.aaa.qy108.model.Menu> 
     */ 
     @PostMapping("/updateMenuOrButton")
-    public ResultData<Menu> updateMenuOrButton(@RequestBody Menu menu){
-        Boolean aBoolean = menuService.updateMenuOrButton(menu);
-        if (true == aBoolean){
-            return super.operationSuccess();
-        }else {
-            return super.operationFailed();
-        }
+    public ResultData<Menu> updateMenuOrButton(Menu menu){
+        return iProjectService.updateMenuOrButton(menu);
     }
     
     /** 
@@ -96,13 +84,8 @@ public class MenuController extends BaseController {
     * @return: com.aaa.qy108.base.ResultData<com.aaa.qy108.model.Menu> 
     */ 
     @PostMapping("/deleteMenuOrButton")
-    public ResultData<Menu> deleteMenuOrButton(@RequestParam("menuId") Long menuId){
-        Boolean aBoolean = menuService.deleteMenuOrButton(menuId);
-        if (aBoolean == true){
-            return super.operationSuccess();
-        }else {
-            return super.operationFailed();
-        }
+    public ResultData<Menu> deleteMenuOrButton(Long menuId){
+        return iProjectService.deleteMenuOrButton(menuId);
     }
 
 

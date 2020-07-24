@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
  * @create: 2020-07-18 15:17
  **/
 @RestController
-@RequestMapping("/checkperson")
+/*@RequestMapping("/checkperson")*/
 public class CheckPersonController extends BaseController {
 
     @Autowired
@@ -29,7 +29,7 @@ public class CheckPersonController extends BaseController {
      * @Date: 2020/7/18
      */
     @PostMapping("/allCheckPaerson")
-    public ResultData selectALLNews(){
+    public ResultData selectALLCheckPaerson(){
         ResultData resultData=checkPersonService.selectALLCheckPerson();
         if ("20010" == resultData.getCode()){
             return super.operationSuccess(resultData.getData());
