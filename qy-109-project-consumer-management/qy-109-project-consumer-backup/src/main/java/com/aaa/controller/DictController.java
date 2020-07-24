@@ -1,12 +1,9 @@
 package com.aaa.controller;
 
-import com.aaa.base.BaseService;
-import com.aaa.base.CommonController;
+import com.aaa.base.BaseController;
 import com.aaa.base.ResultData;
 import com.aaa.model.Dictionary;
-import com.aaa.redis.RedisService;
-import com.aaa.service.DictService;
-import com.github.pagehelper.PageInfo;
+import com.aaa.service.IProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,19 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
  **/
 
 @RestController
-public class DictController extends CommonController<Dictionary> {
+public class DictController extends BaseController {
 
     @Autowired
-    private DictService dictService;
-
-    @Autowired
-    private RedisService<Dictionary> redisService;
-
-
-    @Override
-    public BaseService<Dictionary> getBaseService() {
-        return dictService;
-    }
+    private IProjectService iProjectService;
 
 
     /**
@@ -47,16 +35,8 @@ public class DictController extends CommonController<Dictionary> {
     *
     **/
     @PostMapping("/getAllDict")
-    public ResultData getAllDict(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize){
-
-        PageInfo<Dictionary> dictList=dictService.getAllDict(pageNo,pageSize,redisService);
-        if (!"".equals(dictList) && null !=dictList){
-            //（true）有值，返回成功结果
-            return operationSuccess(dictList);
-        }else {
-            //(false)无值，返回失败结果
-            return operationFailed();
-        }
+    public ResultData getAllDict( Integer pageNo,Integer pageSize){
+        return iProjectService.getAllDict(pageNo,pageSize);
 
     }
 
@@ -70,46 +50,40 @@ public class DictController extends CommonController<Dictionary> {
     *
     **/
     @PostMapping("/addDict")
-    public Boolean addDict(@RequestBody Dictionary dictionary)throws Exception{
-        //调用service层新增方法
-        Boolean result=dictService.addDict(dictionary,redisService);
-        //返回结果
-        return result;
+    public Boolean addDict( Dictionary dictionary){
+      return iProjectService.addDict(dictionary);
     }
 
 
     /**
     * @Author:xfc
     * @Description:
-     *          删除字典信息
+     *          删除 字典信息
     * @Date:2020/7/16
     * @param dictionary:
     * @return: java.lang.Boolean
     *
     **/
     @PostMapping("/delDict")
-    public Boolean delDict(@RequestBody Dictionary dictionary)throws Exception{
-        //调用service层删除方法
-        Boolean result=dictService.delDict(dictionary,redisService);
-        //返回结果
-        return result;
+    public Boolean delDict( Dictionary dictionary){
+        return iProjectService.delDict(dictionary);
     }
+
 
     /**
     * @Author:xfc
     * @Description:
-     *      更新字典数据
-    * @Date:2020/7/16
+     *    更新数据字典
+    * @Date: 2020/7/23 21:07
     * @param dictionary:
     * @return: java.lang.Boolean
     *
     **/
     @PostMapping("/updateDict")
-    public Boolean updateDict(@RequestBody Dictionary dictionary)throws Exception{
-        //调用service层更新方法
-        Boolean result=dictService.updateDict(dictionary,redisService);
-        //返回结果
-        return result;
+    public Boolean updateDict( Dictionary dictionary){
+        return iProjectService.updateDict(dictionary);
     }
+
+
 
 }

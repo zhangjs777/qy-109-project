@@ -28,7 +28,7 @@ public class MappingUnitController {
      * @Return com.aaa.base.ResultData
      */
     @GetMapping("/bwUnit")
-    public ResultData bwUnit(@RequestParam("blankAndWirte") String blankAndWirte,@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize){
+    public ResultData bwUnit( String blankAndWirte, Integer pageNo,  Integer pageSize){
        return iProjectService.bwUnit(blankAndWirte,pageNo,pageSize);
     }
 
@@ -40,7 +40,7 @@ public class MappingUnitController {
      * @Return com.aaa.base.ResultData
      */
     @PostMapping("updateUnit")
-    public ResultData updateUnit(@RequestBody Map map){
+    public ResultData updateUnit( Map map){
       return   iProjectService.updateUnit(map);
     }
 
@@ -52,7 +52,7 @@ public class MappingUnitController {
      * @Return com.aaa.base.ResultData
      */
     @RequestMapping("/unitSelect")
-    public ResultData unitSelect(@RequestBody MappingUnit mappingUnit){
+    public ResultData unitSelect( MappingUnit mappingUnit){
     return  iProjectService.unitSelect(mappingUnit);
     }
 
@@ -65,7 +65,7 @@ public class MappingUnitController {
      * @Return com.aaa.base.ResultData
      */
     @RequestMapping("updateAllMappingUnit")
-    public ResultData updateMappingUnit(@RequestBody Map map){
+    public ResultData updateMappingUnit( Map map){
        return iProjectService.updateMappingUnit(map);
     }
 
@@ -77,7 +77,7 @@ public class MappingUnitController {
      * @Return com.aaa.base.ResultData
      */
     @RequestMapping("selectAllMappingUnit")
-    public  ResultData selectAllMappingUnit(@RequestBody Map map){
+    public  ResultData selectAllMappingUnit( Map map){
         return  iProjectService.selectAllMappingUnit(map);
     }
 
@@ -89,7 +89,7 @@ public class MappingUnitController {
      * @Return com.aaa.base.ResultData
      */
     @PostMapping("/selectUnitById")
-    public ResultData selectUnitById(@RequestBody  MappingUnit mappingUnit){
+    public ResultData selectUnitById(  MappingUnit mappingUnit){
         return  iProjectService.selectUnitById(mappingUnit);
     }
 
@@ -101,7 +101,7 @@ public class MappingUnitController {
      * @Return com.aaa.base.ResultData
      */
     @RequestMapping("/selctMappingUnit")
-    public  ResultData selectMappingUnit(@RequestBody MappingUnit mappingUnit){
+    public  ResultData selectMappingUnit( MappingUnit mappingUnit){
         return  iProjectService.selectUnitById(mappingUnit);
     }
 

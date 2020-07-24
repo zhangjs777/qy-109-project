@@ -1,17 +1,12 @@
 package com.aaa.controller;
 
-import com.aaa.base.BaseService;
-import com.aaa.base.CommonController;
+import com.aaa.base.BaseController;
 import com.aaa.base.ResultData;
 import com.aaa.model.MappingProject;
-import com.aaa.redis.RedisService;
-import com.aaa.service.MappingProjectService;
-import com.github.pagehelper.PageInfo;
+import com.aaa.service.IProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
 
 
 /**
@@ -21,19 +16,10 @@ import java.util.List;
  * @description:
  **/
 @RestController
-public class MappingProjectController extends CommonController<MappingProject> {
+public class MappingProjectController extends BaseController {
 
     @Autowired
-    MappingProjectService mappingProjectService;
-
-    @Autowired
-    private RedisService redisService;
-
-
-    @Override
-    public BaseService<MappingProject> getBaseService() {
-        return mappingProjectService;
-    }
+   private IProjectService iProjectService;
 
 
     /**
@@ -47,15 +33,8 @@ public class MappingProjectController extends CommonController<MappingProject> {
     *
     **/
     @PostMapping("/getAllMappingProject")
-    public ResultData getAllMappingProject(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize){
-        PageInfo<MappingProject> mappingProjectList= mappingProjectService.getAllMappingProject(pageNo,pageSize,redisService);
-        if (!"".equals(mappingProjectList) && null !=mappingProjectList){
-            //（true）有值，返回成功结果
-            return operationSuccess(mappingProjectList);
-        }else {
-            //(false)无值，返回失败结果
-            return operationFailed();
-        }
+    public ResultData getAllMappingProject( Integer pageNo, Integer pageSize){
+       return iProjectService.getAllMappingProject(pageNo,pageSize);
     }
 
     /**
@@ -68,17 +47,8 @@ public class MappingProjectController extends CommonController<MappingProject> {
     *
     **/
    @PostMapping("/getMappingProjectByName")
-   public ResultData getMappingProjectByName(@RequestParam("name") String name){
-        System.out.println(name);
-        List<HashMap<String, Object>> mappingProjectList = mappingProjectService.getMappingProjectByName(name);
-        if (!"".equals(mappingProjectList) && null !=mappingProjectList){
-            //（true）有值，返回成功结果
-            return operationSuccess(mappingProjectList);
-        }else {
-            //(false)无值，返回失败结果
-            return operationFailed();
-        }
-
+   public ResultData getMappingProjectByName(String name){
+       return iProjectService.getMappingProjectByName(name);
    }
 
    /**
@@ -91,15 +61,8 @@ public class MappingProjectController extends CommonController<MappingProject> {
    *
    **/
    @PostMapping("/getMappingProjectById")
-    public ResultData getMappingProjectById(@RequestParam("id") String id){
-       MappingProject mappingProjectById = mappingProjectService.getMappingProjectById(id);
-       if (!"".equals(mappingProjectById) && null !=mappingProjectById){
-            //（true）有值，返回成功结果
-            return operationSuccess(mappingProjectById);
-        }else {
-            //(false)无值，返回失败结果
-            return operationFailed();
-        }
+    public ResultData getMappingProjectById( String id){
+      return iProjectService.getMappingProjectById(id);
     }
 
 
@@ -107,7 +70,7 @@ public class MappingProjectController extends CommonController<MappingProject> {
     /**
     * @Author:xfc
     * @Description:
-     *           查询 未审核的项目登记信息
+     *           查询未审核的项目登记信息
     * @Date: 2020/7/17 14:37
     * @param pageNo:
      * @param pageSize:
@@ -115,15 +78,8 @@ public class MappingProjectController extends CommonController<MappingProject> {
     *
     **/
     @PostMapping("/getMappingProjectUnaudited")
-    public ResultData getMappingProjectUnaudited(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize) {
-        PageInfo<MappingProject> mappingProjectList= mappingProjectService.getMappingProjectUnaudited(pageNo,pageSize);
-        if (!"".equals(mappingProjectList) && null !=mappingProjectList){
-            //（true）有值，返回成功结果
-            return operationSuccess(mappingProjectList);
-        }else {
-            //(false)无值，返回失败结果
-            return operationFailed();
-        }
+    public ResultData getMappingProjectUnaudited( Integer pageNo, Integer pageSize) {
+       return iProjectService.getMappingProjectUnaudited(pageNo,pageSize);
     }
 
     /**
@@ -137,15 +93,8 @@ public class MappingProjectController extends CommonController<MappingProject> {
     *
     **/
     @PostMapping("/getMappingProjectUnauditedInfo")
-    public ResultData getMappingProjectUnauditedInfo(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize){
-        PageInfo<MappingProject> mappingProjectList= mappingProjectService.getMappingProjectUnauditedInfo(pageNo,pageSize);
-        if (!"".equals(mappingProjectList) && null !=mappingProjectList){
-            //（true）有值，返回成功结果
-            return operationSuccess(mappingProjectList);
-        }else {
-            //(false)无值，返回失败结果
-            return operationFailed();
-        }
+    public ResultData getMappingProjectUnauditedInfo( Integer pageNo,  Integer pageSize){
+      return iProjectService.getMappingProjectUnauditedInfo(pageNo,pageSize);
     }
 
 
@@ -161,15 +110,8 @@ public class MappingProjectController extends CommonController<MappingProject> {
     *
     **/
     @PostMapping("/getMappingProjectUnauditedByName")
-    public ResultData getMappingProjectUnauditedByName(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize")Integer pageSize,@RequestParam("name") String name){
-        PageInfo<MappingProject> mappingProjectList= mappingProjectService.getMappingProjectUnauditedByName(pageNo,pageSize,name);
-        if (!"".equals(mappingProjectList) && null !=mappingProjectList){
-            //（true）有值，返回成功结果
-            return operationSuccess(mappingProjectList);
-        }else {
-            //(false)无值，返回失败结果
-            return operationFailed();
-        }
+    public ResultData getMappingProjectUnauditedByName( Integer pageNo, Integer pageSize, String name){
+      return getMappingProjectUnauditedByName(pageNo,pageSize,name);
     }
 
     /**
@@ -185,15 +127,8 @@ public class MappingProjectController extends CommonController<MappingProject> {
     **/
 
     @PostMapping("/getMappingProjectUnauditedByNameInfo")
-    public ResultData getMappingProjectUnauditedByNameInfo(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize")Integer pageSize,@RequestParam("name") String name){
-        PageInfo<MappingProject> mappingProjectList= mappingProjectService.getMappingProjectUnauditedByNameInfo(pageNo,pageSize,name);
-        if (!"".equals(mappingProjectList) && null !=mappingProjectList){
-            //（true）有值，返回成功结果
-            return operationSuccess(mappingProjectList);
-        }else {
-            //(false)无值，返回失败结果
-            return operationFailed();
-        }
+    public ResultData getMappingProjectUnauditedByNameInfo( Integer pageNo, Integer pageSize, String name){
+     return iProjectService.getMappingProjectUnauditedInfo(pageNo,pageSize);
     }
 
 
@@ -210,16 +145,8 @@ public class MappingProjectController extends CommonController<MappingProject> {
     **/
     @RequestMapping("/selectAllMappingProject")
 
-    public  ResultData selectAllMappingProject(@RequestBody MappingProject mappingProject) {
-         List<MappingProject> mappingProjectList= mappingProjectService.selectAllMappingProject(mappingProject);
-
-        if (!"".equals(mappingProjectList) && null !=mappingProjectList){
-            //（true）有值，返回成功结果
-            return operationSuccess(mappingProjectList);
-        }else {
-            //(false)无值，返回失败结果
-            return operationFailed();
-        }
+    public  ResultData selectAllMappingProject( MappingProject mappingProject) {
+        return iProjectService.selectAllMappingProject(mappingProject);
     }
 
 

@@ -29,7 +29,7 @@ public class UserController extends BaseController {
     * @Return com.aaa.base.ResultData
     */
     @RequestMapping("/addUser")
-    ResultData addUser(@RequestBody Map map){
+    ResultData addUser(      Map map){
        return iProjectService.addUser(map);
     }
 
@@ -41,7 +41,7 @@ public class UserController extends BaseController {
     * @Return com.aaa.base.ResultData
     */
     @RequestMapping("/updateUser")
-    ResultData updateUser(@RequestBody Map map ){
+    ResultData updateUser(      Map map ){
        return iProjectService.updateUser(map);
     }
 
@@ -54,7 +54,7 @@ public class UserController extends BaseController {
     * @Return com.aaa.base.ResultData
     */
     @RequestMapping("/deleteUserById")
-    ResultData updateUserStatus(@RequestParam("ids[]") Integer [] ids){
+    ResultData updateUserStatus( Integer [] ids){
        return iProjectService.updateUserStatus(ids);
     }
 
@@ -68,7 +68,7 @@ public class UserController extends BaseController {
     * @Return com.aaa.base.ResultData
     */
     @RequestMapping("/selectAllUser")
-    public ResultData selectAllUser(@RequestBody User user ){
+    public ResultData selectAllUser(      User user ){
       return   iProjectService.selectAllUser(user);
     }
 
@@ -80,8 +80,8 @@ public class UserController extends BaseController {
      * @Params: [id]
      * @Return com.aaa.base.ResultData
      */
-    @GetMapping("/selectUserById")
-    public ResultData selectUserById(@RequestParam ("id") Long id){
+    @RequestMapping("/selectUserById")
+    public ResultData selectUserById( Long id){
      return    iProjectService.selectUserById(id);
     }
 

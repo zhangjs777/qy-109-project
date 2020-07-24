@@ -25,7 +25,7 @@ public class LoginController extends BaseController {
    * @Return com.aaa.base.ResultData
    */
     @PostMapping("/doLogin")
-    public ResultData doLogin(@RequestBody User user){
+    public ResultData doLogin( User user){
         return iProjectService.doLogin(user);
 
     }

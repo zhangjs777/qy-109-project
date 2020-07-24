@@ -125,6 +125,7 @@ public class TechnicistController extends CommonController<Technicist> {
     * @Params: [technicist]
     * @Return com.aaa.base.ResultData
     */
+    @PostMapping("/deleteTechnicist")
     public ResultData deleteTechnicist(@RequestBody Technicist technicist){
         Integer delete = getBaseService().delete(technicist);
         if (delete>0){
