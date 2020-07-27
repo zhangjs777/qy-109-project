@@ -195,7 +195,7 @@ public interface IProjectService {
      * @Return com.aaa.base.ResultData
      */
     @PostMapping("/selectByRefId")
-   ResultData selectByRefId(@RequestBody HashMap map);
+   ResultData selectByRefId(@RequestBody Audit audit);
 
 
     /**
@@ -280,7 +280,7 @@ public interface IProjectService {
      * @Return com.aaa.base.ResultData
      */
     @PostMapping("/selectTechByUid")
-    ResultData selectTechByUid(Technicist technicist, Integer pageNo, Integer pageSize);
+    ResultData selectTechByUid(@RequestBody Technicist technicist, @RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize);
 
 
     /**
@@ -311,6 +311,7 @@ public interface IProjectService {
      * @Params: [technicist]
      * @Return com.aaa.base.ResultData
      */
+    @PostMapping("/deleteTechnicist")
     ResultData deleteTechnicist(@RequestBody Technicist technicist);
 
 
@@ -325,15 +326,6 @@ public interface IProjectService {
     ResultData selectByRefBizId(Resource resource);
 
 
-    /**
-     * @Author: js.zhang
-     * @Description: 文件上传
-     * @DateTime: 2020/7/21 16:37
-     * @Params: [multipartFile, resource]
-     * @Return com.aaa.base.ResultData
-     */
-    @RequestMapping("/addResouce")
-    ResultData addResource(MultipartFile multipartFile, Resource resource);
 
     /**
      * @Author: js.zhang
@@ -402,6 +394,17 @@ public interface IProjectService {
     Boolean delDict(@RequestBody Dictionary dictionary);
 
 
+    /**
+    * @Author:xfc
+    * @Description:
+     *     更新字典数据
+    * @Date: 2020/7/23 21:05
+    * @param dictionary:
+    * @return: java.lang.Boolean
+    *
+    **/
+    @PostMapping("/updateDict")
+    Boolean updateDict(@RequestBody Dictionary dictionary);
 
     /**
      * @Author:xfc
@@ -413,7 +416,7 @@ public interface IProjectService {
      *
      **/
     @PostMapping("/getAllMapProject")
-    ResultData getAllMappingProject(@RequestBody MappingProject mappingProject);
+    ResultData getAllMappingProject(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize);
 
     /**
      * @Author:xfc
@@ -608,23 +611,21 @@ public interface IProjectService {
     **/
 
     @PostMapping("/addSpecialPost")
-   Boolean addSpecialPost(@RequestBody SpecialPost specialPost)throws Exception;
+   Boolean addSpecialPost(@RequestBody SpecialPost specialPost);
 
 
     /**
      * 更新特殊人才信息
      **/
     @PostMapping("/updateSpecialPost")
-     Boolean updateSpecialPost(@RequestBody SpecialPost specialPost)throws Exception;
+     Boolean updateSpecialPost(@RequestBody SpecialPost specialPost);
 
 
     /**
      * 根据id 删除特殊人才信息
      **/
     @PostMapping("/deleteSpecialPost")
-    Boolean deleteSpecialPost(@RequestParam("id") Long id)throws Exception;
-
-
+    Boolean deleteSpecialPost(@RequestParam("id") Long id);
 
     //------------抽查人员信息表
     /**
@@ -910,7 +911,6 @@ public interface IProjectService {
      */
     @PostMapping("/updateRole")
     ResultData updateRole(@RequestBody RoleVo roleVo);
-
 
     }
 

@@ -4,15 +4,10 @@ import com.aaa.base.BaseController;
 import com.aaa.base.ResultData;
 import com.aaa.model.News;
 import com.aaa.service.IProjectService;
-import com.aaa.service.NewsService;
 import com.aaa.vo.RoleVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * @program: qy-109-project
