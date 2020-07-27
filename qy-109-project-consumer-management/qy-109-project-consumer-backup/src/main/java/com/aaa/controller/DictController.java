@@ -35,7 +35,7 @@ public class DictController extends BaseController {
     *
     **/
     @PostMapping("/getAllDict")
-    public ResultData getAllDict( Integer pageNo,Integer pageSize){
+        public ResultData getAllDict(@RequestParam("pageNo") Integer pageNo,@RequestParam("pageSize")Integer pageSize){
         return iProjectService.getAllDict(pageNo,pageSize);
 
     }
@@ -50,7 +50,7 @@ public class DictController extends BaseController {
     *
     **/
     @PostMapping("/addDict")
-    public Boolean addDict( Dictionary dictionary){
+    public Boolean addDict(@RequestBody  Dictionary dictionary){
       return iProjectService.addDict(dictionary);
     }
 
@@ -65,7 +65,7 @@ public class DictController extends BaseController {
     *
     **/
     @PostMapping("/delDict")
-    public Boolean delDict( Dictionary dictionary){
+    public Boolean delDict(@RequestBody Dictionary dictionary){
         return iProjectService.delDict(dictionary);
     }
 
@@ -80,7 +80,7 @@ public class DictController extends BaseController {
     *
     **/
     @PostMapping("/updateDict")
-    public Boolean updateDict( Dictionary dictionary){
+    public Boolean updateDict(@RequestBody Dictionary dictionary){
         return iProjectService.updateDict(dictionary);
     }
 

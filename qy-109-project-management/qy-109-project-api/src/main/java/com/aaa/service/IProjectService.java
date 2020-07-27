@@ -411,7 +411,7 @@ public interface IProjectService {
      * @Description:
      *    查询所有测绘项目信息
      * @Date: 2020/7/17 19:24
-     * @param mappingProject:
+     * @param :
      * @return: com.aaa.base.ResultData
      *
      **/
