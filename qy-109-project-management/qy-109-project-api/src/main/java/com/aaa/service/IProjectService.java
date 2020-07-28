@@ -415,7 +415,7 @@ public interface IProjectService {
      * @return: com.aaa.base.ResultData
      *
      **/
-    @PostMapping("/getAllMapProject")
+    @PostMapping("/getAllMappingProject")
     ResultData getAllMappingProject(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize);
 
     /**
@@ -427,7 +427,7 @@ public interface IProjectService {
      * @return: com.aaa.base.ResultData
      *
      **/
-    @PostMapping("/getMapProByName")
+    @PostMapping("/getMappingProjectByName")
     ResultData getMappingProjectByName(@RequestParam("name") String name);
 
 
@@ -440,70 +440,9 @@ public interface IProjectService {
      * @return: com.aaa.base.ResultData
      *
      **/
-    @PostMapping("/getMapProById")
+    @PostMapping("/getMappingProjectById")
     ResultData getMappingProjectById(@RequestParam("id") String id);
 
-
-    /**
-     * @Author:xfc
-     * @Description:
-     *        查询未审核的项目登记信息
-     * @Date: 2020/7/17 19:30
-     * @param pageNo:
-     * @param pageSize:
-     * @return: com.aaa.base.ResultData
-     *
-     **/
-    @PostMapping("/getMapProUnaudited")
-    ResultData getMappingProjectUnaudited(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize);
-
-
-
-    /**
-     * @Author:xfc
-     * @Description:
-     *        查询未审核的项目成功汇交信息
-     * @Date: 2020/7/17 19:32
-     * @param pageNo:
-     * @param pageSize:
-     * @return: com.aaa.base.ResultData
-     *
-     **/
-    @PostMapping("/getMapProUnauditedInfo")
-    ResultData getMappingProjectUnauditedInfo(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize);
-
-
-
-    /**
-     * @Author:xfc
-     * @Description:
-     *     根据 name 查询未审核的项目登记信息
-     * @Date: 2020/7/17 19:35
-     * @param pageNo:
-     * @param pageSize:
-     * @param name:
-     * @return: com.aaa.base.ResultData
-     *
-     **/
-    @PostMapping("/getMapProUnauditedByName")
-    ResultData getMappingProjectUnauditedByName(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize, @RequestParam("name") String name);
-
-
-
-
-    /**
-     * @Author:xfc
-     * @Description:
-     *          根据 name 查询未审核的项目成果汇交信息
-     * @Date: 2020/7/17 19:38
-     * @param pageNo:
-     * @param pageSize:
-     * @param name:
-     * @return: com.aaa.base.ResultData
-     *
-     **/
-    @PostMapping("/getMapProUnaByNameInfo")
-    ResultData  getMappingProjectUnauditedByNameInfo(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize, @RequestParam("name") String name);
 
 
     /**
@@ -517,7 +456,17 @@ public interface IProjectService {
     @RequestMapping("/selectAllMappingProject")
      ResultData selectAllMappingProject(@RequestBody MappingProject mappingProject);
 
-
+    /**
+    * @Author:xfc
+    * @Description:
+     *    输入参数查询信息
+    * @Date: 2020/7/28 10:35
+    * @param mappingProject:
+    * @return: com.aaa.base.ResultData
+    *
+    **/
+   @RequestMapping("/select")
+    ResultData select(@RequestBody MappingProject mappingProject);
 
 
     /**
@@ -626,6 +575,10 @@ public interface IProjectService {
      **/
     @PostMapping("/deleteSpecialPost")
     Boolean deleteSpecialPost(@RequestParam("id") Long id);
+
+
+
+
 
     //------------抽查人员信息表
     /**

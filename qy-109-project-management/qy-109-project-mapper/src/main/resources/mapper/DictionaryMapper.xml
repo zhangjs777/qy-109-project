@@ -11,4 +11,5 @@
     <result column="FIELD_NAME" property="fieldName" jdbcType="VARCHAR" />
     <result column="TABLE_NAME" property="tableName" jdbcType="VARCHAR" />
   </resultMap>
+  
 </mapper>

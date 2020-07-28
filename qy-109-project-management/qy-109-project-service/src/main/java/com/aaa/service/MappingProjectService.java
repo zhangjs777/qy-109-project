@@ -159,25 +159,27 @@ public class MappingProjectService extends BaseService<MappingProject> {
     *
     **/
 
-    public MappingProject getMappingProjectById(String id){
+    public MappingProject getMappingProjectById(Long id){
 
         try {
-            MappingProject getMappingProjectById = mappingProjectMapper.getMappingProjectByid(id);
-            if ("".equals(getMappingProjectById)&& null==getMappingProjectById){
+
+            MappingProject getMappingProject = mappingProjectMapper.selectByPrimaryKey(id);
+            System.out.println(getMappingProject);
+            if ("".equals(getMappingProject)&& null==getMappingProject){
                 //没有数据，返回null
                 return null;
             }else {
                 //有数据，返回数据
-                return getMappingProjectById;
+                return getMappingProject;
             }
         }catch (Exception e){
-            MappingProject getMappingProjectById = mappingProjectMapper.getMappingProjectByid(id);
-            if("".equals(getMappingProjectById) && null==getMappingProjectById){
+            MappingProject getMappingProject = mappingProjectMapper.getMappingProjectByid(id);
+            if("".equals(getMappingProject) && null==getMappingProject){
                 //没有数据，返回null
                 return null;
             }else {
                 //有数据，返回数据
-                return getMappingProjectById;
+                return getMappingProject;
             }
         }
 
@@ -219,160 +221,10 @@ public class MappingProjectService extends BaseService<MappingProject> {
 
 
 
-
     /**
     * @Author:xfc
     * @Description:
-     *              查询未审核的项目登记信息
-    * @Date: 2020/7/17 10:55
-    * @param pageNo:
-     * @param pageSize:
-    * @return: com.github.pagehelper.PageInfo<com.aaa.model.MappingProject>
-    *
-    **/
-    public PageInfo<MappingProject> getMappingProjectUnaudited(Integer pageNo, Integer pageSize){
-        PageHelper.startPage(pageNo, pageSize);
-        try {
-            //从mysql中查询数据
-            List<MappingProject> mappingProjects =mappingProjectMapper.getMappingProjectUnaudited();
-            System.out.println(mappingProjects);
-            if ("".equals(mappingProjects) && 0 == mappingProjects.size() && null == mappingProjects){
-                //没有数据信息
-                return null;
-            }else {
-                return new PageInfo<MappingProject>(mappingProjects);
-            }
-        }catch (Exception e){
-            //查询数据出现异常，再次执行以上查询操作
-            List<MappingProject> mappingProjects =mappingProjectMapper.getMappingProjectUnaudited();
-            System.out.println(mappingProjects);
-            if ("".equals(mappingProjects) && 0 == mappingProjects.size() && null == mappingProjects){
-                //没有数据信息
-                return null;
-            }else {
-                return new PageInfo<MappingProject>(mappingProjects);
-            }
-        }
-    }
-
-
-    /**
-    * @Author:xfc
-    * @Description:
-     *          查询未审核的项目成功汇交信息
-    * @Date: 2020/7/17 11:02
-    * @param pageNo:
-     * @param pageSize:
-    * @return: com.github.pagehelper.PageInfo<com.aaa.model.MappingProject>
-    *
-    **/
-    public PageInfo<MappingProject> getMappingProjectUnauditedInfo(Integer pageNo, Integer pageSize){
-        PageHelper.startPage(pageNo, pageSize);
-        try {
-            //从mysql中查询数据
-            List<MappingProject> mappingProjects = mappingProjectMapper.getMappingProjectUnauditedInfo();
-            System.out.println(mappingProjects);
-            if ("".equals(mappingProjects) && 0 == mappingProjects.size() && null == mappingProjects){
-                //没有数据信息
-                return null;
-            }else {
-                return new PageInfo<MappingProject>(mappingProjects);
-            }
-        }catch (Exception e){
-            //从mysql中查询数据
-            List<MappingProject> mappingProjects = mappingProjectMapper.getMappingProjectUnauditedInfo();
-            System.out.println(mappingProjects);
-            if ("".equals(mappingProjects) && 0 == mappingProjects.size() && null == mappingProjects){
-                //没有数据信息
-                return null;
-            }else {
-                return new PageInfo<MappingProject>(mappingProjects);
-            }
-        }
-
-    }
-
-
-    /**
-    * @Author:xfc
-    * @Description:
-     *          条件分页查询 根据project_name查询未审核的项目登记信息
-    * @Date: 2020/7/17 11:34
-    * @param pageNo:
-     * @param pageSize:
-     * @param name:
-    * @return: com.github.pagehelper.PageInfo<com.aaa.model.MappingProject>
-    *
-    **/
-    public PageInfo<MappingProject> getMappingProjectUnauditedByName(Integer pageNo, Integer pageSize, String name) {
-        PageHelper.startPage(pageNo, pageSize);
-        try {
-            //从mysql中查询数据
-            List<MappingProject> mappingProjects=mappingProjectMapper.getMappingProjectUnauditedByName(name);
-            System.out.println(mappingProjects);
-            if ("".equals(mappingProjects) && 0 == mappingProjects.size() && null == mappingProjects){
-                //没有数据信息
-                return null;
-            }else {
-                return new PageInfo<MappingProject>(mappingProjects);
-            }
-        }catch (Exception e){
-            List<MappingProject> mappingProjects=mappingProjectMapper.getMappingProjectUnauditedByName(name);
-            System.out.println(mappingProjects);
-            if ("".equals(mappingProjects) && 0 == mappingProjects.size() && null == mappingProjects){
-                //没有数据信息
-                return null;
-            }else {
-                return new PageInfo<MappingProject>(mappingProjects);
-            }
-        }
-
-    }
-
-
-
-    /**
-    * @Author:xfc
-    * @Description:
-     *            条件分页查询  根据project_name查询未审核的项目成果汇交信息
-    * @Date: 2020/7/17 11:40
-    * @param pageNo:
-     * @param pageSize:
-     * @param name:
-    * @return: com.github.pagehelper.PageInfo<com.aaa.model.MappingProject>
-    *
-    **/
-    public PageInfo<MappingProject> getMappingProjectUnauditedByNameInfo(Integer pageNo, Integer pageSize, String name){
-          PageHelper.startPage(pageNo, pageSize);
-        try {
-            //从mysql中查询数据
-            List<MappingProject> mappingProjects=mappingProjectMapper.getMappingProjectUnauditedByNameInfo(name);
-            System.out.println(mappingProjects);
-            if ("".equals(mappingProjects) && 0 == mappingProjects.size() && null == mappingProjects){
-                //没有数据信息
-                return null;
-            }else {
-                return new PageInfo<MappingProject>(mappingProjects);
-            }
-        }catch (Exception e){
-            //从mysql中查询数据
-            List<MappingProject> mappingProjects=mappingProjectMapper.getMappingProjectUnauditedByNameInfo(name);
-            System.out.println(mappingProjects);
-            if ("".equals(mappingProjects) && 0 == mappingProjects.size() && null == mappingProjects){
-                //没有数据信息
-                return null;
-            }else {
-                return new PageInfo<MappingProject>(mappingProjects);
-            }
-        }
-
-    }
-
-
-    /**
-    * @Author:xfc
-    * @Description:
-     *      根据 名称模糊查询 +条件 查询
+     *      根据 名称模糊查询 +条件 （类型）  查询
     * @Date: 2020/7/22 9:51
     * @param mappingProject:
     * @return: java.util.List<com.aaa.model.MappingProject>

@@ -66,74 +66,6 @@ public class MappingProjectController extends BaseController {
     }
 
 
-
-    /**
-    * @Author:xfc
-    * @Description:
-     *           查询未审核的项目登记信息
-    * @Date: 2020/7/17 14:37
-    * @param pageNo:
-     * @param pageSize:
-    * @return: com.aaa.base.ResultData
-    *
-    **/
-    @PostMapping("/getMappingProjectUnaudited")
-    public ResultData getMappingProjectUnaudited(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize) {
-       return iProjectService.getMappingProjectUnaudited(pageNo,pageSize);
-    }
-
-    /**
-    * @Author:xfc
-    * @Description:
-     *          查询未审核的项目成功汇交信息
-    * @Date: 2020/7/17 14:48
-    * @param pageNo:
-     * @param pageSize:
-    * @return: com.aaa.base.ResultData
-    *
-    **/
-    @PostMapping("/getMappingProjectUnauditedInfo")
-    public ResultData getMappingProjectUnauditedInfo(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize){
-      return iProjectService.getMappingProjectUnauditedInfo(pageNo,pageSize);
-    }
-
-
-    /**
-    * @Author:xfc
-    * @Description:
-     *         根据project_name查询未审核的项目登记信息
-    * @Date: 2020/7/17 14:51
-    * @param pageNo:
-     * @param pageSize:
-     * @param name:
-    * @return: com.aaa.base.ResultData
-    *
-    **/
-    @PostMapping("/getMappingProjectUnauditedByName")
-    public ResultData getMappingProjectUnauditedByName(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize,@RequestParam("name") String name){
-      return getMappingProjectUnauditedByName(pageNo,pageSize,name);
-    }
-
-    /**
-    * @Author:xfc
-    * @Description:
-     *           根据project_name查询未审核的项目成果汇交信息
-    * @Date: 2020/7/17 14:55
-    * @param pageNo:
-     * @param pageSize:
-     * @param name:
-    * @return: com.aaa.base.ResultData
-    *
-    **/
-
-    @PostMapping("/getMappingProjectUnauditedByNameInfo")
-    public ResultData getMappingProjectUnauditedByNameInfo(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize){
-     return iProjectService.getMappingProjectUnauditedInfo(pageNo,pageSize);
-    }
-
-
-
-
     /**
     * @Author:xfc
     * @Description:
@@ -149,5 +81,17 @@ public class MappingProjectController extends BaseController {
         return iProjectService.selectAllMappingProject(mappingProject);
     }
 
-
+    /**
+    * @Author:xfc
+    * @Description:
+     *     根据输入参数查询信息
+    * @Date: 2020/7/28 10:39
+    * @param mappingProject:
+    * @return: com.aaa.base.ResultData
+    *
+    **/
+    @RequestMapping("/select")
+    public  ResultData select(@RequestBody MappingProject mappingProject){
+        return iProjectService.select(mappingProject);
+    }
 }
