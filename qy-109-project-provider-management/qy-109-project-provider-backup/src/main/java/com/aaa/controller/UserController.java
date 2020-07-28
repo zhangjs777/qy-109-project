@@ -18,9 +18,11 @@ import java.util.Map;
 
 import static com.aaa.staticproperties.RedisProperties.*;
 
+import static com.aaa.status.AddStatus.ADD_DATA_SUCCESS;
 import static com.aaa.status.OperationStatus.*;
 import static com.aaa.status.SelectStatus.SELECT_DATA_FAILED;
 import static com.aaa.status.SelectStatus.SELECT_DATA_SUCCESS;
+import static com.aaa.status.UpdateStatus.UPDATE_DATA_SUCCESS;
 
 /**
  * @program: springcloud-zjs-0708-project
@@ -48,10 +50,13 @@ public class UserController extends CommonController<User> {
     * @Params: [map]
     * @Return com.aaa.base.ResultData
     */
-    @RequestMapping("/addUser")
-    ResultData addUser(@RequestBody Map map){
-        ResultData addResult = super.add(map);
-        return addResult;
+    @PostMapping("/addUser")
+    ResultData addUser(@RequestBody User user){
+        Map<String, Object> stringObjectMap = userService.addUser(user);
+        if ( ADD_DATA_SUCCESS.getCode().equals(stringObjectMap.get(CODE))){
+            return    super.operationSuccess();
+        }
+        return  super.operationFailed();
     }
 
     /**
@@ -61,10 +66,13 @@ public class UserController extends CommonController<User> {
     * @Params: [map]
     * @Return com.aaa.base.ResultData
     */
-    @RequestMapping("/updateUser")
-    ResultData updateUser(@RequestBody Map map ){
-        ResultData updateResult = super.update(map);
-        return updateResult;
+    @PostMapping("/updateUser")
+    ResultData updateUser(@RequestBody User user ){
+        Map<String, Object> stringObjectMap = userService.updateUser(user);
+        if (UPDATE_DATA_SUCCESS.getCode().equals(stringObjectMap.get(CODE))){
+         return    super.operationSuccess();
+        }
+         return  super.operationFailed();
     }
 
 
@@ -115,7 +123,7 @@ public class UserController extends CommonController<User> {
     * @Params: [map]
     * @Return com.aaa.base.ResultData
     */
-    @RequestMapping("/selectAllUser")
+    @PostMapping("/selectAllUser")
     public ResultData selectAllUser(@RequestBody User user ){
         PageInfo<HashMap> hashMapPageInfo = userService.selectAllUser(user);
 
@@ -148,7 +156,7 @@ public class UserController extends CommonController<User> {
 
         /**
         * @Author: js.zhang
-        * @Description: 通过username模糊查询和deptid查询
+        * @Description: 通过username模糊查询和deptid查询 （弃用）
         * @DateTime: 2020/7/20 18:37
         * @Params: [user]
         * @Return com.aaa.base.ResultData

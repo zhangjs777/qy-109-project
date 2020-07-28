@@ -42,7 +42,7 @@ public class TechnicistController extends CommonController<Technicist> {
     * @Return com.aaa.base.ResultData
     */
     @GetMapping("/selectTechById")
-    public ResultData selectTechByUserId( Long id){
+    public ResultData selectTechById( @RequestParam("id") Long id){
 
         //执行查询语句
         Map<String, Object> stringObjectMap = technicistService.selectTecById(id);
@@ -65,8 +65,8 @@ public class TechnicistController extends CommonController<Technicist> {
     * @Params: [technicist, pageNo, pageSize]
     * @Return com.aaa.base.ResultData
     */
-    @PostMapping("/selectTechByUid")
-    public ResultData selectTechByUid( Technicist technicist,Integer pageNo,Integer pageSize){
+    @PostMapping("/selectTechByUserid")
+    public ResultData selectTechByUserid( @RequestBody Technicist technicist,@RequestParam("pageNo") Integer pageNo,@RequestParam("pageSize") Integer pageSize){
 
         PageInfo<Technicist> technicistPageInfo = getBaseService().selectListByPage(technicist, pageNo, pageSize);
         if (technicistPageInfo!=null && technicistPageInfo.getSize()>0){

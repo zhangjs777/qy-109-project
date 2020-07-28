@@ -39,14 +39,14 @@ public class MappingUnitService extends BaseService<MappingUnit> {
         * @Params: [blankAndWirte]
         * @Return java.util.List<com.aaa.model.MappingUnit>
         */
-    public List<MappingUnit> bwUnit(String blankAndWirte){
+    public List<MappingUnit> bwUnit(String blank){
         Example example = new Example(MappingUnit.class);
         Example.Criteria criteria = example.createCriteria();
         List<MappingUnit> mappingUnitList=null;
-        if (blankAndWirte.equals(BLACK)){
+        if (blank.equals(BLANK)){
             criteria.orLessThan("score",60);
           mappingUnitList= mappingUnitMapper.selectByExample(example);
-        }else if (blankAndWirte.equals(WHITE)){
+        }else if (blank.equals(WHITE)){
             criteria.orGreaterThan("score",100);
           mappingUnitList = mappingUnitMapper.selectByExample(example);
         }else {

@@ -36,17 +36,11 @@ public class PrincipalService extends BaseService<Principal> {
         * @Params: [principal, pageNo, pageSize]
         * @Return java.util.Map<java.lang.String,java.lang.Object>
         */
-    public Map<String,Object> selectPrincipalByUserId(Map map){
+    public Map<String,Object> selectPrincipalByUserId(Principal principal){
         Map<String, Object> resultMap = new HashMap<String, Object>();
-        //对象转数字
-        Integer pageNo = BaseUtil.transToInt(map.get("pageNo"));
-        Integer pageSize = BaseUtil.transToInt(map.get("pageSize"));
-        Long userId = BaseUtil.transToLong(map.get("userId"));
-        //  Long userId = Long.valueOf(map.get("userId").toString());
-        Principal principal = new Principal().setUserId(userId);
-
-
-        PageInfo<Principal> principalPageInfo = super.selectListByPage(principal, pageNo, pageSize);
+        PageHelper.startPage(principal.getPageNo(),principal.getPageSize());
+        List<Principal> principals = super.selectList(principal);
+        PageInfo<Principal> principalPageInfo = new PageInfo<>(principals);
 
         if (null != principalPageInfo  && principalPageInfo.getSize() > 0) {
             resultMap.put(CODE, SELECT_DATA_SUCCESS.getCode());

@@ -59,7 +59,7 @@ public interface IProjectService {
      * @Params: [map]
      * @Return com.aaa.base.ResultData
      */
-    @RequestMapping("/selectAllUser")
+    @PostMapping("/selectAllUser")
     ResultData selectAllUser(@RequestBody User user);
 
 
@@ -100,7 +100,7 @@ public interface IProjectService {
      * @Params: [map]
      * @Return com.aaa.base.ResultData
      */
-    @RequestMapping("/updateUser")
+    @PostMapping("/updateUser")
     ResultData updateUser(@RequestBody Map map);
 
     /**
@@ -121,18 +121,9 @@ public interface IProjectService {
      * @Params: [blankAndWirte]
      * @Return com.aaa.base.ResultData
      */
-    @GetMapping("/bwUnit")
-    public ResultData bwUnit(@RequestParam("blankAndWirte") String blankAndWirte, @RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize);
+    @RequestMapping("/bwUnit")
+    public ResultData bwUnit(@RequestParam("blank") String blank, @RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize);
 
-    /**
-    * @Author: js.zhang
-    * @Description: 分页查询所有的mappingUnit 1.带条件  2不带条件
-    * @DateTime: 2020/7/17 10:21
-    * @Params: [hashMap]
-    * @Return com.aaa.base.ResultData
-    */
-            @RequestMapping("/selctMappingUnit")
-     ResultData selectMappingUnit(@RequestBody HashMap hashMap);
 
 
 
@@ -143,29 +134,10 @@ public interface IProjectService {
      * @Params: [map]
      * @Return com.aaa.base.ResultData
      */
-    @PostMapping("updateUnit")
+    @PostMapping("/updateUnit")
     ResultData updateUnit(@RequestBody Map map);
 
-    /**
-     * @Author: js.zhang
-     * @Description: 分页查询所有数据 mappingUnit
-     * @DateTime: 2020/7/17 10:16
-     * @Params: [map]
-     * @Return com.aaa.base.ResultData
-     */
-    @RequestMapping("selectAllMappingUnit")
-     ResultData selectAllMappingUnit(@RequestBody Map map);
 
-
-    /**
-     * @Author: js.zhang
-     * @Description: 修改单位信息
-     * @DateTime: 2020/7/17 11:45
-     * @Params: [map]
-     * @Return com.aaa.base.ResultData
-     */
-    @RequestMapping("updateAllMappingUnit")
-    public ResultData updateMappingUnit(@RequestBody Map map);
 
     /**
      * @Author: js.zhang
@@ -217,7 +189,7 @@ public interface IProjectService {
      * @Return com.aaa.base.ResultData
      */
     @GetMapping("/selectPrincipalById")
-    ResultData selectPrincipalByUserId(String id);
+    ResultData selectPrincipalByUserId(@RequestParam("id") Long id);
 
     /**
      * @Author: js.zhang
@@ -227,7 +199,7 @@ public interface IProjectService {
      * @Return com.aaa.base.ResultData
      */
     @PostMapping("/selectPrincipalByUserId")
-   ResultData selectPrincipalByUserId(@RequestBody Map map);
+   ResultData selectPrincipalByUserId(@RequestBody Principal principal);
 
     /**
      * @Author: js.zhang
@@ -270,7 +242,7 @@ public interface IProjectService {
      * @Return com.aaa.base.ResultData
      */
     @GetMapping("/selectTechById")
-     ResultData selectTechByUserId(Long id);
+     ResultData selectTechById(@RequestParam("id") Long id);
 
     /**
      * @Author: js.zhang
@@ -279,17 +251,17 @@ public interface IProjectService {
      * @Params: [technicist, pageNo, pageSize]
      * @Return com.aaa.base.ResultData
      */
-    @PostMapping("/selectTechByUid")
-    ResultData selectTechByUid(@RequestBody Technicist technicist, @RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize);
+    @PostMapping("/selectTechByUserid")
+    public ResultData selectTechByUserid( @RequestBody Technicist technicist,@RequestParam("pageNo") Integer pageNo,@RequestParam("pageSize") Integer pageSize);
 
 
-    /**
-     * @Author: js.zhang
-     * @Description: 修改技术人员信息
-     * @DateTime: 2020/7/20 11:22
-     * @Params: [technicist]
-     * @Return com.aaa.base.ResultData
-     */
+     /**
+      * @Author: js.zhang
+      * @Description: 修改技术人员信息
+      * @DateTime: 2020/7/20 11:22
+      * @Params: [technicist]
+      * @Return com.aaa.base.ResultData
+      */
     @PostMapping("/updateTechnicist")
     ResultData updateTechnicist(@RequestBody Technicist technicist);
 

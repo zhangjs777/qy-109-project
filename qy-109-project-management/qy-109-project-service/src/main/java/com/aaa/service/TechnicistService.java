@@ -38,7 +38,7 @@ public class TechnicistService extends BaseService<Technicist> {
 
         Map<String, Object> resultMap = new HashMap<String, Object>();
 
-        Technicist technicist = technicistMapper.selectTechnicistById(id);
+        Technicist technicist = technicistMapper.selectByPrimaryKey(id);
         if (technicist != null && !"".equals(technicist)){
             resultMap.put(CODE,SELECT_DATA_SUCCESS.getCode());
             resultMap.put(MSG,SELECT_DATA_SUCCESS.getMsg());

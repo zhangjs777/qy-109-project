@@ -115,11 +115,11 @@ public class UserService extends BaseService<User> {
      * @Params: [user]
      * @Return java.util.Map<java.lang.String, java.lang.Object>
      */
-    public Map<String, Object> delectUser(List<Object> ids,User user) {
+    public Map<String, Object> delectUser(List<Integer> ids) {
 
         Map<String, Object> resultMap = new HashMap<String, Object>();
 
-        Integer integer = super.batchUpdate(user,ids);
+        Integer integer = super.deleteByIds(ids);
             if (integer > 0) {
                 resultMap.put(CODE, UPDATE_DATA_SUCCESS.getCode());
                 resultMap.put(MSG, UPDATE_DATA_SUCCESS.getMsg());

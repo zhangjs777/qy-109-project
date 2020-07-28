@@ -28,8 +28,8 @@ public class UserController extends BaseController {
     * @Params: [map]
     * @Return com.aaa.base.ResultData
     */
-    @RequestMapping("/addUser")
-    ResultData addUser(      Map map){
+    @PostMapping("/addUser")
+    ResultData addUser(Map map){
        return iProjectService.addUser(map);
     }
 
@@ -40,8 +40,8 @@ public class UserController extends BaseController {
     * @Params: [map]
     * @Return com.aaa.base.ResultData
     */
-    @RequestMapping("/updateUser")
-    ResultData updateUser(      Map map ){
+    @PostMapping("/updateUser")
+    ResultData updateUser(Map map ){
        return iProjectService.updateUser(map);
     }
 
@@ -67,8 +67,8 @@ public class UserController extends BaseController {
     * @Params: [user]
     * @Return com.aaa.base.ResultData
     */
-    @RequestMapping("/selectAllUser")
-    public ResultData selectAllUser(      User user ){
+    @PostMapping("/selectAllUser")
+    public ResultData selectAllUser(User user ){
       return   iProjectService.selectAllUser(user);
     }
 
@@ -81,7 +81,7 @@ public class UserController extends BaseController {
      * @Return com.aaa.base.ResultData
      */
     @RequestMapping("/selectUserById")
-    public ResultData selectUserById( Long id){
+    public ResultData selectUserById(Long id){
      return    iProjectService.selectUserById(id);
     }
 

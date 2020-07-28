@@ -115,4 +115,9 @@ public class Principal implements Serializable {
     private List<Resource> resources;
 
 
+    @Transient
+    private Integer pageNo;
+    @Transient
+    private Integer pageSize;
+
 }

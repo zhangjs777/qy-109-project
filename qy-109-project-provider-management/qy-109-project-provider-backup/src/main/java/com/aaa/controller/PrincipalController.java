@@ -42,10 +42,10 @@ public class PrincipalController extends CommonController<Principal> {
     * @Return com.aaa.base.ResultData
     */
     @GetMapping("/selectPrincipalById")
-    public ResultData selectPrincipalByUserId(String id){
-        long l = Long.parseLong(id);
+    public ResultData selectPrincipalByUserId(@RequestParam("id") Long id){
+       // long l = Long.parseLong(id);
         //执行查询语句
-            Map<String, Object> stringObjectMap = principalService.selectPrincipalById(l);
+            Map<String, Object> stringObjectMap = principalService.selectPrincipalById(id);
 
             if (SELECT_DATA_SUCCESS.getCode().equals(stringObjectMap.get(CODE))) {
                 return super.operationSuccess(stringObjectMap);
@@ -65,8 +65,8 @@ public class PrincipalController extends CommonController<Principal> {
             * @Return com.aaa.base.ResultData
             */    
         @PostMapping("/selectPrincipalByUserId")
-        public ResultData selectPrincipalByUserId(@RequestBody Map map){
-        Map<String, Object> stringObjectMap = principalService.selectPrincipalByUserId(map);
+        public ResultData selectPrincipalByUserId(@RequestBody Principal principal){
+        Map<String, Object> stringObjectMap = principalService.selectPrincipalByUserId(principal);
         
                 if (SELECT_DATA_SUCCESS.getCode().equals(stringObjectMap.get(CODE))){
                     return super.operationSuccess(stringObjectMap);

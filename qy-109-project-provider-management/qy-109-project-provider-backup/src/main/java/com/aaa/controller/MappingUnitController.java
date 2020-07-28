@@ -28,7 +28,6 @@ import static java.util.Map.*;
  * @create: 2020-07-17 09:11
  **/
 @RestController
-@RequestMapping("/mappingUnit")
 public class MappingUnitController extends CommonController<MappingUnit> {
 
     @Autowired
@@ -48,12 +47,12 @@ public class MappingUnitController extends CommonController<MappingUnit> {
     * @Params: [blankAndWirte]
     * @Return com.aaa.base.ResultData
     */
-    @GetMapping("/bwUnit")
-    public ResultData bwUnit(@RequestParam("blankAndWirte") String blankAndWirte,@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize){
+    @RequestMapping("/bwUnit")
+    public ResultData bwUnit(@RequestParam("blank") String blank,@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize){
 
         if (pageNo!=null&&pageSize!=null){
             PageHelper.startPage(pageNo,pageSize);
-            List<MappingUnit> mappingUnitList = mappingUnitService.bwUnit(blankAndWirte);
+            List<MappingUnit> mappingUnitList = mappingUnitService.bwUnit(blank);
             PageInfo<MappingUnit> mappingUnitPageInfo = new PageInfo<MappingUnit>(mappingUnitList);
             if (mappingUnitPageInfo!=null&&mappingUnitPageInfo.getSize()>0){
                 return  super.operationSuccess(mappingUnitPageInfo);
@@ -61,7 +60,7 @@ public class MappingUnitController extends CommonController<MappingUnit> {
                 return  super.operationFailed();
             }
         }else {
-            List<MappingUnit> mappingUnitList = mappingUnitService.bwUnit(blankAndWirte);
+            List<MappingUnit> mappingUnitList = mappingUnitService.bwUnit(blank);
             if (mappingUnitList!=null&&mappingUnitList.size()>0){
                 return  super.operationSuccess(mappingUnitList);
             }else {
@@ -113,36 +112,11 @@ public class MappingUnitController extends CommonController<MappingUnit> {
     }
 
 
-    /**
-    * @Author: js.zhang
-    * @Description: 修改单位信息
-    * @DateTime: 2020/7/17 11:45
-    * @Params: [map]
-    * @Return com.aaa.base.ResultData
-    */
-    @RequestMapping("updateAllMappingUnit")
-    public ResultData updateMappingUnit(@RequestBody Map map){
-        ResultData resultData = super.update(map);
-        return resultData;
-    }
 
 
 
 
 
-    /**
-    * @Author: js.zhang
-    * @Description: 分页查询所有数据 mappingUnit
-    * @DateTime: 2020/7/17 10:16
-    * @Params: [map]
-    * @Return com.aaa.base.ResultData
-    */
-    @RequestMapping("selectAllMappingUnit")
-    public  ResultData selectAllMappingUnit(@RequestBody Map map){
-        ResultData resultData = super.selectAllByPage(map);
-        return resultData;
-        
-    }
 
     /**
     * @Author: js.zhang
@@ -156,7 +130,7 @@ public class MappingUnitController extends CommonController<MappingUnit> {
         if (mappingUnit!=null){
             MappingUnit mappingUnit1 = getBaseService().selectOne(mappingUnit);
             if (mappingUnit!=null){
-                ResultData resultData = super.operationSuccess(mappingUnit);
+                ResultData resultData = super.operationSuccess(mappingUnit1);
                 return resultData;
             }
         }

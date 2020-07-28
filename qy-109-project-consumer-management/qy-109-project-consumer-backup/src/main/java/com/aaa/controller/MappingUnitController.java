@@ -27,9 +27,9 @@ public class MappingUnitController {
      * @Params: [blankAndWirte]
      * @Return com.aaa.base.ResultData
      */
-    @GetMapping("/bwUnit")
-    public ResultData bwUnit( String blankAndWirte, Integer pageNo,  Integer pageSize){
-       return iProjectService.bwUnit(blankAndWirte,pageNo,pageSize);
+    @RequestMapping("/bwUnit")
+    public ResultData bwUnit( String blank, Integer pageNo,  Integer pageSize){
+       return iProjectService.bwUnit(blank,pageNo,pageSize);
     }
 
     /**
@@ -39,7 +39,7 @@ public class MappingUnitController {
      * @Params: [map]
      * @Return com.aaa.base.ResultData
      */
-    @PostMapping("updateUnit")
+    @PostMapping("/updateUnit")
     public ResultData updateUnit( Map map){
       return   iProjectService.updateUnit(map);
     }
@@ -57,29 +57,7 @@ public class MappingUnitController {
     }
 
 
-    /**
-     * @Author: js.zhang
-     * @Description: 修改单位信息
-     * @DateTime: 2020/7/17 11:45
-     * @Params: [map]
-     * @Return com.aaa.base.ResultData
-     */
-    @RequestMapping("updateAllMappingUnit")
-    public ResultData updateMappingUnit( Map map){
-       return iProjectService.updateMappingUnit(map);
-    }
 
-    /**
-     * @Author: js.zhang
-     * @Description: 分页查询所有数据 mappingUnit
-     * @DateTime: 2020/7/17 10:16
-     * @Params: [map]
-     * @Return com.aaa.base.ResultData
-     */
-    @RequestMapping("selectAllMappingUnit")
-    public  ResultData selectAllMappingUnit( Map map){
-        return  iProjectService.selectAllMappingUnit(map);
-    }
 
     /**
      * @Author: js.zhang
@@ -102,7 +80,7 @@ public class MappingUnitController {
      */
     @RequestMapping("/selctMappingUnit")
     public  ResultData selectMappingUnit( MappingUnit mappingUnit){
-        return  iProjectService.selectUnitById(mappingUnit);
+        return  iProjectService.selectMappingUnit(mappingUnit);
     }
 
 }

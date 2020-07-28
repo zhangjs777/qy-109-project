@@ -24,9 +24,9 @@ public class TechnicistController {
      * @Params: [id]
      * @Return com.aaa.base.ResultData
      */
-    @RequestMapping("/selectTechById")
-    public ResultData selectTechByUserId(Long id){
-     return    iProjectService.selectTechByUserId(id);
+    @GetMapping("/selectTechById")
+    public ResultData selectTechById(Long id){
+     return    iProjectService.selectTechById(id);
     }
 
 
@@ -37,9 +37,9 @@ public class TechnicistController {
      * @Params: [technicist, pageNo, pageSize]
      * @Return com.aaa.base.ResultData
      */
-    @RequestMapping("/selectTechByUid")
-    public ResultData selectTechByUid(Technicist technicist, Integer pageNo, Integer pageSize){
-        return    iProjectService.selectTechByUid(technicist,pageNo,pageSize);
+    @PostMapping("/selectTechByUserid")
+    public ResultData selectTechByUserid(Technicist technicist, Integer pageNo, Integer pageSize){
+        return    iProjectService.selectTechByUserid(technicist,pageNo,pageSize);
     }
 
 
@@ -50,7 +50,7 @@ public class TechnicistController {
      * @Params: [technicist]
      * @Return com.aaa.base.ResultData
      */
-    @RequestMapping("/updateTechnicist")
+    @PostMapping("/updateTechnicist")
     public ResultData updateTechnicist(     Technicist technicist){
         return    iProjectService.updateTechnicist(technicist);
     }
@@ -62,7 +62,7 @@ public class TechnicistController {
      * @Params: [technicist]
      * @Return com.aaa.base.ResultData
      */
-    @RequestMapping("addTechnicist")
+    @PostMapping("addTechnicist")
     public ResultData addTechnicist(     Technicist technicist){
         return    iProjectService.addTechnicist(technicist);
     }
@@ -75,7 +75,7 @@ public class TechnicistController {
      * @Params: [technicist]
      * @Return com.aaa.base.ResultData
      */
-    @RequestMapping("/deleteTechnicist")
+    @PostMapping("/deleteTechnicist")
     public ResultData deleteTechnicist(     Technicist technicist){
         return    iProjectService.deleteTechnicist(technicist);
     }
