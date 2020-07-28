@@ -9,6 +9,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.HashMap;
@@ -162,9 +163,9 @@ public class MappingProjectService extends BaseService<MappingProject> {
     public MappingProject getMappingProjectById(Long id){
 
         try {
-
             MappingProject getMappingProject = mappingProjectMapper.selectByPrimaryKey(id);
             System.out.println(getMappingProject);
+
             if ("".equals(getMappingProject)&& null==getMappingProject){
                 //没有数据，返回null
                 return null;

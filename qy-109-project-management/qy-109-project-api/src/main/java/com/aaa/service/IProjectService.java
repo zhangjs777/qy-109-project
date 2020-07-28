@@ -413,7 +413,7 @@ public interface IProjectService {
      *
      **/
     @PostMapping("/getMappingProjectById")
-    ResultData getMappingProjectById(@RequestParam("id") String id);
+    ResultData getMappingProjectById(@RequestParam("id") Long id);
 
 
 
@@ -425,7 +425,7 @@ public interface IProjectService {
      * @param mappingProject:
      * @return: com.aaa.base.ResultData
      **/
-    @RequestMapping("/selectAllMappingProject")
+    @PostMapping("/selectAllMappingProject")
      ResultData selectAllMappingProject(@RequestBody MappingProject mappingProject);
 
     /**
@@ -437,7 +437,7 @@ public interface IProjectService {
     * @return: com.aaa.base.ResultData
     *
     **/
-   @RequestMapping("/select")
+   @PostMapping("/select")
     ResultData select(@RequestBody MappingProject mappingProject);
 
 

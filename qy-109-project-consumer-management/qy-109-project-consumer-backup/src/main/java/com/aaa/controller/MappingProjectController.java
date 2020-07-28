@@ -61,7 +61,7 @@ public class MappingProjectController extends BaseController {
    *
    **/
    @PostMapping("/getMappingProjectById")
-    public ResultData getMappingProjectById(@RequestParam("id") String id){
+    public ResultData getMappingProjectById(@RequestParam("id") Long id){
       return iProjectService.getMappingProjectById(id);
     }
 
@@ -75,8 +75,7 @@ public class MappingProjectController extends BaseController {
     * @return: com.aaa.base.ResultData
     *
     **/
-    @RequestMapping("/selectAllMappingProject")
-
+    @PostMapping("/selectAllMappingProject")
     public  ResultData selectAllMappingProject(@RequestBody MappingProject mappingProject) {
         return iProjectService.selectAllMappingProject(mappingProject);
     }
@@ -90,7 +89,7 @@ public class MappingProjectController extends BaseController {
     * @return: com.aaa.base.ResultData
     *
     **/
-    @RequestMapping("/select")
+    @PostMapping("/select")
     public  ResultData select(@RequestBody MappingProject mappingProject){
         return iProjectService.select(mappingProject);
     }

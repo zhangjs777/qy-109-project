@@ -98,7 +98,6 @@ public class EquipmentService extends BaseService<Equipment> {
     *
     **/
     public PageInfo<Equipment> getEquipmentByUnitId(Map map){
-
         //先取出map中的pageNo， pageSize
         Integer pageNo = (Integer) map.get("pageNo");
         Integer pageSize = (Integer) map.get("pageSize");

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -93,7 +94,7 @@ public class MappingProjectController extends CommonController<MappingProject> {
    *
    **/
    @PostMapping("/getMappingProjectById")
-    public ResultData getMappingProjectById(Long id){
+    public ResultData getMappingProjectById(@RequestParam("id") Long id){
        MappingProject mappingProjectById = mappingProjectService.getMappingProjectById(id);
        if (!"".equals(mappingProjectById) && null !=mappingProjectById){
             //（true）有值，返回成功结果
@@ -115,7 +116,7 @@ public class MappingProjectController extends CommonController<MappingProject> {
     * @return: com.aaa.base.ResultData
     *
     **/
-    @RequestMapping("/selectAllMappingProject")
+    @PostMapping("/selectAllMappingProject")
 
     public  ResultData selectAllMappingProject(@RequestBody MappingProject mappingProject) {
          List<MappingProject> mappingProjectList= mappingProjectService.selectAllMappingProject(mappingProject);
@@ -139,9 +140,16 @@ public class MappingProjectController extends CommonController<MappingProject> {
    *
    **/
     @PostMapping("/select")
-    public List<MappingProject> select(MappingProject mappingProject){
+    public ResultData select(MappingProject mappingProject){
         List<MappingProject> mappingProjectList = getBaseService().selectList(mappingProject);
-        return mappingProjectList;
+        if (!"".equals(mappingProjectList) && null !=mappingProjectList){
+            //（true）有值，返回成功结果
+            System.out.println("反序列化数据"+mappingProjectList);
+            return operationSuccess(mappingProjectList);
+        }else {
+            //(false)无值，返回失败结果
+            return operationFailed();
+        }
     }
 
 }
